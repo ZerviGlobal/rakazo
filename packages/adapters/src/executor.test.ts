@@ -1318,6 +1318,19 @@ describe("dockerComputerToolInstruction", () => {
     expect(instruction).toContain("`pdftotext`, `pandoc`, and `openpyxl` are available");
     expect(instruction).toContain("PDFs, documents, and spreadsheets");
   });
+
+  it("warns that Thai needs a font the computer does not ship", () => {
+    // Measured: `fc-list :lang=th` is empty in the bot container and `fc-match` falls back to
+    // DejaVu Sans, which has no Thai glyphs — so Thai renders as tofu boxes. Proven by per-character
+    // shape comparison (5 different Thai chars -> 1 identical shape). Nothing else tells the model
+    // this, so without the warning a Thai invoice silently comes out unreadable.
+    const instruction = dockerComputerToolInstruction("docker");
+    expect(instruction).toContain("installs NO Thai font");
+    expect(instruction).toContain("fc-cache -f ~/.fonts");
+    expect(instruction).toContain("fc-list :lang=th");
+    // The engine caveat matters too: the documented pandoc command fails with its default engine.
+    expect(instruction).toContain("--pdf-engine");
+  });
   it("does not prescribe disabled browser or takeover tools for gh login", () => {
     const instruction = dockerComputerToolInstruction(
       "docker",

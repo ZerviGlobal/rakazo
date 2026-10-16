@@ -7631,6 +7631,11 @@ export function dockerComputerToolInstruction(
   const takeover = builtinOffered(disabled, "request_takeover");
   const parts = [
     "For Python CLI tools, use `uv tool install <package>`; it installs without sudo and keeps tools under this computer's persistent home. GitHub's `gh` CLI is installed. `pdftotext`, `pandoc`, and `openpyxl` are available to extract text from PDFs, documents, and spreadsheets.",
+    // Thai renders as tofu boxes without a Thai-capable font, and this container ships none
+    // (measured: `fc-list :lang=th` is empty and `fc-match` falls back to DejaVu Sans). Nothing tells
+    // the model that, so a Thai invoice would silently come out unreadable. fonts.gstatic.com is
+    // reachable from here, so the fix is a one-liner the bot can run itself.
+    "This computer installs NO Thai font, so Thai text renders as empty boxes (tofu) in any PDF, image or screenshot you generate. Before producing a document with Thai text, install one into the persistent home: `mkdir -p ~/.fonts && curl -sL -o ~/.fonts/NotoSansThai.ttf 'https://fonts.gstatic.com/s/notosansthai/v20/iJWnBXeUZi_OHPqn4wq6hQ2_hbJ1xyN9wd43SofNWcd1MKVQt_So_9CdU5RtpzF-QRvzzXg.ttf' && fc-cache -f ~/.fonts` — then confirm with `fc-list :lang=th`. Do this once per computer, not per document. `pandoc` needs `--pdf-engine` here because its default (`pdflatex`) is not installed; `chromium --headless --print-to-pdf` works as an alternative.",
   ];
   if (navigate && act) {
     parts.push(
