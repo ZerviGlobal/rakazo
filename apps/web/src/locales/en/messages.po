@@ -851,6 +851,10 @@ msgstr "Channels"
 msgid "Chart failed to render: {error}"
 msgstr "Chart failed to render: {error}"
 
+#: src/pages/shell/employee-nav.tsx
+msgid "Chat"
+msgstr "Chat"
+
 #: src/pages/MessagingSettingsOverlay.tsx
 msgid "Chat apps"
 msgstr "Chat apps"

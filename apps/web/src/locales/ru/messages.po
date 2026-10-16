@@ -851,6 +851,10 @@ msgstr "Каналы"
 msgid "Chart failed to render: {error}"
 msgstr "Не удалось отобразить диаграмму: {error}."
 
+#: src/pages/shell/employee-nav.tsx
+msgid "Chat"
+msgstr ""
+
 #: src/pages/MessagingSettingsOverlay.tsx
 msgid "Chat apps"
 msgstr "Приложения для чата"

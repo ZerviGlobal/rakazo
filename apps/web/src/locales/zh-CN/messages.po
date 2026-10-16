@@ -851,6 +851,10 @@ msgstr "频道"
 msgid "Chart failed to render: {error}"
 msgstr "图表渲染失败：{error}"
 
+#: src/pages/shell/employee-nav.tsx
+msgid "Chat"
+msgstr ""
+
 #: src/pages/MessagingSettingsOverlay.tsx
 msgid "Chat apps"
 msgstr "聊天应用"

@@ -15,7 +15,7 @@ vi.mock("@lingui/react/macro", () => {
   return { useLingui: () => ({ t }), Trans: ({ children }: { children: ReactNode }) => children };
 });
 
-import { EmployeeNav } from "./employee-nav";
+import { EmployeeNav, EmployeeTabBar } from "./employee-nav";
 
 function render(ui: ReactNode) {
   const container = document.createElement("div");
@@ -68,6 +68,57 @@ it("routes Usage to the settings callback rather than a path, because it has no 
   act(() =>
     (container.querySelector("[data-testid='work-nav-usage']") as HTMLButtonElement).click(),
   );
+  expect(onOpenUsage).toHaveBeenCalledTimes(1);
+  expect(onNavigate).not.toHaveBeenCalled();
+});
+
+it("gives a phone the same destinations the desktop sidebar has", () => {
+  // On a 390px screen the sidebar is closed at rest, so without this bar the Work
+  // destinations are back behind the hamburger — the defect this change fixes.
+  const { container } = render(
+    <EmployeeTabBar
+      boardEnabled={false}
+      activePath="/app"
+      onNavigate={() => {}}
+      onOpenUsage={() => {}}
+      onOpenChat={() => {}}
+    />,
+  );
+  const ids = [...container.querySelectorAll("[data-testid^='tab-']")].map((e) =>
+    e.getAttribute("data-testid"),
+  );
+  expect(ids).toEqual(["tab-chat", "tab-documents", "tab-usage"]);
+});
+
+it("marks the active tab so the phone shows where you are", () => {
+  const { container } = render(
+    <EmployeeTabBar
+      boardEnabled
+      activePath="/app/artifacts"
+      onNavigate={() => {}}
+      onOpenUsage={() => {}}
+      onOpenChat={() => {}}
+    />,
+  );
+  const docs = container.querySelector("[data-testid='tab-documents']");
+  const chat = container.querySelector("[data-testid='tab-chat']");
+  expect(docs?.getAttribute("aria-current")).toBe("page");
+  expect(chat?.getAttribute("aria-current")).toBeNull();
+});
+
+it("routes the phone Usage tab to settings, not a path", () => {
+  const onNavigate = vi.fn();
+  const onOpenUsage = vi.fn();
+  const { container } = render(
+    <EmployeeTabBar
+      boardEnabled={false}
+      activePath="/app"
+      onNavigate={onNavigate}
+      onOpenUsage={onOpenUsage}
+      onOpenChat={() => {}}
+    />,
+  );
+  act(() => (container.querySelector("[data-testid='tab-usage']") as HTMLButtonElement).click());
   expect(onOpenUsage).toHaveBeenCalledTimes(1);
   expect(onNavigate).not.toHaveBeenCalled();
 });

@@ -134,7 +134,7 @@ import {
   useSyncExternalStore,
 } from "react";
 import { createPortal } from "react-dom";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ArtifactFileCard } from "../components/ArtifactFileCard";
 import { AskCard } from "../components/AskCard";
 import { ActiveBotGlyph, CollaborationMarker } from "../components/ai/CollaborationMarker";
@@ -296,7 +296,7 @@ import {
   ChoiceCard,
   McpApprovalCard,
 } from "./shell/message-cards";
-import { EmployeeNav } from "./shell/employee-nav";
+import { EmployeeNav, EmployeeTabBar } from "./shell/employee-nav";
 import { commitSpaceRename, sidebarGroupsForSpaces } from "./shell/space-sidebar";
 import { WindowChrome } from "./WindowChrome";
 
@@ -413,6 +413,7 @@ export function ShellPage() {
   const { t } = useLingui();
   const { botId, groupId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   // Mirrors searchParams for effects that only need to read it once on run,
   // not re-run on every unrelated query-param change (e.g. the SSE subscribe
@@ -3788,6 +3789,21 @@ export function ShellPage() {
           />
         ) : null}
       </main>
+
+      {/* Zervi: without this, the Work destinations are behind the hamburger on a phone. */}
+      <EmployeeTabBar
+        boardEnabled={bootstrapMe?.ticketBoardEnabled === true}
+        activePath={location.pathname}
+        onNavigate={(path) => {
+          setMobileSidebarOpen(false);
+          navigate(path);
+        }}
+        onOpenUsage={() => openSettings("usage")}
+        onOpenChat={() => {
+          setMobileSidebarOpen(false);
+          navigate("/app");
+        }}
+      />
 
       <CallCard onSettings={() => openSettings("voice")} />
 

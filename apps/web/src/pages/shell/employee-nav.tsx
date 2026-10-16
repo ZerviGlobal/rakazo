@@ -1,5 +1,5 @@
 import { Trans } from "@lingui/react/macro";
-import { FolderOpen, Gauge, SquareKanban } from "lucide-react";
+import { FolderOpen, Gauge, MessageSquare, SquareKanban } from "lucide-react";
 
 /**
  * Zervi employee navigation.
@@ -75,6 +75,95 @@ export function EmployeeNav({
               <Icon size={15} strokeWidth={1.8} />
             </span>
             <span className="text-[14px] font-medium text-foreground/90">{row.label}</span>
+          </button>
+        );
+      })}
+    </nav>
+  );
+}
+
+/**
+ * Phone tab bar.
+ *
+ * WHY: on a 390px screen the sidebar is closed at rest, so the "Work" block above is
+ * only reachable after opening the hamburger — the same discoverability defect this
+ * whole change exists to fix, one level down. A shop-floor supervisor checking stock
+ * on a phone should not have to know to swipe.
+ *
+ * Only shown below `md`, where the sidebar can be hidden. Chat is included as the
+ * first tab so the bar does not strand the user away from the primary surface.
+ */
+export function EmployeeTabBar({
+  boardEnabled,
+  activePath,
+  onNavigate,
+  onOpenUsage,
+  onOpenChat,
+}: {
+  boardEnabled: boolean;
+  /** Current router path, used to mark the active tab. */
+  activePath: string;
+  onNavigate: (path: string) => void;
+  onOpenUsage: () => void;
+  onOpenChat: () => void;
+}) {
+  const tabs = [
+    {
+      testId: "tab-chat",
+      label: <Trans>Chat</Trans>,
+      icon: MessageSquare,
+      path: null as string | null,
+      onClick: onOpenChat,
+      hidden: false,
+    },
+    {
+      testId: "tab-documents",
+      label: <Trans>Documents</Trans>,
+      icon: FolderOpen,
+      path: "/app/artifacts",
+      onClick: () => onNavigate("/app/artifacts"),
+      hidden: false,
+    },
+    {
+      testId: "tab-board",
+      label: <Trans>Board</Trans>,
+      icon: SquareKanban,
+      path: "/app/board",
+      onClick: () => onNavigate("/app/board"),
+      hidden: !boardEnabled,
+    },
+    {
+      testId: "tab-usage",
+      label: <Trans>Usage</Trans>,
+      icon: Gauge,
+      path: null as string | null,
+      onClick: onOpenUsage,
+      hidden: false,
+    },
+  ].filter((tab) => !tab.hidden);
+
+  return (
+    <nav
+      data-testid="employee-tab-bar"
+      aria-label="Work"
+      className="flex shrink-0 items-stretch justify-around border-t border-sidebar-border bg-sidebar pb-[env(safe-area-inset-bottom)] md:hidden"
+    >
+      {tabs.map((tab) => {
+        const Icon = tab.icon;
+        const active = tab.path !== null && activePath === tab.path;
+        return (
+          <button
+            key={tab.testId}
+            type="button"
+            data-testid={tab.testId}
+            aria-current={active ? "page" : undefined}
+            onClick={tab.onClick}
+            className={`flex flex-1 flex-col items-center gap-0.5 px-2 py-2 text-[11px] ${
+              active ? "text-foreground" : "text-muted-foreground"
+            }`}
+          >
+            <Icon size={19} strokeWidth={1.8} />
+            <span className="truncate">{tab.label}</span>
           </button>
         );
       })}
