@@ -380,14 +380,45 @@ const SIDEBAR_GROUP_TITLE_KEYS = {
  * Exact-match only. Anything the model generates, or that a user typed, passes through untouched:
  * guessing at free text would corrupt real conversation.
  */
-function translateApiComposedText(text: string): string {
+export function translateApiComposedText(text: string): string {
   const ONBOARDING_SENTENCES: Record<string, string> = {
     "Got it. Slack, calendar, and email. I’ll see what’s already connected so I don’t make you set something up twice.": t`Got it. Slack, calendar, and email. I’ll see what’s already connected so I don’t make you set something up twice.`,
     "Hit those one and I’ll start pulling the picture.": t`Hit those one and I’ll start pulling the picture.`,
     "Hit those two and I’ll start pulling the picture.": t`Hit those two and I’ll start pulling the picture.`,
     "Hit those three and I’ll start pulling the picture.": t`Hit those three and I’ll start pulling the picture.`,
   };
-  return ONBOARDING_SENTENCES[text] ?? text;
+  const exact = ONBOARDING_SENTENCES[text];
+  if (exact) return exact;
+
+  // Sentences the API builds AROUND interpolated values cannot be exact-matched. The app-name list
+  // is the notable one: "<App A>, <App B>, and <App C> are a good place to start. Connect them here
+  // and I'll use what you already have." The leading names are user-facing app labels and pass
+  // through; only the sentence is translated.
+  const GOOD_PLACE = /^(.*) are a good place to start\. Connect them here and I’ll use what you already have\.$/;
+  const goodPlace = GOOD_PLACE.exec(text);
+  if (goodPlace) {
+    return t`${goodPlace[1] ?? ""} are a good place to start. Connect them here and I’ll use what you already have.`;
+  }
+
+  // Runtime status lines sent as `progress` blocks, which render inside the message bubble. These
+  // appear the first time the provider hiccups or a turn hits its tool budget — latent, not absent.
+  const PROVIDER_SWITCH = /^Provider unavailable\. Switched to backup model (.+)\.$/;
+  const providerSwitch = PROVIDER_SWITCH.exec(text);
+  if (providerSwitch) return t`Provider unavailable. Switched to backup model ${providerSwitch[1] ?? ""}.`;
+
+  const BUDGET_STOP = /^Stopped: more than (\d+) tool calls in one turn\.$/;
+  const budgetStop = BUDGET_STOP.exec(text);
+  if (budgetStop) return t`Stopped: more than ${budgetStop[1] ?? ""} tool calls in one turn.`;
+
+  const UNKNOWN_MODEL = /^Unknown model (.+)$/;
+  const unknownModel = UNKNOWN_MODEL.exec(text);
+  if (unknownModel) return t`Unknown model ${unknownModel[1] ?? ""}`;
+
+  const NO_EXECUTOR = /^(.+) is unavailable without an executor\.$/;
+  const noExecutor = NO_EXECUTOR.exec(text);
+  if (noExecutor) return t`${noExecutor[1] ?? ""} is unavailable without an executor.`;
+
+  return text;
 }
 
 function sidebarGroupTitle(group: { title: string | null; sectionId: string | null }): string | null {

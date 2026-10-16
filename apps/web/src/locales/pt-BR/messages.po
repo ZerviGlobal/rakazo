@@ -49,6 +49,11 @@ msgstr "{0} (acima de 10 MiB)"
 msgid "{0} {unitLabel}"
 msgstr "{0} {unitLabel}"
 
+#. placeholder {0}: goodPlace[1] ?? ""
+#: src/pages/Shell.tsx
+msgid "{0} are a good place to start. Connect them here and I’ll use what you already have."
+msgstr ""
+
 #. placeholder {0}: block.name
 #: src/pages/shell/message-cards.tsx
 msgid "{0} connection"
@@ -62,6 +67,11 @@ msgstr ""
 #. placeholder {0}: sender.name
 #: src/pages/ExternalConversationSettings.tsx
 msgid "{0} handling"
+msgstr ""
+
+#. placeholder {0}: noExecutor[1] ?? ""
+#: src/pages/Shell.tsx
+msgid "{0} is unavailable without an executor."
 msgstr ""
 
 #. placeholder {0}: format(size / 1024)
@@ -3529,6 +3539,11 @@ msgstr ""
 msgid "Provider"
 msgstr "Provedor"
 
+#. placeholder {0}: providerSwitch[1] ?? ""
+#: src/pages/Shell.tsx
+msgid "Provider unavailable. Switched to backup model {0}."
+msgstr ""
+
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Providers"
@@ -4356,6 +4371,11 @@ msgstr "Pare de Falar"
 msgid "Stop teaching"
 msgstr "Parar de ensinar"
 
+#. placeholder {0}: budgetStop[1] ?? ""
+#: src/pages/Shell.tsx
+msgid "Stopped: more than {0} tool calls in one turn."
+msgstr ""
+
 #. js-lingui-explicit-id
 #: src/lib/browser-notifications.ts
 msgid "Stopped."
@@ -4679,6 +4699,11 @@ msgstr ""
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Uninstall"
+msgstr ""
+
+#. placeholder {0}: unknownModel[1] ?? ""
+#: src/pages/Shell.tsx
+msgid "Unknown model {0}"
 msgstr ""
 
 #: src/pages/shell/bot-panel.tsx
