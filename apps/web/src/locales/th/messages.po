@@ -261,7 +261,7 @@ msgstr ""
 #: src/pages/BotContextMenu.tsx
 #: src/pages/Shell.tsx
 msgid "Actions for {0}"
-msgstr ""
+msgstr "การจัดการสำหรับ {0}"
 
 #: src/pages/Shell.tsx
 msgid "Actions for space"
@@ -1362,7 +1362,7 @@ msgstr ""
 
 #: src/pages/shell/dialogs.tsx
 msgid "Could not create section"
-msgstr ""
+msgstr "สร้างแผนกไม่สำเร็จ"
 
 #: src/pages/shell/dialogs.tsx
 msgid "Could not create space"
@@ -1586,7 +1586,7 @@ msgstr ""
 
 #: src/pages/shell/dialogs.tsx
 msgid "Could not rename section"
-msgstr ""
+msgstr "เปลี่ยนชื่อแผนกไม่สำเร็จ"
 
 #: src/pages/shell/dialogs.tsx
 msgid "Could not rename space"
@@ -1735,12 +1735,12 @@ msgstr ""
 #: src/pages/shell/bot-panel.tsx
 #: src/pages/shell/dialogs.tsx
 msgid "Create"
-msgstr ""
+msgstr "สร้าง"
 
 #. placeholder {0}: bot.name
 #: src/pages/shell/dialogs.tsx
 msgid "Create a section and move {0} into it."
-msgstr ""
+msgstr "สร้างแผนกและย้าย {0} เข้าไปในแผนกนี้"
 
 #: src/pages/Auth.tsx
 msgid "Create account"
@@ -1784,7 +1784,7 @@ msgstr ""
 #: src/pages/shell/bot-panel.tsx
 #: src/pages/shell/dialogs.tsx
 msgid "Creating…"
-msgstr ""
+msgstr "กำลังสร้าง…"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Credential"
@@ -3032,7 +3032,7 @@ msgstr "รหัสผ่านใหม่"
 #: src/pages/BotContextMenu.tsx
 #: src/pages/shell/dialogs.tsx
 msgid "New section"
-msgstr ""
+msgstr "แผนกใหม่"
 
 #: src/pages/KnowledgeSection.tsx
 msgid "New skill"
@@ -3685,7 +3685,7 @@ msgstr ""
 #: src/pages/Shell.tsx
 #: src/pages/shell/dialogs.tsx
 msgid "Rename section"
-msgstr ""
+msgstr "เปลี่ยนชื่อแผนก"
 
 #: src/pages/Shell.tsx
 #: src/pages/shell/dialogs.tsx
