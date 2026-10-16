@@ -106,7 +106,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "{botName}’s computer"
-msgstr ""
+msgstr "คอมพิวเตอร์ของ {botName}"
 
 #: src/pages/shell/bot-credentials.tsx
 msgid "{commandVariable} is reserved and cannot be used as a command variable. Choose another name."
@@ -387,7 +387,7 @@ msgstr ""
 #: src/pages/McpServersOverlay.tsx
 #: src/pages/PluginsOverlay.tsx
 msgid "Adding…"
-msgstr ""
+msgstr "กำลังเพิ่ม…"
 
 #: src/pages/AccountSettingsOverlay.tsx
 #: src/pages/McpServersOverlay.tsx
@@ -730,12 +730,12 @@ msgstr "บอร์ด"
 
 #: src/pages/Shell.tsx
 msgid "Booting live desktop…"
-msgstr ""
+msgstr "กำลังเปิดเดสก์ท็อป…"
 
 #. placeholder {0}: computerBot?.name ?? active?.name
 #: src/pages/Shell.tsx
 msgid "Booting up {0}’s computer"
-msgstr ""
+msgstr "กำลังเปิดคอมพิวเตอร์ของ {0}"
 
 #: src/pages/Shell.tsx
 msgid "bot"
@@ -846,7 +846,7 @@ msgstr "เปลี่ยนรหัสผ่าน"
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Changing…"
-msgstr ""
+msgstr "กำลังเปลี่ยน…"
 
 #: src/pages/MessagingSettingsOverlay.tsx
 msgid "Channels"
@@ -911,7 +911,7 @@ msgstr ""
 #: src/components/SoftwareUpdateSection.tsx
 #: src/pages/HostComputerPrompt.tsx
 msgid "Checking…"
-msgstr ""
+msgstr "กำลังตรวจสอบ…"
 
 #: src/components/SoftwareUpdateSection.tsx
 msgid "Checkout has local changes. Clean it before updating."
@@ -944,7 +944,7 @@ msgstr "ล้าง"
 #. placeholder {0}: bot.name
 #: src/pages/shell/dialogs.tsx
 msgid "Clear {0}’s conversation?"
-msgstr ""
+msgstr "ล้างบทสนทนาของ {0}?"
 
 #: src/pages/BotContextMenu.tsx
 #: src/pages/shell/bot-panel.tsx
@@ -957,7 +957,7 @@ msgstr ""
 
 #: src/pages/shell/dialogs.tsx
 msgid "Clearing…"
-msgstr ""
+msgstr "กำลังล้าง…"
 
 #: src/components/integrations/IntegrationSetup.tsx
 msgid "Client ID"
@@ -1223,7 +1223,7 @@ msgstr ""
 #: src/pages/shell/message-cards.tsx
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Connecting…"
-msgstr ""
+msgstr "กำลังเชื่อมต่อ…"
 
 #: src/lib/model-connection-preflight.ts
 msgid "Connection test failed."
@@ -1929,7 +1929,7 @@ msgstr ""
 #: src/pages/Artifacts.tsx
 #: src/pages/shell/dialogs.tsx
 msgid "Deleting…"
-msgstr ""
+msgstr "กำลังลบ…"
 
 #: src/components/AccountAccess.tsx
 msgid "Deletion code"
@@ -2066,7 +2066,7 @@ msgstr ""
 
 #: src/components/DesktopUpdates.tsx
 msgid "Downloading…"
-msgstr ""
+msgstr "กำลังดาวน์โหลด…"
 
 #: src/components/teach/SkillDraftCard.tsx
 msgid "Draft skill"
@@ -2267,7 +2267,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Finding…"
-msgstr ""
+msgstr "กำลังค้นหา…"
 
 #. placeholder {0}: new URL(oauth.verificationUri).hostname
 #: src/pages/ModelSettingsOverlay.tsx
@@ -2439,7 +2439,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "I’m done"
-msgstr ""
+msgstr "เสร็จแล้ว"
 
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "If you heard that, voice is ready."
@@ -2538,7 +2538,7 @@ msgstr "แยกเฉพาะ"
 
 #: src/pages/Artifacts.tsx
 msgid "Isolated preview — no access to your account"
-msgstr ""
+msgstr "ตัวอย่างแบบแยกส่วน — ไม่เข้าถึงบัญชีของคุณ"
 
 #: src/pages/shell/dialogs.tsx
 msgid "Its conversation, files, and routines will be permanently deleted. Bots it created stay in your list."
@@ -2631,7 +2631,7 @@ msgstr ""
 
 #: src/pages/ActivityList.tsx
 msgid "Loading activity…"
-msgstr ""
+msgstr "กำลังโหลดกิจกรรม…"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Loading integrations…"
@@ -2647,11 +2647,11 @@ msgstr ""
 
 #: src/components/ArtifactFileCard.tsx
 msgid "Loading preview…"
-msgstr ""
+msgstr "กำลังโหลดตัวอย่าง…"
 
 #: src/components/ApprovalRulesSettings.tsx
 msgid "Loading rules…"
-msgstr ""
+msgstr "กำลังโหลดกฎ…"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Loading tools…"
@@ -2845,7 +2845,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Message…"
-msgstr ""
+msgstr "ข้อความ…"
 
 #: src/pages/Shell.tsx
 msgid "Messaged {peer}"
@@ -3317,7 +3317,7 @@ msgstr ""
 
 #: src/App.tsx
 msgid "Opening your Space…"
-msgstr ""
+msgstr "กำลังเปิดพื้นที่ของคุณ…"
 
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
@@ -3569,7 +3569,7 @@ msgstr ""
 
 #: src/components/ComputerMaintenanceActions.tsx
 msgid "Recovering…"
-msgstr ""
+msgstr "กำลังกู้คืน…"
 
 #: src/components/ComputerUpdateProgress.tsx
 msgid "Recovery failed"
@@ -3604,7 +3604,7 @@ msgstr ""
 
 #: src/components/teach/TeachComputerOverlay.tsx
 msgid "Refreshing…"
-msgstr ""
+msgstr "กำลังรีเฟรช…"
 
 #: src/lib/user-error.ts
 msgid "Registration is closed"
@@ -3756,7 +3756,7 @@ msgstr "ตั้งรหัสผ่านใหม่"
 
 #: src/components/ComputerMaintenanceActions.tsx
 msgid "Resetting…"
-msgstr ""
+msgstr "กำลังรีเซ็ต…"
 
 #: src/pages/ResizableSidePanel.tsx
 msgid "Resize panel"
@@ -3944,7 +3944,7 @@ msgstr ""
 #: src/pages/shell/bot-credentials.tsx
 #: src/pages/shell/dialogs.tsx
 msgid "Saving…"
-msgstr ""
+msgstr "กำลังบันทึก…"
 
 #: src/lib/call-session.ts
 msgid "Say yes or no, or answer in a sentence."
@@ -3974,7 +3974,7 @@ msgstr ""
 
 #: src/pages/Artifacts.tsx
 msgid "Search artifacts…"
-msgstr ""
+msgstr "ค้นหาเอกสาร…"
 
 #: src/pages/shell/command-palette.tsx
 msgid "Search bots and switch conversations"
@@ -4008,7 +4008,7 @@ msgstr ""
 #: src/pages/PluginsOverlay.tsx
 #: src/pages/SpaceSearch.tsx
 msgid "Searching…"
-msgstr ""
+msgstr "กำลังค้นหา…"
 
 #: src/pages/Shell.tsx
 msgid "Select a bot"
@@ -4048,7 +4048,7 @@ msgstr ""
 
 #: src/components/AskCard.tsx
 msgid "Sending…"
-msgstr ""
+msgstr "กำลังส่ง…"
 
 #: src/pages/RoutineEditor.tsx
 msgid "Sentry alert"
@@ -4284,7 +4284,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Starting…"
-msgstr ""
+msgstr "กำลังเริ่ม…"
 
 #: src/pages/ActivityList.tsx
 #: src/pages/Board.tsx
@@ -4421,7 +4421,7 @@ msgstr ""
 
 #: src/components/ModelConnectionPreflightNotice.tsx
 msgid "Testing…"
-msgstr ""
+msgstr "กำลังทดสอบ…"
 
 #: src/components/SoftwareUpdateSection.tsx
 msgid "The API did not come back. Refresh this page."
@@ -4706,7 +4706,7 @@ msgstr ""
 #: src/components/ComputerMaintenanceActions.tsx
 #: src/components/SoftwareUpdateSection.tsx
 msgid "Updating…"
-msgstr ""
+msgstr "กำลังอัปเดต…"
 
 #: src/components/computer/FilesApp.tsx
 #: src/pages/shell/avatar-studio-popover.tsx
@@ -4811,11 +4811,11 @@ msgstr ""
 
 #: src/lib/roster-status.ts
 msgid "Waiting in line…"
-msgstr ""
+msgstr "กำลังรอคิว…"
 
 #: src/pages/shell/message-cards.tsx
 msgid "Waiting…"
-msgstr ""
+msgstr "กำลังรอ…"
 
 #: src/pages/Paywall.tsx
 msgid "Web, desktop and mobile apps"
@@ -4897,7 +4897,7 @@ msgstr "แท็บงาน"
 #: src/lib/roster-status.ts
 #: src/pages/Auth.tsx
 msgid "Working…"
-msgstr ""
+msgstr "กำลังทำงาน…"
 
 #: src/components/computer/TerminalApp.tsx
 msgid "Wrote {path}"
