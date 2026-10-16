@@ -2168,7 +2168,16 @@ export function ShellPage() {
         }
         const mimeType = inferAttachmentMimeType(file.name, file.type);
         if (!mimeType) {
-          skipped.push(file.name);
+          // Say WHY. Measured: iPhone photos arrive as .heic by default and this app has no HEIC
+          // support anywhere (absent from EXTENSION_MIME_TYPES and the allowed MIME list), so a Thai
+          // employee photographing a part was told only "Skipped IMG_1234.HEIC" with no hint that
+          // the FORMAT was the problem or what to do about it.
+          const extension = file.name.slice(file.name.lastIndexOf(".")).toLowerCase();
+          skipped.push(
+            /^\.(heic|heif)$/.test(extension)
+              ? t`${file.name} (iPhone HEIC photos are not supported — send as JPEG)`
+              : t`${file.name} (unsupported file type)`,
+          );
           continue;
         }
         next.push({

@@ -36,6 +36,11 @@ msgstr ""
 
 #. placeholder {0}: file.name
 #: src/pages/Shell.tsx
+msgid "{0} (iPhone HEIC photos are not supported — send as JPEG)"
+msgstr "{0} (รูปจาก iPhone แบบ HEIC ยังไม่รองรับ — กรุณาส่งเป็น JPEG)"
+
+#. placeholder {0}: file.name
+#: src/pages/Shell.tsx
 msgid "{0} (max {ATTACHMENT_MAX_COUNT} attachments)"
 msgstr ""
 
@@ -43,6 +48,11 @@ msgstr ""
 #: src/pages/Shell.tsx
 msgid "{0} (over 10 MiB)"
 msgstr ""
+
+#. placeholder {0}: file.name
+#: src/pages/Shell.tsx
+msgid "{0} (unsupported file type)"
+msgstr "{0} (ไม่รองรับชนิดไฟล์นี้)"
 
 #. placeholder {0}: preset.n
 #: src/pages/RoutineSchedule.tsx

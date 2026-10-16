@@ -1,3 +1,4 @@
+import { isAllowedAttachmentMimeType } from "@rakazo/contracts";
 import { describe, expect, it } from "vitest";
 import {
   AttachmentValidationError,
@@ -167,5 +168,25 @@ describe("ask history", () => {
         { kind: "ask", text: "API key", input: "secret", status: "answered", answer: "" },
       ]),
     ).toBe("API key");
+  });
+});
+
+describe("HEIC is unsupported, and that is worth stating", () => {
+  // iPhone photos arrive as .heic by default (since iOS 11), and HEIC is absent from both
+  // EXTENSION_MIME_TYPES and ATTACHMENT_ALLOWED_MIME_TYPES. So the file is REJECTED — which is a
+  // product decision, but it must be a KNOWN one: a Thai employee photographing a part on an iPhone
+  // otherwise gets "Skipped IMG_1234.HEIC" with no hint that the format is the problem.
+  it("rejects HEIC/HEIF whatever the case or reported type", () => {
+    expect(inferAttachmentMimeType("IMG_1234.HEIC", "image/heic")).toBeNull();
+    expect(inferAttachmentMimeType("IMG_1234.heic", "")).toBeNull();
+    expect(inferAttachmentMimeType("photo.HEIF", "image/heif")).toBeNull();
+    expect(isAllowedAttachmentMimeType("image/heic")).toBe(false);
+    expect(isAllowedAttachmentMimeType("image/heif")).toBe(false);
+  });
+
+  it("still accepts the formats a phone camera can be set to produce", () => {
+    expect(inferAttachmentMimeType("photo.jpg", "image/jpeg")).toBe("image/jpeg");
+    expect(inferAttachmentMimeType("photo.jpeg", "")).toBe("image/jpeg");
+    expect(inferAttachmentMimeType("scan.png", "image/png")).toBe("image/png");
   });
 });
