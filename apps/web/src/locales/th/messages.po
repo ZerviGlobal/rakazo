@@ -232,7 +232,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "A subscription credential is stored securely."
-msgstr ""
+msgstr "คีย์การสมัครสมาชิกถูกเก็บอย่างปลอดภัย"
 
 #: src/pages/shell/bot-picker.tsx
 msgid "About groups"
@@ -261,7 +261,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Account ID"
-msgstr ""
+msgstr "รหัสบัญชี"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Account label"
@@ -313,11 +313,11 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Add a run time for this one-shot."
-msgstr ""
+msgstr "กำหนดเวลาสำหรับงานครั้งเดียวนี้"
 
 #: src/pages/Shell.tsx
 msgid "Add a schedule, webhook, GitHub, or message trigger"
-msgstr ""
+msgstr "เพิ่มกำหนดการ เว็บฮุก GitHub หรือตัวกระตุ้นข้อความ"
 
 #: src/pages/RoutineEditor.tsx
 msgid "Add a schedule, webhook, GitHub, or message trigger to run this routine."
@@ -564,7 +564,7 @@ msgstr "อนุมัติ"
 
 #: src/pages/shell/message-cards.tsx
 msgid "Approve this server to let your agent use its tools."
-msgstr ""
+msgstr "อนุมัติเซิร์ฟเวอร์นี้เพื่อให้ผู้ช่วยใช้เครื่องมือได้"
 
 #: src/pages/BotContextMenu.tsx
 msgid "Archive"
@@ -655,7 +655,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Authorization code or callback URL"
-msgstr ""
+msgstr "รหัสยืนยันหรือ URL ปลายทาง"
 
 #: src/pages/shell/message-cards.tsx
 msgid "Authorization timed out. Please try again."
@@ -667,7 +667,7 @@ msgstr "ยืนยันสิทธิ์"
 
 #: src/pages/shell/message-cards.tsx
 msgid "Authorize this server so agents can use its tools. A popup opens."
-msgstr ""
+msgstr "ยืนยันสิทธิ์เซิร์ฟเวอร์นี้เพื่อให้ผู้ช่วยใช้เครื่องมือได้ หน้าต่างใหม่จะเปิดขึ้น"
 
 #: src/pages/ExternalConversationSettings.tsx
 msgid "Automated senders"
@@ -765,7 +765,7 @@ msgstr "ผู้ช่วย"
 #: src/pages/Shell.tsx
 #: src/pages/shell/avatar-studio-popover.tsx
 msgid "Bot"
-msgstr ""
+msgstr "ผู้ช่วย"
 
 #. js-lingui-explicit-id
 #: src/lib/browser-notifications.ts
@@ -774,11 +774,11 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Bot screen"
-msgstr ""
+msgstr "หน้าจอผู้ช่วย"
 
 #: src/pages/Shell.tsx
 msgid "Bot screen preview"
-msgstr ""
+msgstr "ตัวอย่างหน้าจอผู้ช่วย"
 
 #: src/pages/MessagingSettingsOverlay.tsx
 msgid "Bot to link"
@@ -790,7 +790,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Bots are working"
-msgstr ""
+msgstr "ผู้ช่วยกำลังทำงาน"
 
 #: src/pages/Paywall.tsx
 msgid "Bots with their own computer and browser"
@@ -841,7 +841,7 @@ msgstr ""
 
 #: src/pages/shell/chat-context.tsx
 msgid "Cancel reply"
-msgstr ""
+msgstr "ยกเลิกการตอบกลับ"
 
 #: src/pages/BillingSettingsPanel.tsx
 msgid "Canceled"
@@ -890,7 +890,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Chat Settings"
-msgstr ""
+msgstr "ตั้งค่าแชท"
 
 #: src/components/ComputersUnavailableHint.tsx
 #: src/pages/HostComputerPrompt.tsx
@@ -908,7 +908,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Check in."
-msgstr ""
+msgstr "เข้าไปดู"
 
 #: src/lib/model-connection-preflight.ts
 msgid "Check the API key or sign-in, then test again."
@@ -920,7 +920,7 @@ msgstr "ตรวจสอบที่อยู่เซิร์ฟเวอร
 
 #: src/pages/Auth.tsx
 msgid "Check your email"
-msgstr ""
+msgstr "ตรวจสอบอีเมลของคุณ"
 
 #: src/components/ComputersUnavailableHint.tsx
 msgid "Checking computer setup…"
@@ -947,7 +947,7 @@ msgstr ""
 
 #: src/pages/Auth.tsx
 msgid "Choose a new password"
-msgstr ""
+msgstr "ตั้งรหัสผ่านใหม่"
 
 #: src/pages/shell/avatar-studio-popover.tsx
 msgid "Choose file"
@@ -1003,15 +1003,15 @@ msgstr ""
 
 #: src/pages/shell/message-cards.tsx
 msgid "Close chart"
-msgstr ""
+msgstr "ปิดแผนภูมิ"
 
 #: src/pages/Shell.tsx
 msgid "Close computer"
-msgstr ""
+msgstr "ปิดคอมพิวเตอร์"
 
 #: src/pages/shell/message-cards.tsx
 msgid "Close image preview"
-msgstr ""
+msgstr "ปิดตัวอย่างรูป"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Close integrations"
@@ -1042,7 +1042,7 @@ msgstr "ปิดเมนูนำทาง"
 #: src/pages/GroupPanel.tsx
 #: src/pages/Shell.tsx
 msgid "Close panel"
-msgstr ""
+msgstr "ปิดแผง"
 
 #: src/components/ArtifactFileCard.tsx
 msgid "Close preview"
@@ -1069,7 +1069,7 @@ msgstr ""
 #. placeholder {0}: item.chat.name
 #: src/pages/Shell.tsx
 msgid "Collapse {0}"
-msgstr ""
+msgstr "ย่อ {0}"
 
 #: src/pages/shell/avatar-studio-popover.tsx
 msgid "Color"
@@ -1177,7 +1177,7 @@ msgstr "เชื่อมต่อ"
 
 #: src/pages/Onboarding.tsx
 msgid "Connect a model"
-msgstr ""
+msgstr "เชื่อมต่อโมเดล"
 
 #: src/pages/ModelBackupsSettings.tsx
 msgid "Connect a provider to add backups."
@@ -1193,7 +1193,7 @@ msgstr ""
 
 #: src/pages/shell/message-cards.tsx
 msgid "Connect MCP server “{name}”"
-msgstr ""
+msgstr "เชื่อมต่อเซิร์ฟเวอร์ MCP “{name}”"
 
 #: src/pages/McpServersOverlay.tsx
 msgid "Connect OAuth"
@@ -1214,7 +1214,7 @@ msgstr ""
 #: src/pages/shell/message-cards.tsx
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Connected"
-msgstr ""
+msgstr "เชื่อมต่อแล้ว"
 
 #. placeholder {0}: credential.label
 #: src/pages/ModelSettingsOverlay.tsx
@@ -1234,7 +1234,7 @@ msgstr ""
 
 #: src/pages/shell/message-cards.tsx
 msgid "Connected. Its tools are available from your next message."
-msgstr ""
+msgstr "เชื่อมต่อแล้ว เครื่องมือจะใช้ได้ตั้งแต่ข้อความถัดไป"
 
 #: src/components/integrations/IntegrationSetup.tsx
 #: src/pages/McpServersOverlay.tsx
@@ -1257,12 +1257,12 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Context limit"
-msgstr ""
+msgstr "ขีดจำกัดบริบท"
 
 #: src/components/integrations/IntegrationSetup.tsx
 #: src/pages/Onboarding.tsx
 msgid "Continue"
-msgstr ""
+msgstr "ดำเนินการต่อ"
 
 #: src/components/ComputerUpdateProgress.tsx
 msgid "Continue in Background"
@@ -1271,7 +1271,7 @@ msgstr ""
 #. placeholder {0}: reset.sso.name
 #: src/pages/Auth.tsx
 msgid "Continue with {0}"
-msgstr ""
+msgstr "ดำเนินการต่อด้วย {0}"
 
 #: src/pages/Auth.tsx
 msgid "Continue with email"
@@ -1281,13 +1281,13 @@ msgstr "ดำเนินการต่อด้วยอีเมล"
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Copied"
-msgstr ""
+msgstr "คัดลอกแล้ว"
 
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 #: src/pages/Shell.tsx
 msgid "Copy"
-msgstr ""
+msgstr "คัดลอก"
 
 #: src/components/ComputersUnavailableHint.tsx
 msgid "Copy .env example"
@@ -1303,11 +1303,11 @@ msgstr ""
 
 #: src/pages/shell/message-cards.tsx
 msgid "Could not approve this server"
-msgstr ""
+msgstr "อนุมัติเซิร์ฟเวอร์นี้ไม่สำเร็จ"
 
 #: src/pages/shell/message-cards.tsx
 msgid "Could not authorize this app"
-msgstr ""
+msgstr "ยืนยันสิทธิ์แอปนี้ไม่สำเร็จ"
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Could not change password"
@@ -1442,7 +1442,7 @@ msgstr ""
 
 #: src/pages/shell/message-cards.tsx
 msgid "Could not dismiss"
-msgstr ""
+msgstr "ปิดไม่สำเร็จ"
 
 #: src/pages/shell/message-cards.tsx
 msgid "Could not dismiss this server"
@@ -1649,7 +1649,7 @@ msgstr "บันทึกกลุ่มไม่สำเร็จ"
 
 #: src/pages/Onboarding.tsx
 msgid "Could not save model"
-msgstr ""
+msgstr "บันทึกโมเดลไม่สำเร็จ"
 
 #: src/pages/Shell.tsx
 msgid "Could not save routine"
@@ -1689,7 +1689,7 @@ msgstr ""
 
 #: src/pages/Auth.tsx
 msgid "Could not send reset email"
-msgstr ""
+msgstr "ส่งอีเมลรีเซ็ตไม่สำเร็จ"
 
 #: src/lib/call-session.ts
 msgid "Could not send that"
@@ -1774,7 +1774,7 @@ msgstr ""
 #: src/pages/Shell.tsx
 #: src/pages/shell/bot-picker.tsx
 msgid "Create new Bot"
-msgstr ""
+msgstr "สร้างผู้ช่วยใหม่"
 
 #: src/pages/shell/bot-picker.tsx
 msgid "Create new Group"
@@ -1875,13 +1875,13 @@ msgstr ""
 #: src/pages/Onboarding.tsx
 #: src/pages/shell/avatar-studio-popover.tsx
 msgid "Default"
-msgstr ""
+msgstr "ค่าเริ่มต้น"
 
 #. js-lingui-explicit-id
 #. placeholder {0}: thinkingLevelLabel("medium")
 #: src/pages/ModelSettingsOverlay.tsx
 msgid "Default ({0})"
-msgstr ""
+msgstr "ค่าเริ่มต้น ({0})"
 
 #. placeholder {0}: thinkingLevelLabel("medium")
 #. placeholder {0}: thinkingLevelLabel(defaultThinkingLevel)
@@ -1916,7 +1916,7 @@ msgstr ""
 #: src/pages/Artifacts.tsx
 #: src/pages/Shell.tsx
 msgid "Delete {0}"
-msgstr ""
+msgstr "ลบ {0}"
 
 #. placeholder {0}: bot.name
 #. placeholder {0}: item.name
@@ -1942,11 +1942,11 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Delete space"
-msgstr ""
+msgstr "ลบพื้นที่"
 
 #: src/pages/Shell.tsx
 msgid "deleted"
-msgstr ""
+msgstr "ลบแล้ว"
 
 #: src/pages/Artifacts.tsx
 #: src/pages/shell/dialogs.tsx
@@ -2020,7 +2020,7 @@ msgstr ""
 #: src/components/teach/TeachComputerOverlay.tsx
 #: src/pages/shell/message-cards.tsx
 msgid "Dismiss"
-msgstr ""
+msgstr "ปิด"
 
 #: src/pages/Shell.tsx
 msgid "Dismiss error"
@@ -2159,7 +2159,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Enter a whole number from 1 to 1000 for the image limit."
-msgstr ""
+msgstr "ใส่จำนวนเต็ม 1 ถึง 1000 สำหรับจำนวนรูป"
 
 #: src/lib/model-connection-preflight.ts
 msgid "Enter an API key before testing."
@@ -2168,7 +2168,7 @@ msgstr ""
 #: src/lib/roster-status.ts
 #: src/pages/Shell.tsx
 msgid "Error"
-msgstr ""
+msgstr "ข้อผิดพลาด"
 
 #: src/pages/ExternalConversationSettings.tsx
 #: src/pages/RoutineSchedule.tsx
@@ -2235,7 +2235,7 @@ msgstr "ขยาย"
 #. placeholder {0}: item.chat.name
 #: src/pages/Shell.tsx
 msgid "Expand {0}"
-msgstr ""
+msgstr "ขยาย {0}"
 
 #: src/pages/shell/bot-panel.tsx
 msgid "Export"
@@ -2253,7 +2253,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Extra high"
-msgstr ""
+msgstr "สูงมาก"
 
 #. js-lingui-explicit-id
 #: src/lib/model-catalog.ts
@@ -2270,11 +2270,11 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Failed to send message"
-msgstr ""
+msgstr "ส่งข้อความไม่สำเร็จ"
 
 #: src/pages/Shell.tsx
 msgid "Failed to stop"
-msgstr ""
+msgstr "หยุดไม่สำเร็จ"
 
 #. js-lingui-explicit-id
 #: src/lib/browser-notifications.ts
@@ -2304,7 +2304,7 @@ msgstr "ตัวกรอง"
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Find models"
-msgstr ""
+msgstr "ค้นหาโมเดล"
 
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
@@ -2340,7 +2340,7 @@ msgstr ""
 
 #: src/pages/Auth.tsx
 msgid "Forgot password?"
-msgstr ""
+msgstr "ลืมรหัสผ่าน?"
 
 #: src/pages/ModelSettingsOverlay.tsx
 msgid "Free"
@@ -2362,7 +2362,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Gateway ID"
-msgstr ""
+msgstr "รหัสเกตเวย์"
 
 #: src/pages/SettingsOverlay.tsx
 msgid "General"
@@ -2391,7 +2391,7 @@ msgstr "รับทราบครับ (Slack ปฏิทิน และอ
 #: src/pages/MessagingSettingsOverlay.tsx
 #: src/pages/Shell.tsx
 msgid "Group"
-msgstr ""
+msgstr "กลุ่ม"
 
 #: src/pages/GroupPanel.tsx
 msgid "Group settings"
@@ -2449,7 +2449,7 @@ msgstr "ซ่อนรายการผู้ช่วย"
 
 #: src/pages/Auth.tsx
 msgid "Hide password"
-msgstr ""
+msgstr "ซ่อนรหัสผ่าน"
 
 #: src/components/call/VoiceChatCard.tsx
 msgid "Hide transcript"
@@ -2459,7 +2459,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "High"
-msgstr ""
+msgstr "สูง"
 
 #. js-lingui-explicit-id
 #: src/lib/model-catalog.ts
@@ -2674,11 +2674,11 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Load earlier messages"
-msgstr ""
+msgstr "โหลดข้อความก่อนหน้า"
 
 #: src/pages/Artifacts.tsx
 msgid "Load more"
-msgstr ""
+msgstr "โหลดเพิ่มเติม"
 
 #: src/pages/RoutineRunHistory.tsx
 msgid "Load older runs"
@@ -2754,7 +2754,7 @@ msgstr "ออกจากระบบ"
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Low"
-msgstr ""
+msgstr "ต่ำ"
 
 #. js-lingui-explicit-id
 #: src/lib/model-catalog.ts
@@ -2808,7 +2808,7 @@ msgstr "ทำเป็นยังไม่อ่าน"
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Max"
-msgstr ""
+msgstr "สูงสุด"
 
 #. js-lingui-explicit-id
 #: src/lib/model-catalog.ts
@@ -2817,12 +2817,12 @@ msgstr ""
 
 #: src/pages/Artifacts.tsx
 msgid "Maximize"
-msgstr ""
+msgstr "ขยายเต็มจอ"
 
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Maximum images per request"
-msgstr ""
+msgstr "จำนวนรูปสูงสุดต่อครั้ง"
 
 #: src/pages/ModelBackupsSettings.tsx
 msgid "Maximum of 10 backup models."
@@ -2831,7 +2831,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Maximum output tokens"
-msgstr ""
+msgstr "จำนวนโทเคนส่งออกสูงสุด"
 
 #: src/pages/memory-providers/SerenitySettingsForm.tsx
 msgid "MCP endpoint"
@@ -2844,7 +2844,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Medium"
-msgstr ""
+msgstr "ปานกลาง"
 
 #. js-lingui-explicit-id
 #: src/lib/model-catalog.ts
@@ -2871,7 +2871,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Mentions"
-msgstr ""
+msgstr "การกล่าวถึง"
 
 #: src/pages/ExternalConversationSettings.tsx
 msgid "Mentions only"
@@ -2879,7 +2879,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Message"
-msgstr ""
+msgstr "ข้อความ"
 
 #. js-lingui-explicit-id
 #: src/lib/browser-notifications.ts
@@ -2892,7 +2892,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Message composer"
-msgstr ""
+msgstr "ช่องพิมพ์ข้อความ"
 
 #: src/pages/RoutineEditor.tsx
 msgid "Message event"
@@ -2900,7 +2900,7 @@ msgstr "เหตุการณ์ข้อความ"
 
 #: src/pages/Shell.tsx
 msgid "Message from {peer}"
-msgstr ""
+msgstr "ข้อความจาก {peer}"
 
 #: src/pages/Shell.tsx
 msgid "Message…"
@@ -2908,7 +2908,7 @@ msgstr "ข้อความ…"
 
 #: src/pages/Shell.tsx
 msgid "Messaged {peer}"
-msgstr ""
+msgstr "ส่งข้อความถึง {peer} แล้ว"
 
 #: src/pages/AccountSettingsOverlay.tsx
 #: src/pages/MessagingSettingsOverlay.tsx
@@ -2922,7 +2922,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Minimal"
-msgstr ""
+msgstr "น้อยที่สุด"
 
 #. js-lingui-explicit-id
 #: src/lib/model-catalog.ts
@@ -2960,7 +2960,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Model id"
-msgstr ""
+msgstr "รหัสโมเดล"
 
 #: src/pages/ModelSettingsOverlay.tsx
 msgid "Model options"
@@ -2987,7 +2987,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Models from server"
-msgstr ""
+msgstr "โมเดลจากเซิร์ฟเวอร์"
 
 #: src/lib/model-connection-preflight.ts
 msgid "Models list OK. {modelCount, plural, one {# model} other {# models}} available. Chat was not tested."
@@ -3066,7 +3066,7 @@ msgstr ""
 #: src/lib/roster-status.ts
 #: src/pages/Shell.tsx
 msgid "Needs you"
-msgstr ""
+msgstr "รอคุณอยู่"
 
 #: src/pages/shell/bot-panel.tsx
 msgid "New bot"
@@ -3165,7 +3165,7 @@ msgstr ""
 
 #: src/pages/Artifacts.tsx
 msgid "No matching artifacts on this page."
-msgstr ""
+msgstr "ไม่พบเอกสารที่ตรงกันในหน้านี้"
 
 #: src/pages/ModelSettingsOverlay.tsx
 msgid "No matching models"
@@ -3348,11 +3348,11 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Open in full window"
-msgstr ""
+msgstr "เปิดแบบเต็มหน้าต่าง"
 
 #: src/pages/Shell.tsx
 msgid "Open navigation"
-msgstr ""
+msgstr "เปิดเมนู"
 
 #: src/components/computer/TerminalApp.tsx
 msgid "Open shell"
@@ -3365,7 +3365,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "OpenAI-compatible server URL"
-msgstr ""
+msgstr "ที่อยู่เซิร์ฟเวอร์ที่รองรับ OpenAI"
 
 #: src/components/computer/TerminalApp.tsx
 msgid "Opened {path}"
@@ -3373,11 +3373,11 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Opened its thread."
-msgstr ""
+msgstr "เปิดบทสนทนาแล้ว"
 
 #: src/pages/Onboarding.tsx
 msgid "Opening chat…"
-msgstr ""
+msgstr "กำลังเปิดแชท…"
 
 #: src/App.tsx
 msgid "Opening your Space…"
@@ -3387,7 +3387,7 @@ msgstr "กำลังเปิดพื้นที่ของคุณ…"
 #: src/pages/Onboarding.tsx
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Optional"
-msgstr ""
+msgstr "ไม่บังคับ"
 
 #: src/pages/McpServersOverlay.tsx
 msgid "Optional header value"
@@ -3399,7 +3399,7 @@ msgstr ""
 
 #: src/pages/Onboarding.tsx
 msgid "Or paste an API key"
-msgstr ""
+msgstr "หรือวาง API key"
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Organic"
@@ -3411,12 +3411,12 @@ msgstr "คีย์ API ขององค์กร"
 
 #: src/pages/shell/chat-context.tsx
 msgid "Original message unavailable"
-msgstr ""
+msgstr "ไม่พบข้อความต้นฉบับ"
 
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Other model…"
-msgstr ""
+msgstr "โมเดลอื่น…"
 
 #: src/pages/Board.tsx
 msgid "Owner"
@@ -3439,17 +3439,17 @@ msgstr "รหัสผ่าน"
 
 #: src/pages/Auth.tsx
 msgid "Password recovery is not configured for this server"
-msgstr ""
+msgstr "เซิร์ฟเวอร์นี้ยังไม่ได้ตั้งการกู้คืนรหัสผ่าน"
 
 #: src/pages/AccountSettingsOverlay.tsx
 #: src/pages/Auth.tsx
 msgid "Password updated"
-msgstr ""
+msgstr "อัปเดตรหัสผ่านแล้ว"
 
 #: src/pages/AccountSettingsOverlay.tsx
 #: src/pages/Auth.tsx
 msgid "Passwords do not match"
-msgstr ""
+msgstr "รหัสผ่านไม่ตรงกัน"
 
 #: src/pages/BillingSettingsPanel.tsx
 msgid "Past due"
@@ -3485,7 +3485,7 @@ msgstr "หยุดชั่วคราว"
 #: src/pages/Shell.tsx
 #: src/pages/shell/chat-context.tsx
 msgid "Photo"
-msgstr ""
+msgstr "รูปภาพ"
 
 #: src/lib/model-connection-preflight.ts
 msgid "Pick a model from the catalog."
@@ -3522,7 +3522,7 @@ msgstr ""
 
 #: src/pages/Artifacts.tsx
 msgid "Preview isn't available for this file type — download it to view it."
-msgstr ""
+msgstr "ไฟล์ชนิดนี้แสดงตัวอย่างไม่ได้ — ดาวน์โหลดเพื่อเปิดดู"
 
 #: src/pages/Board.tsx
 msgid "Priority"
@@ -3569,7 +3569,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Quote"
-msgstr ""
+msgstr "อ้างอิง"
 
 #: src/pages/Shell.tsx
 msgid "React"
@@ -3577,7 +3577,7 @@ msgstr "แสดงความรู้สึก"
 
 #: src/pages/Shell.tsx
 msgid "Reactions"
-msgstr ""
+msgstr "ปฏิกิริยา"
 
 #: src/pages/shell/bot-panel.tsx
 msgid "Read replies aloud"
@@ -3586,7 +3586,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Reasoning effort"
-msgstr ""
+msgstr "ระดับการคิดวิเคราะห์"
 
 #: src/pages/memory-providers/SerenitySettingsForm.tsx
 msgid "Recall and write"
@@ -3689,7 +3689,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Release control"
-msgstr ""
+msgstr "ปล่อยการควบคุม"
 
 #: src/components/ComputerUpdateProgress.tsx
 msgid "Release interrupted computer?"
@@ -3706,7 +3706,7 @@ msgstr ""
 #. placeholder {0}: attachment.file.name
 #: src/pages/Shell.tsx
 msgid "Remove {0}"
-msgstr ""
+msgstr "ลบ {0}"
 
 #: src/pages/ModelBackupsSettings.tsx
 msgid "Remove {full}"
@@ -3723,7 +3723,7 @@ msgstr ""
 #. placeholder {0}: mention.name
 #: src/pages/Shell.tsx
 msgid "Remove mention {0}"
-msgstr ""
+msgstr "ลบการกล่าวถึง {0}"
 
 #: src/pages/RoutineEditor.tsx
 msgid "Remove message trigger"
@@ -3744,7 +3744,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Removed with chat, computer, and memory."
-msgstr ""
+msgstr "ลบพร้อมบทสนทนา คอมพิวเตอร์ และความจำแล้ว"
 
 #: src/pages/ScratchpadSection.tsx
 msgid "Removed, but list refresh failed"
@@ -3763,7 +3763,7 @@ msgstr "เปลี่ยนชื่อแผนก"
 #: src/pages/Shell.tsx
 #: src/pages/shell/dialogs.tsx
 msgid "Rename space"
-msgstr ""
+msgstr "เปลี่ยนชื่อพื้นที่"
 
 #: src/pages/BillingSettingsPanel.tsx
 msgid "Renews {day}"
@@ -3796,7 +3796,7 @@ msgstr "ยกเลิกการตอบกลับ"
 #. placeholder {0}: replyNameRef.current
 #: src/pages/Shell.tsx
 msgid "Replying to {0}"
-msgstr ""
+msgstr "กำลังตอบกลับ {0}"
 
 #: src/pages/shell/message-cards.tsx
 msgid "Research & writing"
@@ -3821,7 +3821,7 @@ msgstr ""
 
 #: src/pages/Auth.tsx
 msgid "Reset password"
-msgstr ""
+msgstr "รีเซ็ตรหัสผ่าน"
 
 #: src/pages/Auth.tsx
 msgid "Reset your password"
@@ -3873,7 +3873,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Retry screen"
-msgstr ""
+msgstr "ลองหน้าจออีกครั้ง"
 
 #: src/pages/McpOAuthCallback.tsx
 msgid "Return to Rakazo"
@@ -3907,7 +3907,7 @@ msgstr ""
 #: src/pages/RoutineEditor.tsx
 #: src/pages/Shell.tsx
 msgid "Routine"
-msgstr ""
+msgstr "งานตามกำหนดการ"
 
 #: src/pages/RoutineEditor.tsx
 msgid "Routines"
@@ -3927,7 +3927,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Run time must be in the future."
-msgstr ""
+msgstr "เวลาทำงานต้องเป็นเวลาในอนาคต"
 
 #: src/components/CloudAgentCard.tsx
 msgid "running"
@@ -4085,7 +4085,7 @@ msgstr "กำลังค้นหา…"
 
 #: src/pages/Shell.tsx
 msgid "Select a bot"
-msgstr ""
+msgstr "เลือกผู้ช่วย"
 
 #: src/pages/ModelBackupsSettings.tsx
 msgid "Select a connected model"
@@ -4146,7 +4146,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Server URL"
-msgstr ""
+msgstr "ที่อยู่เซิร์ฟเวอร์"
 
 #: src/components/call/CallCard.tsx
 #: src/pages/MessagingSettingsOverlay.tsx
@@ -4157,11 +4157,11 @@ msgstr "ตั้งค่า"
 
 #: src/pages/Shell.tsx
 msgid "Settings: General"
-msgstr ""
+msgstr "ตั้งค่า: ทั่วไป"
 
 #: src/pages/Shell.tsx
 msgid "Settings: Usage"
-msgstr ""
+msgstr "ตั้งค่า: การใช้งาน"
 
 #: src/components/integrations/IntegrationSetup.tsx
 #: src/pages/ModelSettingsOverlay.tsx
@@ -4195,15 +4195,15 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Show bots"
-msgstr ""
+msgstr "แสดงผู้ช่วย"
 
 #: src/pages/Shell.tsx
 msgid "Show computer"
-msgstr ""
+msgstr "แสดงคอมพิวเตอร์"
 
 #: src/pages/Artifacts.tsx
 msgid "Show list"
-msgstr ""
+msgstr "แสดงรายการ"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Show more"
@@ -4211,11 +4211,11 @@ msgstr ""
 
 #: src/pages/Auth.tsx
 msgid "Show password"
-msgstr ""
+msgstr "แสดงรหัสผ่าน"
 
 #: src/pages/Shell.tsx
 msgid "Show settings"
-msgstr ""
+msgstr "แสดงการตั้งค่า"
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Show tool activity"
@@ -4272,7 +4272,7 @@ msgstr ""
 #: src/components/integrations/IntegrationSetup.tsx
 #: src/pages/Shell.tsx
 msgid "Skip"
-msgstr ""
+msgstr "ข้าม"
 
 #: src/lib/localized-provider-hint.ts
 msgid "Skip or deploy key"
@@ -4281,7 +4281,7 @@ msgstr ""
 #. placeholder {0}: skipped.join(", ")
 #: src/pages/Shell.tsx
 msgid "Skipped {0}"
-msgstr ""
+msgstr "ข้าม {0}"
 
 #: src/pages/RoutineEditor.tsx
 msgid "Slack message"
@@ -4319,7 +4319,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Speak"
-msgstr ""
+msgstr "อ่านออกเสียง"
 
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Speak + transcribe"
@@ -4331,7 +4331,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Speak this reply"
-msgstr ""
+msgstr "อ่านคำตอบนี้ออกเสียง"
 
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Speech model"
@@ -4371,11 +4371,11 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Stop"
-msgstr ""
+msgstr "หยุด"
 
 #: src/pages/Shell.tsx
 msgid "Stop speaking"
-msgstr ""
+msgstr "หยุดอ่านออกเสียง"
 
 #: src/components/teach/TeachRecordingChrome.tsx
 msgid "Stop teaching"
@@ -4405,12 +4405,12 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "subagent"
-msgstr ""
+msgstr "ผู้ช่วยย่อย"
 
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Submit"
-msgstr ""
+msgstr "ส่ง"
 
 #: src/pages/Paywall.tsx
 msgid "Subscribe"
@@ -4423,12 +4423,12 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Supports images"
-msgstr ""
+msgstr "รองรับรูปภาพ"
 
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Supports thinking"
-msgstr ""
+msgstr "รองรับการคิดวิเคราะห์"
 
 #: src/pages/shell/command-palette.tsx
 msgid "Switch bot"
@@ -4444,7 +4444,7 @@ msgstr "ตามระบบ"
 
 #: src/pages/Shell.tsx
 msgid "Take control"
-msgstr ""
+msgstr "เข้าควบคุม"
 
 #: src/pages/shell/employee-nav.tsx
 msgid "Tasks"
@@ -4464,7 +4464,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Team Computer"
-msgstr ""
+msgstr "คอมพิวเตอร์ทีม"
 
 #: src/pages/MessagingSettingsOverlay.tsx
 msgid "Team conversations"
@@ -4543,7 +4543,7 @@ msgstr ""
 
 #: src/pages/Artifacts.tsx
 msgid "This can't be undone."
-msgstr ""
+msgstr "ไม่สามารถย้อนกลับได้"
 
 #: src/pages/shell/dialogs.tsx
 msgid "This cannot be undone."
@@ -4596,11 +4596,11 @@ msgstr ""
 
 #: src/pages/Auth.tsx
 msgid "This reset link is invalid or expired"
-msgstr ""
+msgstr "ลิงก์รีเซ็ตนี้ไม่ถูกต้องหรือหมดอายุแล้ว"
 
 #: src/pages/shell/message-cards.tsx
 msgid "This server cannot be assigned without a bot."
-msgstr ""
+msgstr "ต้องเลือกผู้ช่วยก่อนจึงจะกำหนดเซิร์ฟเวอร์นี้ได้"
 
 #: src/pages/McpServersOverlay.tsx
 msgid "This server did not request browser authorization."
@@ -4735,7 +4735,7 @@ msgstr ""
 #. placeholder {0}: pending.file.name
 #: src/pages/Shell.tsx
 msgid "Unsupported file type: {0}"
-msgstr ""
+msgstr "ไม่รองรับชนิดไฟล์นี้: {0}"
 
 #: src/components/DesktopUpdates.tsx
 #: src/components/SoftwareUpdateSection.tsx
@@ -4816,7 +4816,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Use a found model"
-msgstr ""
+msgstr "ใช้โมเดลที่พบ"
 
 #: src/lib/model-connection-preflight.ts
 msgid "Use Connect to verify the key."
@@ -4865,7 +4865,7 @@ msgstr ""
 
 #: src/pages/Artifacts.tsx
 msgid "Version"
-msgstr ""
+msgstr "เวอร์ชัน"
 
 #: src/pages/RoutineRunHistory.tsx
 msgid "View chat"
@@ -5004,7 +5004,7 @@ msgstr "เมื่อวาน"
 
 #: src/pages/Shell.tsx
 msgid "You"
-msgstr ""
+msgstr "คุณ"
 
 #: src/pages/McpOAuthCallback.tsx
 msgid "You can close this tab if it does not redirect automatically."
@@ -5016,7 +5016,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "You have control"
-msgstr ""
+msgstr "คุณกำลังควบคุม"
 
 #: src/pages/Auth.tsx
 msgid "Your email address"
