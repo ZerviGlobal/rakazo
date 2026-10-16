@@ -896,7 +896,7 @@ msgstr ""
 
 #: src/lib/model-connection-preflight.ts
 msgid "Check the server URL and network, then test again."
-msgstr ""
+msgstr "ตรวจสอบที่อยู่เซิร์ฟเวอร์และเครือข่าย แล้วลองอีกครั้ง"
 
 #: src/pages/Auth.tsx
 msgid "Check your email"
@@ -1291,15 +1291,15 @@ msgstr ""
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Could not change password"
-msgstr ""
+msgstr "เปลี่ยนรหัสผ่านไม่สำเร็จ"
 
 #: src/pages/ModelSettingsOverlay.tsx
 msgid "Could not change the default model"
-msgstr ""
+msgstr "เปลี่ยนโมเดลเริ่มต้นไม่สำเร็จ"
 
 #: src/lib/model-connection-preflight.ts
 msgid "Could not check stored credentials."
-msgstr ""
+msgstr "ตรวจสอบคีย์ที่บันทึกไว้ไม่สำเร็จ"
 
 #: src/components/teach/TeachComputerOverlay.tsx
 msgid "Could not check teaching status. Refresh the view to continue."
@@ -1307,7 +1307,7 @@ msgstr ""
 
 #: src/pages/shell/dialogs.tsx
 msgid "Could not clear conversation"
-msgstr ""
+msgstr "ล้างบทสนทนาไม่สำเร็จ"
 
 #: src/components/ComputerUpdateProgress.tsx
 msgid "Could not complete action"
@@ -1315,11 +1315,11 @@ msgstr ""
 
 #: src/pages/McpOAuthCallback.tsx
 msgid "Could not complete OAuth"
-msgstr ""
+msgstr "ยืนยันสิทธิ์ไม่สำเร็จ"
 
 #: src/components/DesktopUpdates.tsx
 msgid "Could not complete the update. Try again."
-msgstr ""
+msgstr "อัปเดตไม่สำเร็จ ลองอีกครั้ง"
 
 #: src/components/integrations/IntegrationSetup.tsx
 #: src/pages/PluginsOverlay.tsx
@@ -1562,7 +1562,7 @@ msgstr ""
 #: src/pages/AccountSettingsOverlay.tsx
 #: src/pages/Auth.tsx
 msgid "Could not reach the server"
-msgstr ""
+msgstr "เชื่อมต่อเซิร์ฟเวอร์ไม่ได้"
 
 #: src/pages/ScratchpadSection.tsx
 msgid "Could not remove"
