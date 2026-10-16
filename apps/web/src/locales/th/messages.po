@@ -26,13 +26,13 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "{0, plural, one {Waiting for sign-in — the code expires in about # minute.} other {Waiting for sign-in — the code expires in about # minutes.}}"
-msgstr ""
+msgstr "{0, plural, one {รอการเข้าสู่ระบบ — รหัสจะหมดอายุในประมาณ # นาที} other {รอการเข้าสู่ระบบ — รหัสจะหมดอายุในประมาณ # นาที}}"
 
 #. placeholder {0}: Math.ceil(oauth.expiresInSeconds / 60)
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "{0, plural, one {Waiting for sign-in — the link expires in about # minute.} other {Waiting for sign-in — the link expires in about # minutes.}}"
-msgstr ""
+msgstr "{0, plural, one {รอการเข้าสู่ระบบ — ลิงก์จะหมดอายุในประมาณ # นาที} other {รอการเข้าสู่ระบบ — ลิงก์จะหมดอายุในประมาณ # นาที}}"
 
 #. placeholder {0}: file.name
 #: src/pages/Shell.tsx
@@ -227,7 +227,7 @@ msgstr "ผสมกันทุกอย่าง"
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "A sign-in tab opened at <0>{0}</0>. Enter this code there — this window keeps waiting:"
-msgstr ""
+msgstr "เปิดแท็บเข้าสู่ระบบที่ <0>{0}</0> แล้วกรอกรหัสนี้ที่นั่น — หน้าต่างนี้จะรออยู่"
 
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
@@ -874,7 +874,7 @@ msgstr ""
 
 #: src/pages/shell/message-cards.tsx
 msgid "Chart failed to render: {error}"
-msgstr ""
+msgstr "แสดงแผนภูมิไม่สำเร็จ: {error}"
 
 #: src/pages/shell/employee-nav.tsx
 msgid "Chat"
@@ -1116,19 +1116,19 @@ msgstr "คอมพิวเตอร์"
 
 #: src/pages/Shell.tsx
 msgid "Computer failed to boot"
-msgstr ""
+msgstr "คอมพิวเตอร์เริ่มทำงานไม่สำเร็จ"
 
 #: src/pages/Shell.tsx
 msgid "Computer is asleep"
-msgstr ""
+msgstr "คอมพิวเตอร์กำลังพัก"
 
 #: src/pages/Shell.tsx
 msgid "Computer is asleep. Open it to wake."
-msgstr ""
+msgstr "คอมพิวเตอร์กำลังพัก เปิดเพื่อปลุก"
 
 #: src/pages/Shell.tsx
 msgid "Computer is stopped"
-msgstr ""
+msgstr "คอมพิวเตอร์หยุดทำงาน"
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Computers"
@@ -1446,7 +1446,7 @@ msgstr "ปิดไม่สำเร็จ"
 
 #: src/pages/shell/message-cards.tsx
 msgid "Could not dismiss this server"
-msgstr ""
+msgstr "ปิดเซิร์ฟเวอร์นี้ไม่สำเร็จ"
 
 #. placeholder {0}: props.name
 #: src/components/ArtifactFileCard.tsx
@@ -1889,7 +1889,7 @@ msgstr "ค่าเริ่มต้น ({0})"
 #: src/pages/RoutineEditor.tsx
 #: src/pages/shell/bot-panel.tsx
 msgid "Default ({0})"
-msgstr ""
+msgstr "ค่าเริ่มต้น ({0})"
 
 #: src/pages/MemorySettingsOverlay.tsx
 msgid "Default scope"
@@ -1908,7 +1908,7 @@ msgstr "ลบ"
 #. placeholder {0}: pendingDelete.name
 #: src/pages/Artifacts.tsx
 msgid "Delete \"{0}\"?"
-msgstr ""
+msgstr "ลบ \"{0}\" ?"
 
 #. placeholder {0}: artifact.name
 #. placeholder {0}: bot.name
@@ -2149,12 +2149,12 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Enter a whole number from 1 to {MAX_MODEL_CONTEXT_WINDOW} for the context limit."
-msgstr ""
+msgstr "ใส่จำนวนเต็ม 1 ถึง {MAX_MODEL_CONTEXT_WINDOW} สำหรับขีดจำกัดบริบท"
 
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Enter a whole number from 1 to {MAX_MODEL_MAX_TOKENS} for maximum output tokens."
-msgstr ""
+msgstr "ใส่จำนวนเต็ม 1 ถึง {MAX_MODEL_MAX_TOKENS} สำหรับจำนวนโทเคนส่งออกสูงสุด"
 
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
@@ -2315,7 +2315,7 @@ msgstr "กำลังค้นหา…"
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Finish signing in at <0>{0}</0>. The final page may not load; paste its URL or code here."
-msgstr ""
+msgstr "เข้าสู่ระบบให้เสร็จที่ <0>{0}</0> หน้าสุดท้ายอาจไม่โหลด ให้วาง URL หรือรหัสที่นี่"
 
 #: src/lib/model-connection-preflight.ts
 msgid "Finish subscription sign-in, then test again."
@@ -2609,7 +2609,7 @@ msgstr "ไปข้อความล่าสุด"
 
 #: src/pages/shell/chat-context.tsx
 msgid "Jump to replied message: {excerpt}"
-msgstr ""
+msgstr "ไปยังข้อความที่ตอบกลับ: {excerpt}"
 
 #: src/lib/relative-time.ts
 #: src/pages/ActivityList.tsx
@@ -2888,7 +2888,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Message {activeName}"
-msgstr ""
+msgstr "ส่งข้อความถึง {activeName}"
 
 #: src/pages/Shell.tsx
 msgid "Message composer"
@@ -3313,7 +3313,7 @@ msgstr "ครั้งเดียว"
 
 #: src/pages/Shell.tsx
 msgid "Only empty spaces can be deleted. Delete its bots and groups first."
-msgstr ""
+msgstr "ลบได้เฉพาะพื้นที่ว่างเท่านั้น กรุณาลบผู้ช่วยและกลุ่มในพื้นที่ก่อน"
 
 #: src/components/markdown-link-prompt.tsx
 #: src/pages/ScratchpadSection.tsx
@@ -3324,19 +3324,19 @@ msgstr "เปิด"
 #. placeholder {0}: group.title
 #: src/pages/Shell.tsx
 msgid "Open {0}"
-msgstr ""
+msgstr "เปิด {0}"
 
 #. placeholder {0}: oauth.verificationUri.replace(/^https:\/\//, "")
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Open <0>{0}</0> and enter this code:"
-msgstr ""
+msgstr "เปิด <0>{0}</0> แล้วกรอกรหัสนี้:"
 
 #. placeholder {0}: new URL(oauth.verificationUri).hostname
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Open <0>{0}</0> to finish signing in."
-msgstr ""
+msgstr "เปิด <0>{0}</0> เพื่อเข้าสู่ระบบให้เสร็จ"
 
 #: src/components/ComputersUnavailableHint.tsx
 msgid "Open computer settings"
@@ -3736,7 +3736,7 @@ msgstr ""
 #. placeholder {0}: selectedSkill.name
 #: src/pages/Shell.tsx
 msgid "Remove skill {0}"
-msgstr ""
+msgstr "ลบทักษะ {0}"
 
 #: src/pages/RoutineEditor.tsx
 msgid "Remove webhook"
@@ -4267,7 +4267,7 @@ msgstr ""
 #. placeholder {0}: skill.name
 #: src/pages/Shell.tsx
 msgid "Skill {0}"
-msgstr ""
+msgstr "ทักษะ {0}"
 
 #: src/components/integrations/IntegrationSetup.tsx
 #: src/pages/Shell.tsx
@@ -4456,7 +4456,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Teaching in progress. Stop teaching before sending a new message."
-msgstr ""
+msgstr "กำลังสอนอยู่ กรุณาหยุดสอนก่อนส่งข้อความใหม่"
 
 #: src/pages/shell/bot-panel.tsx
 msgid "Team"
@@ -4539,7 +4539,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "This bot runs on this computer, not a Linux desktop. Shell and files use your home folder."
-msgstr ""
+msgstr "ผู้ช่วยนี้ทำงานบนคอมพิวเตอร์เครื่องนี้ ไม่ใช่เดสก์ท็อป Linux ส่วนเชลล์และไฟล์ใช้โฟลเดอร์บ้านของคุณ"
 
 #: src/pages/Artifacts.tsx
 msgid "This can't be undone."
@@ -4560,7 +4560,7 @@ msgstr ""
 #. placeholder {0}: pendingDelete.versionCount
 #: src/pages/Artifacts.tsx
 msgid "This deletes all {0} versions of this artifact. This can't be undone."
-msgstr ""
+msgstr "การลบนี้จะลบเอกสารนี้ทั้ง {0} เวอร์ชัน และไม่สามารถย้อนกลับได้"
 
 #: src/components/ArtifactFileCard.tsx
 msgid "This file is not valid UTF-8 text."
