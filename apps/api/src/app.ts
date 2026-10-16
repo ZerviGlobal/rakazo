@@ -1118,6 +1118,15 @@ function sessionHeaders(request: Request) {
  */
 export function logUnexpectedRpcError(error: unknown, path: readonly string[]): void {
   if (error instanceof ORPCError) return;
+  // `IsolationError` already reaches the client as a 404 (mapped in the handler interceptors), so
+  // logging it at ERROR with a stack trace reports a NON-fault as a fault. Measured after the
+  // mapping landed: the response was correctly 404 while the api log still carried
+  // "IsolationError … Resource not found" three times, each with a full stack. A scope denial is a
+  // normal outcome of asking for someone else's resource — note it at debug, not as an error.
+  if (error instanceof IsolationError) {
+    getLogger().debug(`rpc ${path.join("/")} denied by scope`, { name: error.name });
+    return;
+  }
   const where = `rpc ${path.join("/")} failed`;
   getLogger().error(where, error);
 }
