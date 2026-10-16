@@ -296,7 +296,11 @@ import {
   ChoiceCard,
   McpApprovalCard,
 } from "./shell/message-cards";
-import { EmployeeNav, EmployeeTabBar } from "./shell/employee-nav";
+import {
+  EmployeeNav,
+  EmployeeTabBar,
+  takePendingSettingsSection,
+} from "./shell/employee-nav";
 import { commitSpaceRename, sidebarGroupsForSpaces } from "./shell/space-sidebar";
 import { WindowChrome } from "./WindowChrome";
 
@@ -659,6 +663,10 @@ export function ShellPage() {
     { kind: "bot"; chat: Bot } | { kind: "group"; chat: Group } | null
   >(null);
   const [renameSectionTarget, setRenameSectionTarget] = useState<{
+    section: BotSection;
+    spaceId: string;
+  } | null>(null);
+  const [deleteSectionTarget, setDeleteSectionTarget] = useState<{
     section: BotSection;
     spaceId: string;
   } | null>(null);
@@ -2595,8 +2603,15 @@ export function ShellPage() {
       }
       pendingPanelRestore.current = readRightPanelState(panelStorageKey);
     }
-    const saved = pendingPanelRestore.current;
-    if (!saved) return;
+    // Zervi: the phone tab bar lives on standalone routes (/app/artifacts, /app/board) and
+    // must be able to open the settings overlay, which lives here. A `?usage=1` query param
+    // does NOT work: a bare /app redirects to /app/<botId> with `{ replace: true }` and no
+    // search string, destroying the param before this runs. sessionStorage survives the
+    // redirect and is read once here (takePendingSettingsSection clears it).
+    if (takePendingSettingsSection() === "usage") {
+      openSettings("usage");
+    }
+    const saved = pendingPanelRestore.current;    if (!saved) return;
     // Explicit routine links take precedence over a local layout preference.
     if (searchParams.has("routine")) {
       pendingPanelRestore.current = null;
@@ -3065,6 +3080,46 @@ export function ShellPage() {
                             )}
                           </button>
                         ) : null}
+                        {/* A section owns a menu (rename/delete) that was reachable ONLY by
+                            right-click — so on a phone a department could be CREATED but
+                            never renamed or deleted (measured: long-press opens nothing).
+                            This gives the section the same visible actions button the space
+                            header already has, so a tap works on touch.
+                            The className enlarges it on touch: upstream's `icon-sm` is
+                            size-7 = 28px, below the 44px touch guideline. This is the only
+                            control the Zervi work added to a phone-first surface, so it gets
+                            a full-size hit area without restyling the shared variant. */}
+                        {group.sectionId && !group.emptySpaceId ? (
+                          <Button
+                            variant="ghost"
+                            size="icon-sm"
+                            className={`md:size-7 max-md:min-h-11 max-md:min-w-11 ${
+                              group.title
+                                ? "col-start-1 row-start-1 justify-self-end self-center"
+                                : ""
+                            }`}
+                            data-testid="section-actions-trigger"
+                            aria-label={t`Actions for ${group.title}`}
+                            onClick={(event) => {
+                              const sections =
+                                group.spaceId === bootstrapMe?.spaceId
+                                  ? botSections
+                                  : (spaces.find((space) => space.id === group.spaceId)
+                                      ?.botSections ?? []);
+                              const section = sections.find((item) => item.id === group.sectionId);
+                              if (!section) return;
+                              const rect = event.currentTarget.getBoundingClientRect();
+                              sectionMenuAnchor.current = event.currentTarget;
+                              setSectionMenu({
+                                section,
+                                spaceId: group.spaceId,
+                                position: { x: rect.left, y: rect.bottom },
+                              });
+                            }}
+                          >
+                            <MoreHorizontal size={14} aria-hidden="true" />
+                          </Button>
+                        ) : null}
                         {hasSpaceActions ? (
                           <Button
                             variant="ghost"
@@ -3445,6 +3500,16 @@ export function ShellPage() {
             navigate(path);
           }}
           onOpenUsage={() => openSettings("usage")}
+          // The section RPC needs a bot (or group) to attach the section to, and it puts
+          // that bot in it. Prefer the active bot, else the first one.
+          onCreateDepartment={
+            active ?? bots[0]
+              ? () => {
+                  setNewSectionTarget({ kind: "bot", chat: (active ?? bots[0]) as Bot });
+                  setMobileSidebarOpen(false);
+                }
+              : undefined
+          }
         />
         <button
           type="button"
@@ -3498,7 +3563,9 @@ export function ShellPage() {
                 }}
               >
                 <FolderOpen className="text-muted-foreground" strokeWidth={1.75} />
-                <Trans>Artifacts</Trans>
+                {/* "Documents" — the same destination as the sidebar row. Two names for one
+                    page is how the original confusion started. The route stays /app/artifacts. */}
+                <Trans>Documents</Trans>
               </Button>
               <Button
                 variant="ghost"
@@ -4494,8 +4561,7 @@ export function ShellPage() {
             onOpenChange={(open) => {
               if (!open) closeSectionMenu();
             }}
-          >
-            <DropdownMenuTrigger
+          >            <DropdownMenuTrigger
               render={
                 <button
                   type="button"
@@ -4524,8 +4590,50 @@ export function ShellPage() {
                 <Pencil />
                 {t`Rename section`}
               </DropdownMenuItem>
+              {/* Departments could be created and renamed but never removed — the RPC only
+                  had list/create/update. Deleting a section keeps its members: the schema is
+                  onDelete: SetNull, so bots and groups fall back to Unassigned. No separator:
+                  @rakazo/ui-web does not export DropdownMenuSeparator, and the destructive
+                  styling already sets this item apart. */}
+              <DropdownMenuItem
+                className="text-destructive"
+                onClick={() => {
+                  setDeleteSectionTarget({
+                    section: sectionMenu.section,
+                    spaceId: sectionMenu.spaceId,
+                  });
+                  setSectionMenu(null);
+                }}
+              >
+                <Trash2 />
+                {t`Delete department`}
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+        ) : null}
+
+        {deleteSectionTarget ? (
+          <DeleteItemDialog
+            item={deleteSectionTarget.section}
+            noun="section"
+            description={
+              // Be explicit that this is not destructive to content, because the dialog's
+              // default copy ("This cannot be undone") undersells that on purpose.
+              <Trans>
+                The assistants and groups in this department are kept — they move back to
+                Unassigned.
+              </Trans>
+            }
+            onCancel={() => setDeleteSectionTarget(null)}
+            onConfirm={async () => {
+              await rpc.botSections.remove(
+                { sectionId: deleteSectionTarget.section.id },
+                { context: { spaceId: deleteSectionTarget.spaceId } },
+              );
+              setDeleteSectionTarget(null);
+              await refreshBots();
+            }}
+          />
         ) : null}
 
         <CommandPalette

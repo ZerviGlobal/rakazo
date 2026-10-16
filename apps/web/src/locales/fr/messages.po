@@ -95,6 +95,11 @@ msgstr "{0} répondra toujours aux mentions directes."
 msgid "{0}'s screen"
 msgstr "Écran de {0}"
 
+#. placeholder {0}: routines.length
+#: src/pages/ScheduledTasks.tsx
+msgid "{activeCount} of {0} running"
+msgstr ""
+
 #: src/lib/billing.ts
 msgid "{amount} / {period}"
 msgstr ""
@@ -252,7 +257,7 @@ msgstr "Confirmations d'action"
 
 #. placeholder {0}: bot.name
 #. placeholder {0}: group.spaceName
-#. placeholder {0}: sectionMenu.section.name
+#. placeholder {0}: group.title
 #: src/pages/BotContextMenu.tsx
 #: src/pages/Shell.tsx
 msgid "Actions for {0}"
@@ -503,6 +508,10 @@ msgstr "Répondu : {answer}"
 msgid "Any model, with your own key"
 msgstr ""
 
+#: src/lib/relative-time.ts
+msgid "any moment now"
+msgstr ""
+
 #: src/components/SoftwareUpdateSection.tsx
 msgid "API is back, but the update did not finish. Check the host logs."
 msgstr "L'API est de retour, mais la mise à jour n'est pas terminée. Vérifiez les journaux de l'hôte."
@@ -557,11 +566,6 @@ msgstr "Archivé. Conversation, mémoire et fichiers conservés."
 msgid "Arguments"
 msgstr "Arguments"
 
-#: src/pages/Artifacts.tsx
-#: src/pages/Shell.tsx
-msgid "Artifacts"
-msgstr "Artefacts"
-
 #. placeholder {0}: rule.matchValue
 #: src/components/ApprovalRulesSettings.tsx
 msgid "Ask before {0}"
@@ -596,6 +600,11 @@ msgstr "Demander avant d'envoyer un e-mail externe"
 #: src/components/integrations/IntegrationSetup.tsx
 msgid "Ask the server owner to configure this provider."
 msgstr "Demandez au propriétaire du serveur de configurer ce fournisseur."
+
+#: src/pages/Artifacts.tsx
+#: src/pages/ScheduledTasks.tsx
+msgid "Assistants"
+msgstr ""
 
 #. placeholder {0}: preset.time
 #: src/pages/RoutineSchedule.tsx
@@ -758,10 +767,6 @@ msgstr "Bot à connecter"
 #: src/pages/RoutineEditor.tsx
 msgid "Bot's model"
 msgstr "Modèle du bot"
-
-#: src/pages/Artifacts.tsx
-msgid "Bots"
-msgstr "Bots"
 
 #: src/pages/Shell.tsx
 msgid "Bots are working"
@@ -1372,6 +1377,10 @@ msgid "Could not delete bot"
 msgstr "Impossible de supprimer le bot"
 
 #: src/pages/shell/dialogs.tsx
+msgid "Could not delete department"
+msgstr ""
+
+#: src/pages/shell/dialogs.tsx
 msgid "Could not delete group"
 msgstr "Impossible de supprimer le groupe"
 
@@ -1897,6 +1906,10 @@ msgstr "Supprimer {0} ?"
 msgid "Delete account"
 msgstr "Supprimer le compte"
 
+#: src/pages/Shell.tsx
+msgid "Delete department"
+msgstr ""
+
 #: src/pages/GroupPanel.tsx
 msgid "Delete group"
 msgstr "Supprimer le groupe"
@@ -2011,6 +2024,8 @@ msgstr ""
 msgid "Docker limits access to your computer for added security. Using {hostLabel} lets bots work with your local files and tools."
 msgstr "Docker limite l'accès à votre ordinateur pour une sécurité renforcée. Utiliser {hostLabel} permet aux bots de travailler avec vos fichiers et outils locaux."
 
+#: src/pages/Artifacts.tsx
+#: src/pages/Shell.tsx
 #: src/pages/shell/employee-nav.tsx
 msgid "Documents"
 msgstr ""
@@ -2442,12 +2457,28 @@ msgstr "Zone de téléchargement d'image"
 msgid "Import OpenAPI JSON"
 msgstr "Importer OpenAPI JSON"
 
+#: src/lib/relative-time.ts
+msgid "in {days}d"
+msgstr ""
+
+#: src/lib/relative-time.ts
+msgid "in {hours}h"
+msgstr ""
+
+#: src/lib/relative-time.ts
+msgid "in {minutes}m"
+msgstr ""
+
 #: src/lib/ticket-status.ts
 msgid "In progress"
 msgstr ""
 
 #: src/lib/ticket-status.ts
 msgid "In review"
+msgstr ""
+
+#: src/lib/relative-time.ts
+msgid "in under a minute"
 msgstr ""
 
 #: src/pages/BillingSettingsPanel.tsx
@@ -2638,6 +2669,7 @@ msgstr "Chargement des fournisseurs vocaux…"
 #: src/pages/Onboarding.tsx
 #: src/pages/PeerMessagesOverlay.tsx
 #: src/pages/RoutineRunHistory.tsx
+#: src/pages/ScheduledTasks.tsx
 #: src/pages/Shell.tsx
 msgid "Loading…"
 msgstr "Chargement…"
@@ -2980,6 +3012,10 @@ msgstr "A besoin de vous"
 msgid "New bot"
 msgstr "Nouveau bot"
 
+#: src/pages/shell/employee-nav.tsx
+msgid "New department"
+msgstr ""
+
 #: src/pages/GroupPanel.tsx
 msgid "New group"
 msgstr "Nouveau groupe"
@@ -3008,6 +3044,11 @@ msgstr "Nouvel espace"
 
 #: src/pages/Board.tsx
 msgid "New ticket"
+msgstr ""
+
+#. placeholder {0}: formatTimeUntil(routine.nextRunAt)
+#: src/pages/ScheduledTasks.tsx
+msgid "Next run {0}"
 msgstr ""
 
 #: src/pages/MessagingSettingsOverlay.tsx
@@ -3150,6 +3191,10 @@ msgstr "Pas dans le catalogue de plugins"
 #: src/pages/shell/message-cards.tsx
 msgid "Not now"
 msgstr "Pas maintenant"
+
+#: src/pages/ScheduledTasks.tsx
+msgid "Nothing is scheduled yet. Open an assistant and add a scheduled task to make it run on its own."
+msgstr ""
 
 #: src/components/ComputerUpdateProgress.tsx
 msgid "Nothing is still running"
@@ -3363,7 +3408,13 @@ msgstr "Collez votre clé API"
 msgid "Paste your API key, then test again."
 msgstr "Collez votre clé API, puis testez à nouveau."
 
+#. placeholder {0}: routine.name
+#: src/pages/ScheduledTasks.tsx
+msgid "Pause {0}"
+msgstr ""
+
 #: src/pages/RoutineEditor.tsx
+#: src/pages/ScheduledTasks.tsx
 msgid "Paused"
 msgstr "En pause"
 
@@ -3731,6 +3782,11 @@ msgstr "Restaurez le dernier espace de travail enregistré. Les travaux non enre
 msgid "Restoring your workspace"
 msgstr "Restauration de votre espace de travail"
 
+#. placeholder {0}: routine.name
+#: src/pages/ScheduledTasks.tsx
+msgid "Resume {0}"
+msgstr ""
+
 #: src/components/AccountAccess.tsx
 #: src/pages/Auth.tsx
 #: src/pages/ModelBackupsSettings.tsx
@@ -3893,6 +3949,11 @@ msgstr "Enregistrement en cours…"
 #: src/lib/call-session.ts
 msgid "Say yes or no, or answer in a sentence."
 msgstr "Dites oui ou non, ou répondez en une phrase."
+
+#: src/pages/ScheduledTasks.tsx
+#: src/pages/shell/employee-nav.tsx
+msgid "Scheduled tasks"
+msgstr ""
 
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/PluginsOverlay.tsx
@@ -4306,6 +4367,10 @@ msgstr "Système"
 msgid "Take control"
 msgstr "Prendre le contrôle"
 
+#: src/pages/shell/employee-nav.tsx
+msgid "Tasks"
+msgstr ""
+
 #: src/components/teach/TeachComputerOverlay.tsx
 msgid "Teach a task"
 msgstr "Enseigner une tâche"
@@ -4361,6 +4426,10 @@ msgstr "Test en cours…"
 #: src/components/SoftwareUpdateSection.tsx
 msgid "The API did not come back. Refresh this page."
 msgstr "L'API n'est pas revenue. Actualisez cette page."
+
+#: src/pages/Shell.tsx
+msgid "The assistants and groups in this department are kept — they move back to Unassigned."
+msgstr ""
 
 #: src/lib/model-connection-preflight.ts
 msgid "The connection timed out."
@@ -4732,6 +4801,10 @@ msgstr "Chat vocal"
 msgid "Wait a moment and test again."
 msgstr "Patientez un instant et testez à nouveau."
 
+#: src/pages/ScheduledTasks.tsx
+msgid "Waiting for its first run"
+msgstr ""
+
 #: src/components/SoftwareUpdateSection.tsx
 msgid "Waiting for the API to come back…"
 msgstr "En attente du retour de l'API…"
@@ -4811,6 +4884,14 @@ msgstr ""
 
 #: src/pages/shell/employee-nav.tsx
 msgid "Work"
+msgstr ""
+
+#: src/pages/shell/employee-nav.tsx
+msgid "Work destinations"
+msgstr ""
+
+#: src/pages/shell/employee-nav.tsx
+msgid "Work tabs"
 msgstr ""
 
 #: src/lib/roster-status.ts

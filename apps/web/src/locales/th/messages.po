@@ -95,6 +95,11 @@ msgstr ""
 msgid "{0}'s screen"
 msgstr ""
 
+#. placeholder {0}: routines.length
+#: src/pages/ScheduledTasks.tsx
+msgid "{activeCount} of {0} running"
+msgstr ""
+
 #: src/lib/billing.ts
 msgid "{amount} / {period}"
 msgstr ""
@@ -252,7 +257,7 @@ msgstr ""
 
 #. placeholder {0}: bot.name
 #. placeholder {0}: group.spaceName
-#. placeholder {0}: sectionMenu.section.name
+#. placeholder {0}: group.title
 #: src/pages/BotContextMenu.tsx
 #: src/pages/Shell.tsx
 msgid "Actions for {0}"
@@ -280,7 +285,7 @@ msgstr "กิจกรรม"
 #: src/pages/PluginsOverlay.tsx
 #: src/pages/ScratchpadSection.tsx
 msgid "Add"
-msgstr ""
+msgstr "เพิ่ม"
 
 #: src/components/ApprovalRulesSettings.tsx
 msgid "Add a model in Settings to use this."
@@ -316,7 +321,7 @@ msgstr ""
 
 #: src/pages/ModelBackupsSettings.tsx
 msgid "Add connected model"
-msgstr ""
+msgstr "เพิ่มโมเดลที่เชื่อมต่อ"
 
 #: src/pages/ModelBackupsSettings.tsx
 msgid "Add connected models to use them as backups."
@@ -393,7 +398,7 @@ msgstr ""
 #: src/pages/RoutineSchedule.tsx
 #: src/pages/shell/bot-panel.tsx
 msgid "Advanced"
-msgstr ""
+msgstr "ขั้นสูง"
 
 #: src/pages/RoutineEditor.tsx
 msgid "Advanced..."
@@ -503,6 +508,10 @@ msgstr ""
 msgid "Any model, with your own key"
 msgstr ""
 
+#: src/lib/relative-time.ts
+msgid "any moment now"
+msgstr "อีกสักครู่"
+
 #: src/components/SoftwareUpdateSection.tsx
 msgid "API is back, but the update did not finish. Check the host logs."
 msgstr ""
@@ -514,7 +523,7 @@ msgstr ""
 #: src/pages/Onboarding.tsx
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "API key"
-msgstr ""
+msgstr "คีย์ API"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "API key header"
@@ -522,7 +531,7 @@ msgstr ""
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Appearance"
-msgstr ""
+msgstr "รูปลักษณ์"
 
 #: src/components/teach/SkillDraftCard.tsx
 msgid "Approval boundaries"
@@ -556,11 +565,6 @@ msgstr ""
 #: src/pages/McpServersOverlay.tsx
 msgid "Arguments"
 msgstr ""
-
-#: src/pages/Artifacts.tsx
-#: src/pages/Shell.tsx
-msgid "Artifacts"
-msgstr "เอกสาร"
 
 #. placeholder {0}: rule.matchValue
 #: src/components/ApprovalRulesSettings.tsx
@@ -597,6 +601,11 @@ msgstr ""
 msgid "Ask the server owner to configure this provider."
 msgstr ""
 
+#: src/pages/Artifacts.tsx
+#: src/pages/ScheduledTasks.tsx
+msgid "Assistants"
+msgstr "ผู้ช่วย"
+
 #. placeholder {0}: preset.time
 #: src/pages/RoutineSchedule.tsx
 msgid "at {0}"
@@ -608,7 +617,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Attach file"
-msgstr ""
+msgstr "แนบไฟล์"
 
 #: src/components/computer/TerminalApp.tsx
 msgid "Attached {path}"
@@ -662,7 +671,7 @@ msgstr ""
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Avatars"
-msgstr ""
+msgstr "รูปโปรไฟล์"
 
 #: src/components/computer/FilesApp.tsx
 #: src/pages/Board.tsx
@@ -677,7 +686,7 @@ msgstr ""
 
 #: src/pages/ModelBackupsSettings.tsx
 msgid "Backup models"
-msgstr ""
+msgstr "โมเดลสำรอง"
 
 #: src/pages/ModelBackupsSettings.tsx
 msgid "Backup models order"
@@ -759,10 +768,6 @@ msgstr ""
 msgid "Bot's model"
 msgstr ""
 
-#: src/pages/Artifacts.tsx
-msgid "Bots"
-msgstr ""
-
 #: src/pages/Shell.tsx
 msgid "Bots are working"
 msgstr ""
@@ -833,11 +838,11 @@ msgstr ""
 
 #: src/pages/Artifacts.tsx
 msgid "Card view"
-msgstr ""
+msgstr "มุมมองการ์ด"
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Change password"
-msgstr ""
+msgstr "เปลี่ยนรหัสผ่าน"
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Changing…"
@@ -999,7 +1004,7 @@ msgstr ""
 #: src/pages/MemorySettingsOverlay.tsx
 #: src/pages/SettingsOverlay.tsx
 msgid "Close memory settings"
-msgstr ""
+msgstr "ปิดการตั้งค่าความจำ"
 
 #: src/pages/MessagingSettingsOverlay.tsx
 msgid "Close messaging settings"
@@ -1008,7 +1013,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/SettingsOverlay.tsx
 msgid "Close model settings"
-msgstr ""
+msgstr "ปิดการตั้งค่าโมเดล"
 
 #: src/pages/Shell.tsx
 msgid "Close navigation"
@@ -1025,16 +1030,16 @@ msgstr ""
 
 #: src/pages/SettingsOverlay.tsx
 msgid "Close user settings"
-msgstr ""
+msgstr "ปิดการตั้งค่าผู้ใช้"
 
 #: src/pages/SettingsOverlay.tsx
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Close voice settings"
-msgstr ""
+msgstr "ปิดการตั้งค่าเสียง"
 
 #: src/pages/memory-providers/SupermemorySettingsForm.tsx
 msgid "Cloud"
-msgstr ""
+msgstr "คลาวด์"
 
 #: src/components/AskCard.tsx
 msgid "Code"
@@ -1056,7 +1061,7 @@ msgstr ""
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Comfortable"
-msgstr ""
+msgstr "สบายตา"
 
 #: src/pages/RoutineEditor.tsx
 msgid "Coming soon"
@@ -1077,7 +1082,7 @@ msgstr ""
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Compact"
-msgstr ""
+msgstr "กระชับ"
 
 #: src/pages/ScratchpadSection.tsx
 msgid "Complete"
@@ -1137,7 +1142,7 @@ msgstr ""
 #: src/pages/AccountSettingsOverlay.tsx
 #: src/pages/Auth.tsx
 msgid "Confirm password"
-msgstr ""
+msgstr "ยืนยันรหัสผ่าน"
 
 #: src/lib/model-connection-preflight.ts
 msgid "Confirm the URL is reachable from this browser session, then test again."
@@ -1148,7 +1153,7 @@ msgstr ""
 #: src/pages/memory-providers/SupermemorySettingsForm.tsx
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Connect"
-msgstr ""
+msgstr "เชื่อมต่อ"
 
 #: src/pages/Onboarding.tsx
 msgid "Connect a model"
@@ -1370,6 +1375,10 @@ msgstr ""
 #: src/pages/shell/dialogs.tsx
 msgid "Could not delete bot"
 msgstr ""
+
+#: src/pages/shell/dialogs.tsx
+msgid "Could not delete department"
+msgstr "ลบแผนกไม่สำเร็จ"
 
 #: src/pages/shell/dialogs.tsx
 msgid "Could not delete group"
@@ -1805,7 +1814,7 @@ msgstr ""
 #: src/components/AccountAccess.tsx
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Current password"
-msgstr ""
+msgstr "รหัสผ่านปัจจุบัน"
 
 #: src/pages/shell/bot-credentials.tsx
 msgid "Custom header"
@@ -1821,7 +1830,7 @@ msgstr ""
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Dark"
-msgstr ""
+msgstr "มืด"
 
 #: src/lib/billing.ts
 #: src/pages/RoutineSchedule.tsx
@@ -1895,7 +1904,11 @@ msgstr ""
 
 #: src/components/AccountAccess.tsx
 msgid "Delete account"
-msgstr ""
+msgstr "ลบบัญชี"
+
+#: src/pages/Shell.tsx
+msgid "Delete department"
+msgstr "ลบแผนก"
 
 #: src/pages/GroupPanel.tsx
 msgid "Delete group"
@@ -1964,7 +1977,7 @@ msgstr ""
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Disconnect"
-msgstr ""
+msgstr "ยกเลิกการเชื่อมต่อ"
 
 #: src/pages/ModelSettingsOverlay.tsx
 msgid "Disconnect {disconnectName}?"
@@ -2011,6 +2024,8 @@ msgstr ""
 msgid "Docker limits access to your computer for added security. Using {hostLabel} lets bots work with your local files and tools."
 msgstr ""
 
+#: src/pages/Artifacts.tsx
+#: src/pages/Shell.tsx
 #: src/pages/shell/employee-nav.tsx
 msgid "Documents"
 msgstr "เอกสาร"
@@ -2043,7 +2058,7 @@ msgstr ""
 
 #: src/pages/KnowledgeSection.tsx
 msgid "Download as markdown"
-msgstr ""
+msgstr "ดาวน์โหลดเป็น Markdown"
 
 #: src/components/integrations/IntegrationSetup.tsx
 msgid "Download Executor"
@@ -2242,7 +2257,7 @@ msgstr ""
 
 #: src/pages/Artifacts.tsx
 msgid "Filters"
-msgstr ""
+msgstr "ตัวกรอง"
 
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
@@ -2384,7 +2399,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Hide bots"
-msgstr ""
+msgstr "ซ่อนรายการผู้ช่วย"
 
 #: src/pages/Auth.tsx
 msgid "Hide password"
@@ -2442,6 +2457,18 @@ msgstr ""
 msgid "Import OpenAPI JSON"
 msgstr ""
 
+#: src/lib/relative-time.ts
+msgid "in {days}d"
+msgstr ""
+
+#: src/lib/relative-time.ts
+msgid "in {hours}h"
+msgstr ""
+
+#: src/lib/relative-time.ts
+msgid "in {minutes}m"
+msgstr ""
+
 #: src/lib/ticket-status.ts
 msgid "In progress"
 msgstr ""
@@ -2449,6 +2476,10 @@ msgstr ""
 #: src/lib/ticket-status.ts
 msgid "In review"
 msgstr ""
+
+#: src/lib/relative-time.ts
+msgid "in under a minute"
+msgstr "ไม่ถึงหนึ่งนาที"
 
 #: src/pages/BillingSettingsPanel.tsx
 msgid "Inactive"
@@ -2503,7 +2534,7 @@ msgstr ""
 #: src/pages/MemorySettingsOverlay.tsx
 #: src/pages/shell/bot-panel.tsx
 msgid "Isolated"
-msgstr ""
+msgstr "แยกเฉพาะ"
 
 #: src/pages/Artifacts.tsx
 msgid "Isolated preview — no access to your account"
@@ -2515,7 +2546,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Jump to latest"
-msgstr ""
+msgstr "ไปข้อความล่าสุด"
 
 #: src/pages/shell/chat-context.tsx
 msgid "Jump to replied message: {excerpt}"
@@ -2556,7 +2587,7 @@ msgstr ""
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Light"
-msgstr ""
+msgstr "สว่าง"
 
 #: src/pages/RoutineEditor.tsx
 msgid "Linear issue"
@@ -2572,7 +2603,7 @@ msgstr ""
 
 #: src/pages/Artifacts.tsx
 msgid "List view"
-msgstr ""
+msgstr "มุมมองรายการ"
 
 #: src/pages/ExternalConversationSettings.tsx
 msgid "Listen"
@@ -2638,13 +2669,14 @@ msgstr ""
 #: src/pages/Onboarding.tsx
 #: src/pages/PeerMessagesOverlay.tsx
 #: src/pages/RoutineRunHistory.tsx
+#: src/pages/ScheduledTasks.tsx
 #: src/pages/Shell.tsx
 msgid "Loading…"
-msgstr ""
+msgstr "กำลังโหลด…"
 
 #: src/pages/memory-providers/SupermemorySettingsForm.tsx
 msgid "Local"
-msgstr ""
+msgstr "ในเครื่อง"
 
 #: src/pages/HostComputerPrompt.tsx
 msgid "Local access lets bots run commands without asking. Avoid it on shared or public servers."
@@ -2844,7 +2876,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Minimize bots"
-msgstr ""
+msgstr "ย่อรายการผู้ช่วย"
 
 #: src/pages/RoutineSchedule.tsx
 msgid "minute"
@@ -2859,7 +2891,7 @@ msgstr ""
 #: src/pages/RoutineEditor.tsx
 #: src/pages/shell/bot-panel.tsx
 msgid "Model"
-msgstr ""
+msgstr "โมเดล"
 
 #: src/lib/model-connection-preflight.ts
 msgid "Model \"{modelId}\" was not listed."
@@ -2911,7 +2943,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "More"
-msgstr ""
+msgstr "เพิ่มเติม"
 
 #: src/components/ComputerMaintenanceActions.tsx
 msgid "More computer actions"
@@ -2980,6 +3012,10 @@ msgstr ""
 msgid "New bot"
 msgstr ""
 
+#: src/pages/shell/employee-nav.tsx
+msgid "New department"
+msgstr "แผนกใหม่"
+
 #: src/pages/GroupPanel.tsx
 msgid "New group"
 msgstr ""
@@ -2991,7 +3027,7 @@ msgstr ""
 #: src/pages/AccountSettingsOverlay.tsx
 #: src/pages/Auth.tsx
 msgid "New password"
-msgstr ""
+msgstr "รหัสผ่านใหม่"
 
 #: src/pages/BotContextMenu.tsx
 #: src/pages/shell/dialogs.tsx
@@ -3008,6 +3044,11 @@ msgstr ""
 
 #: src/pages/Board.tsx
 msgid "New ticket"
+msgstr ""
+
+#. placeholder {0}: formatTimeUntil(routine.nextRunAt)
+#: src/pages/ScheduledTasks.tsx
+msgid "Next run {0}"
 msgstr ""
 
 #: src/pages/MessagingSettingsOverlay.tsx
@@ -3150,6 +3191,10 @@ msgstr ""
 #: src/pages/shell/message-cards.tsx
 msgid "Not now"
 msgstr ""
+
+#: src/pages/ScheduledTasks.tsx
+msgid "Nothing is scheduled yet. Open an assistant and add a scheduled task to make it run on its own."
+msgstr "ยังไม่มีงานตามกำหนดการ เปิดผู้ช่วยแล้วเพิ่มงานเพื่อให้ทำงานอัตโนมัติ"
 
 #: src/components/ComputerUpdateProgress.tsx
 msgid "Nothing is still running"
@@ -3294,11 +3339,11 @@ msgstr ""
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Organic"
-msgstr ""
+msgstr "ออร์แกนิก"
 
 #: src/pages/memory-providers/SupermemorySettingsForm.tsx
 msgid "Organization API key"
-msgstr ""
+msgstr "คีย์ API ขององค์กร"
 
 #: src/pages/shell/chat-context.tsx
 msgid "Original message unavailable"
@@ -3311,7 +3356,7 @@ msgstr ""
 
 #: src/pages/Board.tsx
 msgid "Owner"
-msgstr ""
+msgstr "เจ้าของ"
 
 #: src/pages/RoutineEditor.tsx
 msgid "PagerDuty incident"
@@ -3326,7 +3371,7 @@ msgstr ""
 #: src/pages/Auth.tsx
 #: src/pages/shell/bot-credentials.tsx
 msgid "Password"
-msgstr ""
+msgstr "รหัสผ่าน"
 
 #: src/pages/Auth.tsx
 msgid "Password recovery is not configured for this server"
@@ -3363,9 +3408,15 @@ msgstr ""
 msgid "Paste your API key, then test again."
 msgstr ""
 
-#: src/pages/RoutineEditor.tsx
-msgid "Paused"
+#. placeholder {0}: routine.name
+#: src/pages/ScheduledTasks.tsx
+msgid "Pause {0}"
 msgstr ""
+
+#: src/pages/RoutineEditor.tsx
+#: src/pages/ScheduledTasks.tsx
+msgid "Paused"
+msgstr "หยุดชั่วคราว"
 
 #: src/pages/Shell.tsx
 #: src/pages/shell/chat-context.tsx
@@ -3428,7 +3479,7 @@ msgstr ""
 #: src/pages/MemorySettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
 msgid "Provider"
-msgstr ""
+msgstr "ผู้ให้บริการ"
 
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/VoiceSettingsOverlay.tsx
@@ -3449,7 +3500,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "React"
-msgstr ""
+msgstr "แสดงความรู้สึก"
 
 #: src/pages/Shell.tsx
 msgid "Reactions"
@@ -3651,7 +3702,7 @@ msgstr ""
 
 #: src/pages/ModelSettingsOverlay.tsx
 msgid "Replace API key"
-msgstr ""
+msgstr "เปลี่ยนคีย์ API"
 
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Replace key"
@@ -3663,7 +3714,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Reply"
-msgstr ""
+msgstr "ตอบกลับ"
 
 #: src/pages/Shell.tsx
 msgid "Reply cancelled"
@@ -3731,6 +3782,11 @@ msgstr ""
 msgid "Restoring your workspace"
 msgstr ""
 
+#. placeholder {0}: routine.name
+#: src/pages/ScheduledTasks.tsx
+msgid "Resume {0}"
+msgstr ""
+
 #: src/components/AccountAccess.tsx
 #: src/pages/Auth.tsx
 #: src/pages/ModelBackupsSettings.tsx
@@ -3765,7 +3821,7 @@ msgstr ""
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Robot"
-msgstr ""
+msgstr "หุ่นยนต์"
 
 #: src/pages/ExternalConversationSettings.tsx
 msgid "Room guidance"
@@ -3835,7 +3891,7 @@ msgstr "บันทึก"
 
 #: src/pages/ModelBackupsSettings.tsx
 msgid "Save backups"
-msgstr ""
+msgstr "บันทึกโมเดลสำรอง"
 
 #: src/pages/shell/bot-credentials.tsx
 msgid "Save credential"
@@ -3843,7 +3899,7 @@ msgstr ""
 
 #: src/pages/ModelSettingsOverlay.tsx
 msgid "Save limits"
-msgstr ""
+msgstr "บันทึกขีดจำกัด"
 
 #: src/pages/shell/bot-credentials.tsx
 msgid "Save new value"
@@ -3894,6 +3950,11 @@ msgstr ""
 msgid "Say yes or no, or answer in a sentence."
 msgstr ""
 
+#: src/pages/ScheduledTasks.tsx
+#: src/pages/shell/employee-nav.tsx
+msgid "Scheduled tasks"
+msgstr "งานตามกำหนดการ"
+
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/PluginsOverlay.tsx
 #: src/pages/Shell.tsx
@@ -3933,7 +3994,7 @@ msgstr ""
 
 #: src/pages/ModelSettingsOverlay.tsx
 msgid "Search providers"
-msgstr ""
+msgstr "ค้นหาผู้ให้บริการ"
 
 #: src/pages/ActivityList.tsx
 msgid "Search runs"
@@ -4041,7 +4102,7 @@ msgstr ""
 #: src/pages/MemorySettingsOverlay.tsx
 #: src/pages/shell/bot-panel.tsx
 msgid "Shared"
-msgstr ""
+msgstr "ใช้ร่วมกัน"
 
 #: src/pages/shell/dialogs.tsx
 msgid "Shared chat with 2-6 bots. They all reply in the same thread."
@@ -4300,11 +4361,15 @@ msgstr ""
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "System"
-msgstr ""
+msgstr "ตามระบบ"
 
 #: src/pages/Shell.tsx
 msgid "Take control"
 msgstr ""
+
+#: src/pages/shell/employee-nav.tsx
+msgid "Tasks"
+msgstr "งาน"
 
 #: src/components/teach/TeachComputerOverlay.tsx
 msgid "Teach a task"
@@ -4344,7 +4409,7 @@ msgstr ""
 
 #: src/components/ModelConnectionPreflightNotice.tsx
 msgid "Test API key"
-msgstr ""
+msgstr "ทดสอบคีย์ API"
 
 #: src/pages/RoutineEditor.tsx
 msgid "Test run"
@@ -4361,6 +4426,10 @@ msgstr ""
 #: src/components/SoftwareUpdateSection.tsx
 msgid "The API did not come back. Refresh this page."
 msgstr ""
+
+#: src/pages/Shell.tsx
+msgid "The assistants and groups in this department are kept — they move back to Unassigned."
+msgstr "ผู้ช่วยและกลุ่มในแผนกนี้จะยังอยู่ แต่จะกลับไปเป็นยังไม่จัดกลุ่ม"
 
 #: src/lib/model-connection-preflight.ts
 msgid "The connection timed out."
@@ -4383,7 +4452,7 @@ msgstr ""
 #: src/pages/RoutineEditor.tsx
 #: src/pages/shell/bot-panel.tsx
 msgid "Thinking"
-msgstr ""
+msgstr "การคิด"
 
 #: src/pages/ModelSettingsOverlay.tsx
 msgid "Thinking: {activeThinkingLabel}"
@@ -4732,6 +4801,10 @@ msgstr ""
 msgid "Wait a moment and test again."
 msgstr ""
 
+#: src/pages/ScheduledTasks.tsx
+msgid "Waiting for its first run"
+msgstr "รอการทำงานครั้งแรก"
+
 #: src/components/SoftwareUpdateSection.tsx
 msgid "Waiting for the API to come back…"
 msgstr ""
@@ -4812,6 +4885,14 @@ msgstr ""
 #: src/pages/shell/employee-nav.tsx
 msgid "Work"
 msgstr "งาน"
+
+#: src/pages/shell/employee-nav.tsx
+msgid "Work destinations"
+msgstr "ปลายทางงาน"
+
+#: src/pages/shell/employee-nav.tsx
+msgid "Work tabs"
+msgstr "แท็บงาน"
 
 #: src/lib/roster-status.ts
 #: src/pages/Auth.tsx

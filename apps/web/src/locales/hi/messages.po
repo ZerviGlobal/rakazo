@@ -95,6 +95,11 @@ msgstr ""
 msgid "{0}'s screen"
 msgstr ""
 
+#. placeholder {0}: routines.length
+#: src/pages/ScheduledTasks.tsx
+msgid "{activeCount} of {0} running"
+msgstr ""
+
 #: src/lib/billing.ts
 msgid "{amount} / {period}"
 msgstr ""
@@ -252,7 +257,7 @@ msgstr "कार्रवाई की पुष्टि"
 
 #. placeholder {0}: bot.name
 #. placeholder {0}: group.spaceName
-#. placeholder {0}: sectionMenu.section.name
+#. placeholder {0}: group.title
 #: src/pages/BotContextMenu.tsx
 #: src/pages/Shell.tsx
 msgid "Actions for {0}"
@@ -503,6 +508,10 @@ msgstr "उत्तर: {answer}"
 msgid "Any model, with your own key"
 msgstr ""
 
+#: src/lib/relative-time.ts
+msgid "any moment now"
+msgstr ""
+
 #: src/components/SoftwareUpdateSection.tsx
 msgid "API is back, but the update did not finish. Check the host logs."
 msgstr ""
@@ -557,11 +566,6 @@ msgstr "आर्काइव किया गया। चैट, मेमो�
 msgid "Arguments"
 msgstr "आर्ग्युमेंट"
 
-#: src/pages/Artifacts.tsx
-#: src/pages/Shell.tsx
-msgid "Artifacts"
-msgstr ""
-
 #. placeholder {0}: rule.matchValue
 #: src/components/ApprovalRulesSettings.tsx
 msgid "Ask before {0}"
@@ -595,6 +599,11 @@ msgstr "बाहरी ईमेल भेजने से पहले पू�
 
 #: src/components/integrations/IntegrationSetup.tsx
 msgid "Ask the server owner to configure this provider."
+msgstr ""
+
+#: src/pages/Artifacts.tsx
+#: src/pages/ScheduledTasks.tsx
+msgid "Assistants"
 msgstr ""
 
 #. placeholder {0}: preset.time
@@ -758,10 +767,6 @@ msgstr ""
 #: src/pages/RoutineEditor.tsx
 msgid "Bot's model"
 msgstr "बॉट का मॉडल"
-
-#: src/pages/Artifacts.tsx
-msgid "Bots"
-msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Bots are working"
@@ -1372,6 +1377,10 @@ msgid "Could not delete bot"
 msgstr "बॉट डिलीट नहीं किया जा सका"
 
 #: src/pages/shell/dialogs.tsx
+msgid "Could not delete department"
+msgstr ""
+
+#: src/pages/shell/dialogs.tsx
 msgid "Could not delete group"
 msgstr ""
 
@@ -1897,6 +1906,10 @@ msgstr "{0} डिलीट करें?"
 msgid "Delete account"
 msgstr "खाता हटाएँ"
 
+#: src/pages/Shell.tsx
+msgid "Delete department"
+msgstr ""
+
 #: src/pages/GroupPanel.tsx
 msgid "Delete group"
 msgstr "समूह डिलीट करें"
@@ -2011,6 +2024,8 @@ msgstr ""
 msgid "Docker limits access to your computer for added security. Using {hostLabel} lets bots work with your local files and tools."
 msgstr "Docker अतिरिक्त सुरक्षा के लिए आपके कंप्यूटर तक पहुँच सीमित करता है। {hostLabel} चुनने पर बॉट्स आपकी स्थानीय फ़ाइलों और टूल्स के साथ काम कर सकते हैं।"
 
+#: src/pages/Artifacts.tsx
+#: src/pages/Shell.tsx
 #: src/pages/shell/employee-nav.tsx
 msgid "Documents"
 msgstr ""
@@ -2442,12 +2457,28 @@ msgstr "छवि अपलोड क्षेत्र"
 msgid "Import OpenAPI JSON"
 msgstr "OpenAPI JSON इम्पोर्ट करें"
 
+#: src/lib/relative-time.ts
+msgid "in {days}d"
+msgstr ""
+
+#: src/lib/relative-time.ts
+msgid "in {hours}h"
+msgstr ""
+
+#: src/lib/relative-time.ts
+msgid "in {minutes}m"
+msgstr ""
+
 #: src/lib/ticket-status.ts
 msgid "In progress"
 msgstr ""
 
 #: src/lib/ticket-status.ts
 msgid "In review"
+msgstr ""
+
+#: src/lib/relative-time.ts
+msgid "in under a minute"
 msgstr ""
 
 #: src/pages/BillingSettingsPanel.tsx
@@ -2638,6 +2669,7 @@ msgstr "आवाज़ प्रोवाइडर्स लोड हो र�
 #: src/pages/Onboarding.tsx
 #: src/pages/PeerMessagesOverlay.tsx
 #: src/pages/RoutineRunHistory.tsx
+#: src/pages/ScheduledTasks.tsx
 #: src/pages/Shell.tsx
 msgid "Loading…"
 msgstr "लोड हो रहा है…"
@@ -2980,6 +3012,10 @@ msgstr ""
 msgid "New bot"
 msgstr "नया बॉट"
 
+#: src/pages/shell/employee-nav.tsx
+msgid "New department"
+msgstr ""
+
 #: src/pages/GroupPanel.tsx
 msgid "New group"
 msgstr "नया समूह"
@@ -3008,6 +3044,11 @@ msgstr ""
 
 #: src/pages/Board.tsx
 msgid "New ticket"
+msgstr ""
+
+#. placeholder {0}: formatTimeUntil(routine.nextRunAt)
+#: src/pages/ScheduledTasks.tsx
+msgid "Next run {0}"
 msgstr ""
 
 #: src/pages/MessagingSettingsOverlay.tsx
@@ -3150,6 +3191,10 @@ msgstr ""
 #: src/pages/shell/message-cards.tsx
 msgid "Not now"
 msgstr "अभी नहीं"
+
+#: src/pages/ScheduledTasks.tsx
+msgid "Nothing is scheduled yet. Open an assistant and add a scheduled task to make it run on its own."
+msgstr ""
 
 #: src/components/ComputerUpdateProgress.tsx
 msgid "Nothing is still running"
@@ -3363,7 +3408,13 @@ msgstr "अपनी API कुंजी पेस्ट करें"
 msgid "Paste your API key, then test again."
 msgstr "अपनी API कुंजी पेस्ट करें, फिर फिर से परीक्षण करें।"
 
+#. placeholder {0}: routine.name
+#: src/pages/ScheduledTasks.tsx
+msgid "Pause {0}"
+msgstr ""
+
 #: src/pages/RoutineEditor.tsx
+#: src/pages/ScheduledTasks.tsx
 msgid "Paused"
 msgstr ""
 
@@ -3731,6 +3782,11 @@ msgstr "अंतिम सहेजे गए वर्कस्पेस क�
 msgid "Restoring your workspace"
 msgstr ""
 
+#. placeholder {0}: routine.name
+#: src/pages/ScheduledTasks.tsx
+msgid "Resume {0}"
+msgstr ""
+
 #: src/components/AccountAccess.tsx
 #: src/pages/Auth.tsx
 #: src/pages/ModelBackupsSettings.tsx
@@ -3893,6 +3949,11 @@ msgstr "सहेजा जा रहा है…"
 #: src/lib/call-session.ts
 msgid "Say yes or no, or answer in a sentence."
 msgstr "हां या ना कहें, या एक वाक्य में उत्तर दें।"
+
+#: src/pages/ScheduledTasks.tsx
+#: src/pages/shell/employee-nav.tsx
+msgid "Scheduled tasks"
+msgstr ""
 
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/PluginsOverlay.tsx
@@ -4306,6 +4367,10 @@ msgstr "सिस्टम"
 msgid "Take control"
 msgstr "नियंत्रण लें"
 
+#: src/pages/shell/employee-nav.tsx
+msgid "Tasks"
+msgstr ""
+
 #: src/components/teach/TeachComputerOverlay.tsx
 msgid "Teach a task"
 msgstr "कोई कार्य सिखाएं"
@@ -4360,6 +4425,10 @@ msgstr "परीक्षण हो रहा है…"
 
 #: src/components/SoftwareUpdateSection.tsx
 msgid "The API did not come back. Refresh this page."
+msgstr ""
+
+#: src/pages/Shell.tsx
+msgid "The assistants and groups in this department are kept — they move back to Unassigned."
 msgstr ""
 
 #: src/lib/model-connection-preflight.ts
@@ -4732,6 +4801,10 @@ msgstr "वॉइस चैट"
 msgid "Wait a moment and test again."
 msgstr "थोड़ी देर रुकें और फिर से परीक्षण करें।"
 
+#: src/pages/ScheduledTasks.tsx
+msgid "Waiting for its first run"
+msgstr ""
+
 #: src/components/SoftwareUpdateSection.tsx
 msgid "Waiting for the API to come back…"
 msgstr ""
@@ -4811,6 +4884,14 @@ msgstr ""
 
 #: src/pages/shell/employee-nav.tsx
 msgid "Work"
+msgstr ""
+
+#: src/pages/shell/employee-nav.tsx
+msgid "Work destinations"
+msgstr ""
+
+#: src/pages/shell/employee-nav.tsx
+msgid "Work tabs"
 msgstr ""
 
 #: src/lib/roster-status.ts

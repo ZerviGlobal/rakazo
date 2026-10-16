@@ -15,12 +15,15 @@ test("opens Artifacts from the account menu and lists created files", async ({
   const sidebar = page.getByTestId("bots-sidebar");
   await expect(sidebar).toBeVisible();
   expect((await sidebar.boundingBox())?.x).toBe(0);
-  await expect(sidebar.getByRole("link", { name: "Artifacts" })).toHaveCount(0);
-  await expect(sidebar.getByRole("button", { name: "Artifacts", exact: true })).toHaveCount(0);
+  // Zervi: the sidebar NOW exposes Documents directly (it used to be reachable only from
+  // the avatar menu, which is why this test previously asserted count 0). Asserting the
+  // presence is the point — do not revert this to a count-0 check.
+  await expect(sidebar.getByRole("button", { name: "Documents", exact: true })).toBeVisible();
   await expect(sidebar.getByRole("button", { name: "Integrations" })).toBeVisible();
   await page.getByTestId("user-menu-trigger").click();
-  const artifactsItem = page.getByRole("button", { name: "Artifacts", exact: true });
-  const settingsItem = page.getByRole("button", { name: "Settings", exact: true });
+  const menu = page.getByRole("dialog");
+  const artifactsItem = menu.getByRole("button", { name: "Documents", exact: true });
+  const settingsItem = menu.getByRole("button", { name: "Settings", exact: true });
   await expect(artifactsItem).toBeVisible();
   await expect(settingsItem).toBeVisible();
   expect((await artifactsItem.boundingBox())?.y).toBeLessThan(
@@ -30,13 +33,13 @@ test("opens Artifacts from the account menu and lists created files", async ({
 
   await artifactsItem.click();
   await expect(page).toHaveURL(/\/app\/artifacts$/);
-  await expect(page.getByRole("heading", { name: "Artifacts", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Documents", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: "Filters" })).toBeVisible();
   await expect(page.getByText("No artifacts found.")).toBeVisible();
   await captureScreenshot(page, testInfo, "artifacts-empty");
 
   await page.setViewportSize({ width: 360, height: 700 });
-  const narrowHeading = page.getByRole("heading", { name: "Artifacts", exact: true });
+  const narrowHeading = page.getByRole("heading", { name: "Documents", exact: true });
   const narrowCardView = page.getByRole("button", { name: "Card view" });
   await expect(narrowHeading).toBeVisible();
   await expect(narrowCardView).toBeVisible();
@@ -56,7 +59,7 @@ test("opens Artifacts from the account menu and lists created files", async ({
     contentBase64: Buffer.from("# Artifacts tab").toString("base64"),
   });
   await page.reload();
-  await expect(page.getByRole("heading", { name: "Artifacts", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Documents", exact: true })).toBeVisible();
   await expect(page.getByText("notes/artifacts-tab.md")).toBeVisible();
   await captureScreenshot(page, testInfo, "artifacts-list");
 
@@ -74,13 +77,12 @@ test("opens Artifacts from the account menu and lists created files", async ({
   await expect(page.getByTestId("app-rail")).toHaveCount(0);
   await page.getByRole("button", { name: "Open navigation" }).click();
   const mobileSidebar = page.getByTestId("bots-sidebar");
-  await expect(mobileSidebar.getByRole("link", { name: "Artifacts" })).toHaveCount(0);
-  await expect(mobileSidebar.getByRole("button", { name: "Artifacts", exact: true })).toHaveCount(
-    0,
-  );
+  // Zervi: same as the desktop block above — the row is expected, not absent.
+  await expect(mobileSidebar.getByRole("button", { name: "Documents", exact: true })).toBeVisible();
   await mobileSidebar.getByTestId("user-menu-trigger").click();
-  const mobileArtifacts = page.getByRole("button", { name: "Artifacts", exact: true });
+  const mobileMenu = page.getByRole("dialog");
+  const mobileArtifacts = mobileMenu.getByRole("button", { name: "Documents", exact: true });
   await expect(mobileArtifacts).toBeVisible();
-  await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeVisible();
+  await expect(mobileMenu.getByRole("button", { name: "Settings", exact: true })).toBeVisible();
   await captureScreenshot(page, testInfo, "account-menu-artifacts-mobile");
 });
