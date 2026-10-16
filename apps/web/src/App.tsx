@@ -48,6 +48,9 @@ const WelcomePage = lazy(() =>
 const ArtifactsPage = lazy(() =>
   import("./pages/Artifacts").then((module) => ({ default: module.ArtifactsPage })),
 );
+const ScheduledTasksPage = lazy(() =>
+  import("./pages/ScheduledTasks").then((module) => ({ default: module.ScheduledTasksPage })),
+);
 const BoardPage = lazy(() =>
   import("./pages/Board").then((module) => ({ default: module.BoardPage })),
 );
@@ -177,6 +180,8 @@ function SessionApp() {
             <Route path="/app/g/:groupId" element={<ShellPage />} />
             <Route path="/app/artifacts" element={<ArtifactsPage />} />
             <Route path="/app/artifacts/:artifactId" element={<ArtifactsPage />} />
+            {/* Must precede /app/:botId, which would otherwise treat "routines" as a bot id. */}
+            <Route path="/app/routines" element={<ScheduledTasksPage />} />
             {ticketBoardEnabled ? <Route path="/app/board" element={<BoardPage />} /> : null}
             <Route path="/app/:botId" element={<ShellPage />} />
           </Route>

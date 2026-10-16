@@ -15,7 +15,12 @@ vi.mock("@lingui/react/macro", () => {
   return { useLingui: () => ({ t }), Trans: ({ children }: { children: ReactNode }) => children };
 });
 
-import { EmployeeNav, EmployeeTabBar } from "./employee-nav";
+import {
+  EmployeeNav,
+  EmployeeTabBar,
+  requestSettingsSection,
+  takePendingSettingsSection,
+} from "./employee-nav";
 
 function render(ui: ReactNode) {
   const container = document.createElement("div");
@@ -35,7 +40,11 @@ it("shows Documents and Usage to every user, whether or not the board is enabled
   const { container } = render(
     <EmployeeNav boardEnabled={false} onNavigate={() => {}} onOpenUsage={() => {}} />,
   );
-  expect(rowTestIds(container)).toEqual(["work-nav-artifacts", "work-nav-usage"]);
+  expect(rowTestIds(container)).toEqual([
+    "work-nav-artifacts",
+    "work-nav-routines",
+    "work-nav-usage",
+  ]);
 });
 
 it("shows Board only when the ticket board is enabled", () => {
@@ -87,7 +96,7 @@ it("gives a phone the same destinations the desktop sidebar has", () => {
   const ids = [...container.querySelectorAll("[data-testid^='tab-']")].map((e) =>
     e.getAttribute("data-testid"),
   );
-  expect(ids).toEqual(["tab-chat", "tab-documents", "tab-usage"]);
+  expect(ids).toEqual(["tab-chat", "tab-documents", "tab-routines", "tab-usage"]);
 });
 
 it("marks the active tab so the phone shows where you are", () => {
@@ -121,4 +130,114 @@ it("routes the phone Usage tab to settings, not a path", () => {
   act(() => (container.querySelector("[data-testid='tab-usage']") as HTMLButtonElement).click());
   expect(onOpenUsage).toHaveBeenCalledTimes(1);
   expect(onNavigate).not.toHaveBeenCalled();
+});
+
+it("hands a settings request across the route boundary, and consumes it once", async () => {
+  // A query param cannot carry this: a bare /app redirects to /app/<botId> with
+  // { replace: true } and no search string, so the param is destroyed before the Shell
+  // reads it (measured). sessionStorage survives that redirect.
+  const store = new Map<string, string>();
+  const original = window.sessionStorage;
+  Object.defineProperty(window, "sessionStorage", {
+    configurable: true,
+    value: {
+      getItem: (k: string) => store.get(k) ?? null,
+      setItem: (k: string, v: string) => void store.set(k, v),
+      removeItem: (k: string) => void store.delete(k),
+    },
+  });
+  try {
+    expect(takePendingSettingsSection()).toBeNull();
+    requestSettingsSection("usage");
+    // Read-and-clear: a second read must not re-open the overlay on every mount.
+    expect(takePendingSettingsSection()).toBe("usage");
+    expect(takePendingSettingsSection()).toBeNull();
+  } finally {
+    Object.defineProperty(window, "sessionStorage", { configurable: true, value: original });
+  }
+});
+
+it("does not throw when session storage is unavailable", () => {
+  const original = window.sessionStorage;
+  Object.defineProperty(window, "sessionStorage", {
+    configurable: true,
+    get: () => {
+      throw new Error("storage disabled");
+    },
+  });
+  try {
+    // Must not fail the tap just because the browser blocks storage.
+    expect(() => requestSettingsSection("usage")).not.toThrow();
+    expect(takePendingSettingsSection()).toBeNull();
+  } finally {
+    Object.defineProperty(window, "sessionStorage", { configurable: true, value: original });
+  }
+});
+
+it("offers a visible way to create a department", () => {
+  // Upstream reaches sections only via right-click -> Move to -> New section, which is
+  // undiscoverable on desktop and IMPOSSIBLE on a phone (no right-click, and the bot row
+  // carries no menu button — measured). This is the visible, tappable entry point.
+  const onCreateDepartment = vi.fn();
+  const { container } = render(
+    <EmployeeNav
+      boardEnabled={false}
+      onNavigate={() => {}}
+      onOpenUsage={() => {}}
+      onCreateDepartment={onCreateDepartment}
+    />,
+  );
+  const button = container.querySelector("[data-testid='work-nav-new-department']");
+  expect(button).not.toBeNull();
+  expect(button?.textContent).toBe("New department");
+  act(() => (button as HTMLButtonElement).click());
+  expect(onCreateDepartment).toHaveBeenCalledTimes(1);
+});
+
+it("hides the department action where creating one is not possible", () => {
+  // Standalone routes have no bot to attach a section to, so the action must not appear
+  // as a dead control.
+  const { container } = render(
+    <EmployeeNav boardEnabled={false} onNavigate={() => {}} onOpenUsage={() => {}} />,
+  );
+  expect(container.querySelector("[data-testid='work-nav-new-department']")).toBeNull();
+});
+
+it("gives the sidebar nav and the phone tab bar different accessible names", () => {
+  // Both live in the DOM at once (only one is visible per viewport width), so identical
+  // names make two ambiguous navigation landmarks for a screen reader. Measured with
+  // Accessibility.getFullAXTree: both were exposed as "Work".
+  const nav = render(<EmployeeNav boardEnabled={false} onNavigate={() => {}} onOpenUsage={() => {}} />);
+  const tabs = render(
+    <EmployeeTabBar
+      boardEnabled={false}
+      activePath="/app"
+      onNavigate={() => {}}
+      onOpenUsage={() => {}}
+      onOpenChat={() => {}}
+    />,
+  );
+  const sidebarName = nav.container.querySelector("nav")?.getAttribute("aria-label");
+  const tabBarName = tabs.container.querySelector("nav")?.getAttribute("aria-label");
+  expect(sidebarName).toBeTruthy();
+  expect(tabBarName).toBeTruthy();
+  expect(sidebarName).not.toBe(tabBarName);
+});
+
+it("labels every nav control, so no icon-only button is unlabelled", () => {
+  // Upstream's accessibility discipline (zero unlabelled icon buttons) must survive
+  // additions; each row here shows text, so none may be icon-only.
+  const { container } = render(
+    <EmployeeNav
+      boardEnabled
+      onNavigate={() => {}}
+      onOpenUsage={() => {}}
+      onCreateDepartment={() => {}}
+    />,
+  );
+  for (const button of container.querySelectorAll("button")) {
+    const hasText = (button.textContent ?? "").trim().length > 0;
+    const hasAria = !!button.getAttribute("aria-label");
+    expect(hasText || hasAria).toBe(true);
+  }
 });

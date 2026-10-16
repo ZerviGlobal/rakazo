@@ -21,16 +21,18 @@ import {
 } from "@rakazo/ui-web";
 import { ChevronLeft } from "lucide-react";
 import { useCallback, useEffect, useId, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { formatRelativeTime } from "../lib/relative-time";
 import { rpc } from "../lib/rpc";
 import { useTicketPriorityLabels } from "../lib/ticket-priority";
 import { useTicketStatusLabels } from "../lib/ticket-status";
 import { errorText } from "../lib/user-error";
 import { WindowChrome } from "./WindowChrome";
+import { EmployeeTabBar, requestSettingsSection } from "./shell/employee-nav";
 
 export function BoardPage() {
   const { t } = useLingui();
+  const navigate = useNavigate();
   const statuses = useTicketStatusLabels();
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [bots, setBots] = useState<Bot[]>([]);
@@ -165,6 +167,21 @@ export function BoardPage() {
           onSaved={reload}
         />
       ) : null}
+      {/* Zervi: /app/board is a standalone route (no shell-root, so no sidebar). Without
+          the bar here, a phone user who tapped Board loses all navigation — the same
+          defect found on /app/artifacts. */}
+      <EmployeeTabBar
+        boardEnabled
+        activePath="/app/board"
+        onNavigate={(path) => navigate(path)}
+        onOpenUsage={() => {
+          // A query param does not survive the /app -> /app/<botId> redirect; see
+          // requestSettingsSection for the measurement.
+          requestSettingsSection("usage");
+          navigate("/app");
+        }}
+        onOpenChat={() => navigate("/app")}
+      />
     </div>
   );
 }

@@ -10,6 +10,9 @@ const api = vi.hoisted(() => ({ listSpace: vi.fn() }));
 vi.mock("../lib/rpc", () => ({ rpc: { artifacts: api } }));
 vi.mock("../lib/bootstrap", () => ({
   takeInitialBootstrap: vi.fn().mockResolvedValue({ bots: [] }),
+  // The phone tab bar reads the board capability through these two.
+  getTicketBoardEnabled: () => false,
+  subscribeTicketBoardEnabled: () => () => {},
 }));
 vi.mock("../lib/artifact-open", () => ({
   decodeArtifactBase64: vi.fn(),
@@ -97,9 +100,9 @@ it("opens the Artifacts screen and lists what listSpace returns", async () => {
   });
   const page = await renderArtifacts();
   try {
-    expect(page.container.textContent).toContain("Artifacts");
+    expect(page.container.textContent).toContain("Documents");
     expect(page.container.textContent).toContain("Q3 Content Calendar");
-    expect(page.container.querySelector("a[href='/app']")?.textContent).toContain("Bots");
+    expect(page.container.querySelector("a[href='/app']")?.textContent).toContain("Assistants");
     expect(page.container.querySelector("[data-testid='app-rail']")).toBeNull();
   } finally {
     await page.cleanup();
