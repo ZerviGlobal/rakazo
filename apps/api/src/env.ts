@@ -24,6 +24,8 @@ export interface AppEnv {
   authSecret: string;
   authUrl: string;
   webOrigin: string;
+  /** Comma-separated CIDRs of proxy hops in front of this API (see AUTH_TRUSTED_PROXIES). */
+  authTrustedProxies?: string;
   privacyPolicyUrl?: string;
   apiUrl: string;
   apiHost: string;
@@ -165,6 +167,9 @@ export function loadEnv(source: NodeJS.ProcessEnv = process.env): AppEnv {
     authSecret,
     authUrl: source.BETTER_AUTH_URL ?? source.WEB_ORIGIN ?? "http://127.0.0.1:5173",
     webOrigin: source.WEB_ORIGIN ?? "http://127.0.0.1:5173",
+    // Proxy hop(s) in front of this API. Enables per-client sign-in rate-limit buckets instead of
+    // one shared bucket for the whole deployment. See trustedProxyCidrs in @rakazo/auth.
+    authTrustedProxies: optional(source.AUTH_TRUSTED_PROXIES),
     privacyPolicyUrl: optional(source.PRIVACY_POLICY_URL),
     apiUrl: source.API_URL ?? "http://127.0.0.1:3100",
     apiHost: source.API_HOST ?? "127.0.0.1",

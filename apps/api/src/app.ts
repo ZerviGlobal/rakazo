@@ -396,6 +396,10 @@ export async function createApp(
     secret: env.authSecret,
     baseURL: env.authUrl,
     webOrigin: env.webOrigin,
+    trustedProxies: (env.authTrustedProxies ?? "")
+      .split(",")
+      .map((v: string) => v.trim())
+      .filter(Boolean),
     signupsEnabled: env.signupsEnabled,
     signupAllowlist: env.signupAllowlist,
     email,

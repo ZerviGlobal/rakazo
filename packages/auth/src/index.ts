@@ -36,6 +36,8 @@ export interface AuthEnv {
   secret: string;
   baseURL: string;
   webOrigin: string;
+  /** CIDRs of the proxy hop(s) in front of this API; enables per-client rate-limit buckets. */
+  trustedProxies?: string[];
   signupsEnabled: string | undefined;
   signupAllowlist: string | undefined;
   extraOrigins?: string[];
@@ -231,6 +233,29 @@ async function claimUnverifiedFirstAccount(prisma: PrismaClient, userId: string)
 
 const CREDENTIAL_PATHS = ["/sign-in/email", "/sign-up/email", "/request-password-reset"] as const;
 
+/**
+ * Addresses of the proxy hop(s) that sit between the browser and this API.
+ *
+ * WHY THIS MATTERS: better-auth derives the rate-limit key from the client IP. With no
+ * `trustedProxies` its `getIPFromHeader` returns null unless `x-forwarded-for` holds EXACTLY one
+ * value, so it fell back to the literal key `no-trusted-ip` and EVERY user shared one bucket —
+ * measured on this deployment as 10 sign-ins per 15 minutes across all staff, meaning the 11th
+ * person to sign in was locked out. That is a rollout blocker, not a test annoyance.
+ *
+ * Set together with `xfwd: true` on the web proxy (which appends the real client). With the proxy
+ * declared trusted, better-auth walks the chain right-to-left and skips trusted hops, so a client
+ * that PREPENDS its own `x-forwarded-for` cannot pick its own bucket: the right-most untrusted entry
+ * is the address the trusted proxy actually observed.
+ *
+ * Anyone changing the network topology must update this, or the fallback silently returns.
+ */
+export function trustedProxyCidrs(raw = process.env.AUTH_TRUSTED_PROXIES): string[] {
+  return (raw ?? "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean);
+}
+
 /** Shared across API processes. Off outside production so tests can sign in freely. */
 export function authRateLimitOptions(nodeEnv = process.env.NODE_ENV) {
   const rule = { window: 15 * 60, max: 10 };
@@ -248,8 +273,22 @@ export function createAuth(prisma: PrismaClient, env: AuthEnv) {
   if (env.passwordAuth === false && !env.oidc)
     throw new Error("Password auth requires OIDC when disabled");
   const discovery = env.oidc ? oidcDiscovery(env.oidc) : undefined;
+  const trustedProxies = env.trustedProxies ?? trustedProxyCidrs();
   const auth = betterAuth({
     appName: "Rakazo",
+    // Without this the rate limiter cannot tell users apart and every sign-in shares one bucket.
+    // Only set when a proxy is actually declared; leaving it unset keeps better-auth's default
+    // behaviour rather than silently trusting a caller-supplied header.
+    ...(trustedProxies.length > 0
+      ? {
+          advanced: {
+            ipAddress: {
+              trustedProxies,
+              ipAddressHeaders: ["x-forwarded-for"],
+            },
+          },
+        }
+      : {}),
     secret: env.secret,
     baseURL: env.baseURL,
     trustedOrigins: [...buildTrustedOrigins(env), "rakazo://"],

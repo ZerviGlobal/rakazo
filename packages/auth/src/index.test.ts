@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import {
   authRateLimitOptions,
+  trustedProxyCidrs,
   buildTrustedOrigins,
   createAuth,
   isBlockedAuthPath,
@@ -175,5 +176,22 @@ describe("resolveSignupPolicy", () => {
         signupAllowlist: "environment-only@example.com",
       }),
     ).resolves.toEqual({ enabled: false, allowlist: ["approved@example.com"] });
+  });
+});
+
+describe("trustedProxyCidrs", () => {
+  // The rate limiter falls back to ONE shared bucket per path when it cannot resolve a client IP,
+  // which locks out the 11th sign-in in 15 minutes across the whole deployment (measured). Declaring
+  // the proxy hop is what makes per-client buckets possible — and declaring it is ALSO what stops a
+  // caller picking its own bucket by prepending x-forwarded-for.
+  it("parses a comma-separated list and ignores blanks", () => {
+    expect(trustedProxyCidrs("10.0.5.0/24, 172.16.0.0/12")).toEqual(["10.0.5.0/24", "172.16.0.0/12"]);
+    expect(trustedProxyCidrs(" 10.0.5.4 ,, ")).toEqual(["10.0.5.4"]);
+  });
+
+  it("returns an empty list when unset, so the default behaviour is preserved", () => {
+    // An empty list must NOT be treated as "trust everything" — it disables the override entirely.
+    expect(trustedProxyCidrs("")).toEqual([]);
+    expect(trustedProxyCidrs(undefined as unknown as string)).toEqual([]);
   });
 });
