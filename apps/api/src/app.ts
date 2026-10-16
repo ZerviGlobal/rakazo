@@ -96,6 +96,7 @@ import {
 } from "@rakazo/logging";
 import { requestLogging } from "@rakazo/logging/hono";
 import { MarkdownMemoryStore } from "@rakazo/memory";
+import { getConnInfo } from "@hono/node-server/conninfo";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { createBillingService } from "./billing.js";
@@ -600,6 +601,42 @@ export async function createApp(
   });
   const app = new Hono();
   app.use("*", requestLogging(logger));
+
+  /**
+   * Drop a client-supplied `x-forwarded-for` unless the connection really came from a proxy hop.
+   *
+   * WHY: better-auth's rate limiter keys on the header, and it never inspects the socket. Once
+   * `trustedProxies` is configured it TRUSTS the header, so without this guard any caller able to
+   * reach the API directly could send `x-forwarded-for: <anything>` and mint a fresh bucket per
+   * attempt — measured: three distinct buckets from one caller. The API listens on the tailnet
+   * (100.74.72.109:3100) as well as loopback, so "direct" is reachable.
+   *
+   * This removes the header FIRST, so better-auth sees no client claim and falls back to its shared
+   * bucket for a direct caller (a hard failure, not a silent bypass), while proxy traffic keeps the
+   * real address the proxy appended.
+   */
+  const trustedProxyNets = (env.authTrustedProxies ?? "")
+    .split(",")
+    .map((v: string) => v.trim())
+    .filter(Boolean);
+  app.use("*", async (c, next) => {
+    if (trustedProxyNets.length > 0) {
+      let peer: string | null = null;
+      try {
+        peer = getConnInfo(c).remote.address ?? null;
+      } catch {
+        peer = null;
+      }
+      // Node reports IPv4 peers as ::ffff:a.b.c.d; normalise so CIDR checks match.
+      const peer4 = peer?.startsWith("::ffff:") ? peer.slice("::ffff:".length) : peer;
+      if (!peer4 || !isInAnyCidr(peer4, trustedProxyNets)) {
+        // Not from a declared proxy: the caller has no standing to assert a client address.
+        c.req.raw.headers.delete("x-forwarded-for");
+        c.req.raw.headers.delete("forwarded");
+      }
+    }
+    await next();
+  });
   app.use(
     "*",
     cors({
@@ -1120,6 +1157,39 @@ function sessionHeaders(request: Request) {
  * The cause chain matters as much as the message: undici and most SDKs report a bare
  * "fetch failed" and keep the host and errno one level down.
  */
+/** True when `ip` falls inside any CIDR in `cidrs`. Used to decide whether a connection really
+ * came from a declared proxy hop, so a direct caller cannot assert a client address. Supports the
+ * IPv4 forms we declare (`10.0.5.0/24`) plus bare addresses. */
+export function isInAnyCidr(ip: string, cidrs: readonly string[]): boolean {
+  const toInt = (value: string): number | null => {
+    const parts = value.split(".");
+    if (parts.length !== 4) return null;
+    let out = 0;
+    for (const part of parts) {
+      const n = Number(part);
+      if (!Number.isInteger(n) || n < 0 || n > 255) return null;
+      out = (out << 8) | n;
+    }
+    return out >>> 0;
+  };
+  const target = toInt(ip);
+  if (target === null) return false;
+  for (const cidr of cidrs) {
+    const [base, bitsRaw] = cidr.split("/");
+    const baseInt = base ? toInt(base) : null;
+    if (baseInt === null) continue;
+    if (bitsRaw === undefined) {
+      if (baseInt === target) return true;
+      continue;
+    }
+    const bits = Number(bitsRaw);
+    if (!Number.isInteger(bits) || bits < 0 || bits > 32) continue;
+    const mask = bits === 0 ? 0 : (0xffffffff << (32 - bits)) >>> 0;
+    if ((baseInt & mask) === (target & mask)) return true;
+  }
+  return false;
+}
+
 export function logUnexpectedRpcError(error: unknown, path: readonly string[]): void {
   if (error instanceof ORPCError) return;
   // `IsolationError` already reaches the client as a 404 (mapped in the handler interceptors), so
