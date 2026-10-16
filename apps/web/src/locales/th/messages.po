@@ -1354,7 +1354,7 @@ msgstr ""
 
 #: src/pages/shell/bot-panel.tsx
 msgid "Could not create bot"
-msgstr ""
+msgstr "สร้างผู้ช่วยไม่สำเร็จ"
 
 #: src/pages/GroupPanel.tsx
 msgid "Could not create group"
@@ -1382,7 +1382,7 @@ msgstr "ลบแผนกไม่สำเร็จ"
 
 #: src/pages/shell/dialogs.tsx
 msgid "Could not delete group"
-msgstr ""
+msgstr "ลบกลุ่มไม่สำเร็จ"
 
 #: src/pages/McpServersOverlay.tsx
 msgid "Could not delete MCP server"
@@ -1390,7 +1390,7 @@ msgstr ""
 
 #: src/pages/shell/dialogs.tsx
 msgid "Could not delete routine"
-msgstr ""
+msgstr "ลบงานตามกำหนดการไม่สำเร็จ"
 
 #: src/pages/KnowledgeSection.tsx
 msgid "Could not delete skill"
@@ -1398,7 +1398,7 @@ msgstr ""
 
 #: src/pages/shell/dialogs.tsx
 msgid "Could not delete space"
-msgstr ""
+msgstr "ลบพื้นที่ไม่สำเร็จ"
 
 #: src/pages/Artifacts.tsx
 msgid "Could not delete this artifact."
@@ -1578,7 +1578,7 @@ msgstr ""
 
 #: src/pages/shell/bot-credentials.tsx
 msgid "Could not remove the credential"
-msgstr ""
+msgstr "ลบคีย์ไม่สำเร็จ"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Could not rename connection"
@@ -1656,7 +1656,7 @@ msgstr ""
 
 #: src/pages/shell/bot-credentials.tsx
 msgid "Could not save the credential"
-msgstr ""
+msgstr "บันทึกคีย์ไม่สำเร็จ"
 
 #: src/pages/shell/message-cards.tsx
 msgid "Could not save this choice"
@@ -2003,7 +2003,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Dismiss error"
-msgstr ""
+msgstr "ปิดข้อความผิดพลาด"
 
 #: src/pages/shell/message-cards.tsx
 msgid "Dismissed. Reconnect anytime from MCP settings."
@@ -3745,7 +3745,7 @@ msgstr "ตอบกลับ"
 
 #: src/pages/Shell.tsx
 msgid "Reply cancelled"
-msgstr ""
+msgstr "ยกเลิกการตอบกลับ"
 
 #. placeholder {0}: replyNameRef.current
 #: src/pages/Shell.tsx
@@ -4628,7 +4628,7 @@ msgstr ""
 #: src/pages/ActivityList.tsx
 #: src/pages/Onboarding.tsx
 msgid "Try again"
-msgstr ""
+msgstr "ลองอีกครั้ง"
 
 #: src/lib/model-connection-preflight.ts
 msgid "Try the test again."
