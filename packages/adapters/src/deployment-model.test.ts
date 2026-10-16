@@ -106,4 +106,32 @@ describe("hostCredentialSource", () => {
     expect(hostCredentialSource("amazon-bedrock")).toBe("AWS IAM");
     expect(hostCredentialSource("google-vertex")).toBe("Google Cloud");
   });
+
+  it("uses a DeepSeek deployment key when the provider is deepseek", () => {
+    // Regression: deepseek was absent from the keys map while this deployment ran
+    // PI_DEFAULT_PROVIDER=deepseek with DEEPSEEK_API_KEY set. `configured` stayed false, so a
+    // user without a personal credential was sent to "Connect a model" and asked for an API
+    // key — measured on a fresh account. The two existing accounts hold their own DeepSeek
+    // credential, which is why nobody noticed.
+    expect(
+      resolveDeploymentModel({
+        PI_DEFAULT_PROVIDER: "deepseek",
+        PI_DEFAULT_MODEL: "deepseek-v4-pro",
+        DEEPSEEK_API_KEY: "ds-key",
+      }),
+    ).toEqual({
+      provider: "deepseek",
+      model: "deepseek-v4-pro",
+      key: "ds-key",
+      configured: true,
+      hostCredentials: false,
+    });
+  });
+
+  it("still refuses to hand another vendor's key to deepseek", () => {
+    // The principle the existing test pins: a provider without its OWN key yields none.
+    expect(
+      resolveDeploymentModel({ PI_DEFAULT_PROVIDER: "deepseek", OPENROUTER_API_KEY: "or-key" }),
+    ).toMatchObject({ key: undefined, configured: false });
+  });
 });

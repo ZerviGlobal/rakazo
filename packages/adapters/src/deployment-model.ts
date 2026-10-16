@@ -34,9 +34,20 @@ export function resolveDeploymentModel(env: NodeJS.ProcessEnv = process.env) {
   // A row per provider that ships a deployment key. A third one adds a row here, not a
   // branch at each call site — and an unknown provider gets no key rather than another
   // vendor's, which a ternary on one provider would not give.
+  //
+  // `deepseek` was missing while this deployment runs `PI_DEFAULT_PROVIDER=deepseek` with a
+  // DEEPSEEK_API_KEY set. The effect was not subtle: `configured` stayed false, so every user
+  // WITHOUT their own credential was sent to the "Connect a model" screen and asked for an API
+  // key. Measured on a fresh account — sign-in lands on /onboarding -> "Connect a model". The
+  // two existing accounts never saw it because both hold a personal DeepSeek credential, which
+  // is exactly how a deployment-default gap goes unnoticed.
+  //
+  // The env var name matches what pi-ai's `getEnvApiKey("deepseek")` reads (verified at runtime
+  // in the api container: it resolves this deployment's key), so the two paths cannot disagree.
   const keys: Record<string, string | undefined> = {
     openrouter: env.OPENROUTER_API_KEY,
     anthropic: env.ANTHROPIC_API_KEY,
+    deepseek: env.DEEPSEEK_API_KEY,
   };
   const models: Record<string, string> = {
     openrouter: DEFAULT_OPENROUTER_MODEL_ID,
