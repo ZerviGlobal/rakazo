@@ -15,7 +15,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid " (unread)"
-msgstr ""
+msgstr " (ยังไม่อ่าน)"
 
 #. placeholder {0}: group.entries.length
 #: src/pages/ModelSettingsOverlay.tsx
@@ -418,7 +418,7 @@ msgstr ""
 
 #: src/pages/Artifacts.tsx
 msgid "All bots"
-msgstr ""
+msgstr "ผู้ช่วยทั้งหมด"
 
 #: src/pages/ModelSettingsOverlay.tsx
 msgid "All providers"
@@ -430,7 +430,7 @@ msgstr ""
 
 #: src/pages/Artifacts.tsx
 msgid "All time"
-msgstr ""
+msgstr "ทั้งหมด"
 
 #. placeholder {0}: rule.matchValue
 #: src/components/ApprovalRulesSettings.tsx
@@ -678,7 +678,7 @@ msgstr "รูปโปรไฟล์"
 #: src/pages/PluginsOverlay.tsx
 #: src/pages/RoutineEditor.tsx
 msgid "Back"
-msgstr ""
+msgstr "ย้อนกลับ"
 
 #: src/pages/Auth.tsx
 msgid "Back to sign in"
@@ -939,7 +939,7 @@ msgstr ""
 
 #: src/pages/shell/dialogs.tsx
 msgid "Clear"
-msgstr ""
+msgstr "ล้าง"
 
 #. placeholder {0}: bot.name
 #: src/pages/shell/dialogs.tsx
@@ -1017,7 +1017,7 @@ msgstr "ปิดการตั้งค่าโมเดล"
 
 #: src/pages/Shell.tsx
 msgid "Close navigation"
-msgstr ""
+msgstr "ปิดเมนูนำทาง"
 
 #: src/pages/GroupPanel.tsx
 #: src/pages/Shell.tsx
@@ -2253,7 +2253,7 @@ msgstr ""
 
 #: src/pages/Artifacts.tsx
 msgid "Filter by date"
-msgstr ""
+msgstr "กรองตามวันที่"
 
 #: src/pages/Artifacts.tsx
 msgid "Filters"
@@ -2740,11 +2740,11 @@ msgstr ""
 
 #: src/pages/BotContextMenu.tsx
 msgid "Mark as Read"
-msgstr ""
+msgstr "ทำเป็นอ่านแล้ว"
 
 #: src/pages/BotContextMenu.tsx
 msgid "Mark as Unread"
-msgstr ""
+msgstr "ทำเป็นยังไม่อ่าน"
 
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
@@ -3061,7 +3061,7 @@ msgstr ""
 
 #: src/pages/Artifacts.tsx
 msgid "No artifacts found."
-msgstr ""
+msgstr "ไม่พบเอกสาร"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "no auth"
@@ -3791,7 +3791,7 @@ msgstr ""
 #: src/pages/Auth.tsx
 #: src/pages/ModelBackupsSettings.tsx
 msgid "Retry"
-msgstr ""
+msgstr "ลองอีกครั้ง"
 
 #: src/App.tsx
 #: src/pages/PeerMessagesOverlay.tsx
@@ -4493,7 +4493,7 @@ msgstr ""
 
 #: src/pages/Artifacts.tsx
 msgid "This month"
-msgstr ""
+msgstr "เดือนนี้"
 
 #: src/components/AccountAccess.tsx
 msgid "This permanently deletes your account and data."
@@ -4537,7 +4537,7 @@ msgstr ""
 
 #: src/pages/Artifacts.tsx
 msgid "This week"
-msgstr ""
+msgstr "สัปดาห์นี้"
 
 #: src/pages/RoutineSchedule.tsx
 msgid "Time of day"
@@ -4568,7 +4568,7 @@ msgstr ""
 #: src/pages/Artifacts.tsx
 #: src/pages/shell/chat-context.tsx
 msgid "Today"
-msgstr ""
+msgstr "วันนี้"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Tool sources"
@@ -4910,7 +4910,7 @@ msgstr ""
 #: src/pages/Shell.tsx
 #: src/pages/shell/chat-context.tsx
 msgid "Yesterday"
-msgstr ""
+msgstr "เมื่อวาน"
 
 #: src/pages/Shell.tsx
 msgid "You"
