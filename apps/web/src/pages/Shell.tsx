@@ -296,6 +296,7 @@ import {
   ChoiceCard,
   McpApprovalCard,
 } from "./shell/message-cards";
+import { EmployeeNav } from "./shell/employee-nav";
 import { commitSpaceRename, sidebarGroupsForSpaces } from "./shell/space-sidebar";
 import { WindowChrome } from "./WindowChrome";
 
@@ -3434,6 +3435,16 @@ export function ShellPage() {
             </div>
           ) : null}
         </div>
+        {/* Zervi: surface the work destinations at rest instead of behind the avatar. */}
+        <EmployeeNav
+          boardEnabled={bootstrapMe?.ticketBoardEnabled === true}
+          onNavigate={(path) => {
+            setMenuOpen(false);
+            setMobileSidebarOpen(false);
+            navigate(path);
+          }}
+          onOpenUsage={() => openSettings("usage")}
+        />
         <button
           type="button"
           onClick={() => setPluginsOpen(true)}

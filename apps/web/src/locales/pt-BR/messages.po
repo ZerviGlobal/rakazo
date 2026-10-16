@@ -715,6 +715,7 @@ msgstr ""
 
 #: src/pages/Board.tsx
 #: src/pages/Shell.tsx
+#: src/pages/shell/employee-nav.tsx
 msgid "Board"
 msgstr ""
 
@@ -2005,6 +2006,10 @@ msgstr ""
 #: src/pages/HostComputerPrompt.tsx
 msgid "Docker limits access to your computer for added security. Using {hostLabel} lets bots work with your local files and tools."
 msgstr "O Docker limita o acesso ao seu computador para maior segurança. Usar {hostLabel} permite que os bots trabalhem com seus arquivos e ferramentas locais."
+
+#: src/pages/shell/employee-nav.tsx
+msgid "Documents"
+msgstr ""
 
 #: src/pages/Auth.tsx
 msgid "Don’t have an account?"
@@ -4642,6 +4647,7 @@ msgstr ""
 #: src/pages/AccountSettingsOverlay.tsx
 #: src/pages/SettingsOverlay.tsx
 #: src/pages/Shell.tsx
+#: src/pages/shell/employee-nav.tsx
 msgid "Usage"
 msgstr "Uso"
 
@@ -4797,6 +4803,10 @@ msgstr "Onde os bots devem ser executados?"
 
 #: src/lib/ticket-status.ts
 msgid "Won't do"
+msgstr ""
+
+#: src/pages/shell/employee-nav.tsx
+msgid "Work"
 msgstr ""
 
 #: src/lib/roster-status.ts
