@@ -201,7 +201,7 @@ msgstr ""
 
 #: src/pages/shell/message-cards.tsx
 msgid "A bit of everything"
-msgstr ""
+msgstr "ผสมกันทุกอย่าง"
 
 #. placeholder {0}: oauth.verificationUri.replace(/^https:\/\//, "")
 #: src/pages/ModelSettingsOverlay.tsx
@@ -1839,7 +1839,7 @@ msgstr ""
 
 #: src/pages/shell/message-cards.tsx
 msgid "Day-to-day work"
-msgstr ""
+msgstr "งานประจำวัน"
 
 #: src/pages/RoutineSchedule.tsx
 msgid "days"
@@ -2006,7 +2006,7 @@ msgstr ""
 
 #: src/pages/shell/message-cards.tsx
 msgid "Dismissed. Reconnect anytime from MCP settings."
-msgstr ""
+msgstr "ปิดแล้ว เชื่อมต่อใหม่ได้ทุกเมื่อจากตั้งค่า MCP"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Display name"
@@ -2187,7 +2187,7 @@ msgstr ""
 
 #: src/pages/shell/message-cards.tsx
 msgid "Expand"
-msgstr ""
+msgstr "ขยาย"
 
 #. placeholder {0}: group.title
 #. placeholder {0}: item.chat.name
@@ -2487,7 +2487,7 @@ msgstr ""
 
 #: src/pages/shell/message-cards.tsx
 msgid "Inbox & email"
-msgstr ""
+msgstr "กล่องขาเข้าและอีเมล"
 
 #: src/pages/shell/bot-panel.tsx
 msgid "Inherit default"
@@ -3190,7 +3190,7 @@ msgstr ""
 
 #: src/pages/shell/message-cards.tsx
 msgid "Not now"
-msgstr ""
+msgstr "ไว้ก่อน"
 
 #: src/pages/ScheduledTasks.tsx
 msgid "Nothing is scheduled yet. Open an assistant and add a scheduled task to make it run on its own."
@@ -3727,7 +3727,7 @@ msgstr ""
 
 #: src/pages/shell/message-cards.tsx
 msgid "Research & writing"
-msgstr ""
+msgstr "ค้นคว้าและเขียน"
 
 #: src/components/ComputerMaintenanceActions.tsx
 #: src/pages/shell/avatar-studio-popover.tsx
@@ -4844,7 +4844,7 @@ msgstr ""
 
 #: src/pages/shell/message-cards.tsx
 msgid "What do you want me on first?"
-msgstr ""
+msgstr "อยากให้ผมช่วยเรื่องอะไรก่อน?"
 
 #: src/components/teach/TeachComputerOverlay.tsx
 msgid "What result will you demonstrate?"
