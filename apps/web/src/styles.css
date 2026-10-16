@@ -11,6 +11,19 @@
 @source "../../packages/ui-web/src/**/*.{ts,tsx}";
 @source "./src/**/*.{ts,tsx}";
 
+/* Tailwind's default `--font-sans` is a LATIN-only system stack
+ * (-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, …). Anything using the `font-sans` utility
+ * therefore renders Thai WITHOUT the self-hosted Thai face — measured: that stack sets Thai at 209px,
+ * identical to Geist-alone, versus 187px with Noto Sans Thai. Today only one component (`kbd`) uses
+ * `font-sans` explicitly, but this removes the trap for anything added later. `--font-mono` keeps its
+ * monospace stacks; code is not Thai prose. */
+@theme {
+  --font-sans:
+    "Geist Variable", "Noto Sans Thai Variable", "Noto Sans Thai", "Leelawadee UI", Thonburi, Loma,
+    Garuda, Norasi, Sarabun, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+}
+
 html,
 body,
 #root {
