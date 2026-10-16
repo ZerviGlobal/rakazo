@@ -11,6 +11,15 @@ export const authCapabilitiesSchema = z.object({
   passwordReset: z.boolean(),
   resetUrl: z.string().url().nullable(),
   billing: z.boolean().optional(),
+  /**
+   * Whether self-service registration is open.
+   *
+   * Optional so older servers that omit it stay compatible — same pattern as `billing`;
+   * clients treat omission as "enabled" and keep showing the entry point. The landing page
+   * uses it to avoid offering a primary "Sign up" button that cannot succeed on a
+   * deployment with registration closed; an internal tool should point staff at sign-in.
+   */
+  signupsEnabled: z.boolean().optional(),
 });
 export type AuthCapabilities = z.infer<typeof authCapabilitiesSchema>;
 

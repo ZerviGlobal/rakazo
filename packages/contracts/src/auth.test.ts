@@ -1,4 +1,4 @@
-import { expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import {
   accountSecuritySchema,
   authCapabilitiesSchema,
@@ -50,4 +50,30 @@ it("accepts older account security and explicit password-change policy", () => {
   expect(
     accountSecuritySchema.safeParse({ ...security, passwordChangeEnabled: "false" }).success,
   ).toBe(false);
+});
+
+// `signupsEnabled` was added so the landing page can stop offering a "Sign up" button that
+// cannot succeed when registration is closed. It is OPTIONAL for the same reason `billing`
+// is: an older server that omits it must still parse, and clients treat omission as enabled.
+describe("authCapabilitiesSchema signupsEnabled", () => {
+  it("accepts a server that omits it (older deployments)", () => {
+    const parsed = authCapabilitiesSchema.parse({
+      sso: null,
+      passwordAuth: true,
+      passwordReset: false,
+      resetUrl: null,
+    });
+    expect(parsed.signupsEnabled).toBeUndefined();
+  });
+
+  it("carries the value when the server reports it", () => {
+    const closed = authCapabilitiesSchema.parse({
+      sso: null,
+      passwordAuth: true,
+      passwordReset: false,
+      resetUrl: null,
+      signupsEnabled: false,
+    });
+    expect(closed.signupsEnabled).toBe(false);
+  });
 });

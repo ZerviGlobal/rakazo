@@ -296,6 +296,33 @@ export function createRepos(prisma: PrismaClient) {
       }
     },
 
+    /**
+     * Delete a section (department).
+     *
+     * WHY THIS EXISTS: `botSections` shipped with `create` and `update` but NO remove, so a
+     * department could be made but never deleted — from the UI or anywhere in the product.
+     * That is a bad property for an employee-facing tool where a mis-tap should be
+     * reversible.
+     *
+     * Members are NOT deleted: the schema declares `sectionId` as `onDelete: SetNull` on both
+     * `Bot` and `ChatGroup`, so bots and groups inside the section fall back to "Unassigned".
+     * Doing it by hand-rolled SQL instead would risk orphaning them.
+     */
+    async removeBotSection(actor: Actor, input: { sectionId: string }) {
+      const existing = await prisma.botSection.findFirst({
+        where: {
+          id: input.sectionId,
+          spaceId: actor.spaceId,
+          userId: actor.userId,
+        },
+        select: { id: true },
+      });
+      if (!existing) throw new IsolationError();
+      // Cascades to SetNull on bots/groups, so nothing is destroyed with the section.
+      await prisma.botSection.delete({ where: { id: existing.id } });
+      return { ok: true as const };
+    },
+
     async listBots(actor: Actor, options: { archived?: boolean } = {}): Promise<Bot[]> {
       const bots = await prisma.bot.findMany({
         where: {

@@ -71,7 +71,7 @@ import {
   toTeamChatInbound,
   withSecretPersistence,
 } from "@rakazo/adapters";
-import { createAuth, isBlockedAuthPath, loopbackTwinOrigins } from "@rakazo/auth";
+import { createAuth, isBlockedAuthPath, loopbackTwinOrigins, resolveSignupPolicy } from "@rakazo/auth";
 import type { Actor, AuthCapabilities } from "@rakazo/contracts";
 import { signupAllowlistBootUpdate, signupPolicyFromEnv } from "@rakazo/core";
 import type { Pool, PrismaClient } from "@rakazo/db";
@@ -600,7 +600,11 @@ export async function createApp(
       c.header("cache-control", "no-store");
     });
   }
-  app.get("/api/auth/capabilities", (c) => {
+  app.get("/api/auth/capabilities", async (c) => {
+    // Registration state lives in the DATABASE (deploymentSettings), not in env, so it must be
+    // resolved per request. Without this the client cannot tell that /sign-up is closed and
+    // offers a primary "Sign up" button that always fails.
+    const signupPolicy = await resolveSignupPolicy(prisma, env);
     return c.json({
       sso: env.oidc
         ? { name: env.oidc.name, availability: auth.ssoAvailability() ?? "checking" }
@@ -610,6 +614,7 @@ export async function createApp(
       resetUrl:
         env.passwordAuth !== false && email ? new URL("/reset-password", env.webOrigin).href : null,
       billing: Boolean(billing),
+      signupsEnabled: signupPolicy.enabled,
     } satisfies AuthCapabilities);
   });
   if (localEmailEmulator && env.nodeEnv === "development") {

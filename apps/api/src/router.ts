@@ -2077,6 +2077,9 @@ export function createRouter(deps: RouterDeps) {
           throw error;
         }
       }),
+      remove: authed.botSections.remove.handler(async ({ context, input }) =>
+        repos.removeBotSection(context.actor, input),
+      ),
     },
     threads: {
       head: authed.threads.head.handler(async ({ context, input }) => {
@@ -3273,6 +3276,9 @@ export function createRouter(deps: RouterDeps) {
         await repos.getBot(context.actor, input.botId);
         return listRoutinesDto(deps, context.actor, input.botId);
       }),
+      listSpace: authed.routines.listSpace.handler(async ({ context }) =>
+        listSpaceRoutinesDto(deps, context.actor),
+      ),
       create: authed.routines.create.handler(async ({ context, input }) => {
         if (hasMixedOneShotSchedule(input.crons)) {
           throw new ORPCError("BAD_REQUEST", {
@@ -3506,7 +3512,15 @@ export function createRouter(deps: RouterDeps) {
       }),
       remove: authed.routines.remove.handler(async ({ context, input }) => {
         const existing = await deps.prisma.routine.findFirst({
-          where: { id: input.routineId, spaceId: context.actor.spaceId },
+          // userId matters: a routine belongs to a USER, and `spaceId` alone admits any
+          // member of the space. `update` and `testRun` already filter both; without it here
+          // a second member of a shared space could DELETE another user's routine.
+          // The deployment currently has no shared space, so this is latent — not absent.
+          where: {
+            id: input.routineId,
+            spaceId: context.actor.spaceId,
+            userId: context.actor.userId,
+          },
         });
         if (!existing) throw new IsolationError();
         await deps.prisma.routine.delete({ where: { id: existing.id } });
@@ -5963,10 +5977,25 @@ export function createRouter(deps: RouterDeps) {
         };
         const [memory, routines, files, history] = await Promise.all([
           deps.prisma.memoryDocument.findMany({
-            where: { botId: input.botId, spaceId: context.actor.spaceId },
+            // Same class as the routine fix below: a memoryDocument carries its own userId,
+            // and `getBot` above already scopes to the caller, so this is belt-and-braces
+            // rather than a live hole. Every user-facing `memory.*` handler filters userId;
+            // this export path was the one read that did not.
+            where: {
+              botId: input.botId,
+              spaceId: context.actor.spaceId,
+              userId: context.actor.userId,
+            },
           }),
           deps.prisma.routine.findMany({
-            where: { botId: input.botId, spaceId: context.actor.spaceId },
+            // `getBot` above already scopes to the caller, so this is belt-and-braces for
+            // the same class of bug fixed in `remove` and `listRoutinesDto`: a routine row
+            // carries its own userId and a spaceId-only filter would cross users.
+            where: {
+              botId: input.botId,
+              spaceId: context.actor.spaceId,
+              userId: context.actor.userId,
+            },
           }),
           (async () => {
             const exported: ExportManifest["files"] = [];
@@ -6912,9 +6941,30 @@ function mapRoutine(row: {
 
 async function listRoutinesDto(deps: RouterDeps, actor: Actor, botId: string) {
   const rows = await deps.prisma.routine.findMany({
-    where: { botId, spaceId: actor.spaceId },
+    // userId matters for the same reason as `remove`: routines belong to a user, and a
+    // shared space's other members must not read them. Reached from `bootstrap` with a
+    // CLIENT-SUPPLIED botId, which is resolved against the space-wide bot list, so this
+    // predicate is the only thing standing between a co-member and these rows.
+    where: { botId, spaceId: actor.spaceId, userId: actor.userId },
   });
   return rows.map(mapRoutine);
+}
+
+/**
+ * Every routine the actor can see in their space, across all bots.
+ *
+ * Scoped by BOTH `spaceId` and `userId`, matching every other routine read: a routine
+ * belongs to a user, so a shared space must not leak one member's schedules to another.
+ * The bot name is joined in so the Scheduled-tasks page can group by assistant without a
+ * second round trip per bot.
+ */
+async function listSpaceRoutinesDto(deps: RouterDeps, actor: Actor) {
+  const rows = await deps.prisma.routine.findMany({
+    where: { spaceId: actor.spaceId, userId: actor.userId },
+    include: { bot: { select: { name: true } } },
+    orderBy: [{ createdAt: "asc" }],
+  });
+  return rows.map((row) => ({ ...mapRoutine(row), botName: row.bot.name }));
 }
 
 /**

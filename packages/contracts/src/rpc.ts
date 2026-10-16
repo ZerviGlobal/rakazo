@@ -329,6 +329,11 @@ export const appContract = {
     update: oc
       .input(z.object({ sectionId: Id, name: z.string().trim().min(1).max(60) }))
       .output(BotSectionSchema),
+    /**
+     * Delete a section. Members are not deleted — bots/groups inside it fall back to
+     * "Unassigned" via the schema's onDelete: SetNull.
+     */
+    remove: oc.input(z.object({ sectionId: Id })).output(z.object({ ok: z.literal(true) })),
   },
   threads: {
     head: oc.input(threadTarget).output(
@@ -496,6 +501,12 @@ export const appContract = {
   },
   routines: {
     list: oc.input(botId).output(z.array(RoutineSchema)),
+    /**
+     * Every routine in the actor's space, across all bots, each tagged with the bot it
+     * belongs to. `list` is per-bot, so the Scheduled-tasks page had no way to answer
+     * "what runs in my space?" without fanning out one call per bot.
+     */
+    listSpace: oc.output(z.array(RoutineSchema.extend({ botName: z.string() }))),
     history: oc
       .input(z.object({ routineId: Id, before: RoutineRunCursorSchema.optional() }))
       .output(RoutineHistorySchema),
