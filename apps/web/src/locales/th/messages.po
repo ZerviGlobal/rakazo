@@ -4975,4 +4975,4 @@ msgstr "ชื่อของคุณ"
 
 #: src/pages/Welcome.tsx
 msgid "Your team of always-on agents<0/>that you can give real work to."
-msgstr ""
+msgstr "ทีมผู้ช่วย AI ที่ทำงานตลอดเวลา<0/>พร้อมรับงานจริงจากคุณ"
