@@ -3790,20 +3790,24 @@ export function ShellPage() {
         ) : null}
       </main>
 
-      {/* Zervi: without this, the Work destinations are behind the hamburger on a phone. */}
-      <EmployeeTabBar
-        boardEnabled={bootstrapMe?.ticketBoardEnabled === true}
-        activePath={location.pathname}
-        onNavigate={(path) => {
-          setMobileSidebarOpen(false);
-          navigate(path);
-        }}
-        onOpenUsage={() => openSettings("usage")}
-        onOpenChat={() => {
-          setMobileSidebarOpen(false);
-          navigate("/app");
-        }}
-      />
+      {/* Zervi: without this, the Work destinations are behind the hamburger on a phone.
+          Hidden while the full-screen computer is open — that is a takeover view, so the
+          bar would be a false affordance over it. */}
+      {computerOpen || booting ? null : (
+        <EmployeeTabBar
+          boardEnabled={bootstrapMe?.ticketBoardEnabled === true}
+          activePath={location.pathname}
+          onNavigate={(path) => {
+            setMobileSidebarOpen(false);
+            navigate(path);
+          }}
+          onOpenUsage={() => openSettings("usage")}
+          onOpenChat={() => {
+            setMobileSidebarOpen(false);
+            navigate("/app");
+          }}
+        />
+      )}
 
       <CallCard onSettings={() => openSettings("voice")} />
 
