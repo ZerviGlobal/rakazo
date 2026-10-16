@@ -160,3 +160,26 @@ describe("authErrorMessage", () => {
     expect(authErrorMessage(undefined, authCopy)).toBe(authCopy.fallback);
   });
 });
+
+describe("provider error envelopes", () => {
+  // Measured live: a failed run stored and painted this verbatim in the composer alert, because
+  // `/^\s*[[{]/` only matches JSON at the START of a message and this one is prefixed by a status code.
+  const blob =
+    '401: {"message":"Authentication Fails, Your api key: ****eae5 is invalid (request_id: 8921529a-834c-404e-b216-210ea358a3f7)","type":"authentication_error"}';
+
+  it("treats a status-prefixed provider body as technical", () => {
+    expect(isTechnicalErrorMessage(blob)).toBe(true);
+    expect(userErrorMessage(blob, { fallback: "Something went wrong. Try again.", offline: "offline" }))
+      .toBe("Something went wrong. Try again.");
+  });
+
+  it("also catches a bare error envelope", () => {
+    expect(isTechnicalErrorMessage('{"error":"invalid_api_key","request_id":"abc"}')).toBe(true);
+  });
+
+  it("still passes a human sentence through", () => {
+    const human = "Connect a model in Settings before running bots.";
+    expect(isTechnicalErrorMessage(human)).toBe(false);
+    expect(userErrorMessage(human, { fallback: "fallback", offline: "offline" })).toBe(human);
+  });
+});

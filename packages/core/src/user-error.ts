@@ -21,6 +21,12 @@ const TECHNICAL_MESSAGE = [
   /^\w*Error:/,
   /\(at \S+:\d+|\bat \S+ \(\S+:\d+(?::\d+)?\)|\.(?:swift|kt|java|mm?|[cm]?[jt]sx?):\d+/, // stack frames
   /^\s*[[{]/, // JSON
+  // A provider error body, which arrives as one line and may be PREFIXED by a status code, e.g.
+  // `401: {"message":"Authentication Fails, Your api key: ****eae5 is invalid",...}`. Measured: that
+  // exact string reached the composer alert verbatim, because `/^\s*[[{]/` only matches JSON at the
+  // START of the message. The keys below are the giveaways of an API error envelope.
+  /(?:^|\s)\d{3}\s*:\s*[[{]/, // status code then a JSON body
+  /"?(?:error|message|type|request_id|code)"?\s*:\s*"/, // API error envelope keys
   /^rpc \S+ failed|\(\d{3}\)|\bstatus(?: code)? \d{3}\b/i, // HTTP status dumps
   /\bE(?:CONN[A-Z]+|TIMEDOUT|NOTFOUND|AI_AGAIN|PIPE|HOSTUNREACH|NETUNREACH)\b/,
   /^[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)+$/, // bare internal codes

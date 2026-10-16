@@ -4272,7 +4272,7 @@ msgstr ""
 #: src/App.tsx
 #: src/lib/user-error.ts
 msgid "Something went wrong. Try again."
-msgstr ""
+msgstr "เกิดข้อผิดพลาด ลองอีกครั้ง"
 
 #: src/pages/ModelBackupsSettings.tsx
 msgid "Space changed. Reopen Models to load its backup list."

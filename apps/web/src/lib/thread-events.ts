@@ -8,6 +8,7 @@ import type {
   ThreadMessagePage,
   ThreadSnapshot,
 } from "@rakazo/contracts";
+import { userErrorMessage } from "@rakazo/core";
 import { RUN_TRIGGERS } from "@rakazo/contracts";
 import {
   isActive,
@@ -117,6 +118,25 @@ export function threadRunError(
   const run = snapshot?.run;
   if (run?.status !== "failed" || dismissedRunIds?.has(run.id)) return null;
   return run.error ?? null;
+}
+
+/**
+ * `threadRunError` returns the server's message RAW, which is right for a human-readable sentence but
+ * wrong for a provider error body — measured live: a failed run stored and painted
+ * `401: {"message":"Authentication Fails, Your api key: ****eae5 is invalid (request_id: …)",
+ * "type":"authentication_error"}` verbatim. `userErrorMessage` already exists to hide exactly this,
+ * so route the reason through it at the point of display.
+ *
+ * Kept separate from `threadRunError` so the stored value is untouched and existing callers/tests
+ * that assert on the raw reason keep working.
+ */
+export function threadRunErrorForDisplay(
+  snapshot: ThreadSnapshot | null,
+  dismissedRunIds: ReadonlySet<string> | undefined,
+  copy: { fallback: string; offline: string },
+): string | null {
+  const raw = threadRunError(snapshot, dismissedRunIds);
+  return raw === null ? null : userErrorMessage(raw, copy);
 }
 
 export function clearActiveThreadRuns(snapshot: ThreadSnapshot): ThreadSnapshot {

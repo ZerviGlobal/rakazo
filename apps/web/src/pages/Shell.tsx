@@ -241,7 +241,7 @@ import {
   reconcileRefreshedThread,
   reduceComputerStatus,
   reduceThreadSnapshot,
-  threadRunError,
+  threadRunErrorForDisplay,
   userHoldsComputerControl,
 } from "../lib/thread-events";
 import { getToolActivityEnabled, subscribeToolActivity } from "../lib/tool-activity-preference";
@@ -1876,7 +1876,10 @@ export function ShellPage() {
   );
   const transcriptRunning = workingRuns.length > 0;
   const composerRunning = currentRuns.some((run) => isActive(run.status));
-  const runError = threadRunError(activeSnapshot, dismissedRunErrorIds);
+  const runError = threadRunErrorForDisplay(activeSnapshot, dismissedRunErrorIds, {
+    fallback: t`Something went wrong. Try again.`,
+    offline: t`Could not reach the server`,
+  });
   const displayedRunError = !sendError ? runError : null;
   const displayedRunErrorId = displayedRunError ? (activeSnapshot?.run?.id ?? null) : null;
   const handleRunErrorPresented = useCallback((runId: string) => {
