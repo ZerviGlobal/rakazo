@@ -42,12 +42,12 @@ msgstr "{0} (รูปจาก iPhone แบบ HEIC ยังไม่รอ�
 #. placeholder {0}: file.name
 #: src/pages/Shell.tsx
 msgid "{0} (max {ATTACHMENT_MAX_COUNT} attachments)"
-msgstr ""
+msgstr "{0} (แนบได้สูงสุด {ATTACHMENT_MAX_COUNT} ไฟล์)"
 
 #. placeholder {0}: file.name
 #: src/pages/Shell.tsx
 msgid "{0} (over 10 MiB)"
-msgstr ""
+msgstr "{0} (เกิน 10 MiB)"
 
 #. placeholder {0}: file.name
 #: src/pages/Shell.tsx
@@ -67,7 +67,7 @@ msgstr "{0} เป็นจุดเริ่มต้นที่ดี เช�
 #. placeholder {0}: block.name
 #: src/pages/shell/message-cards.tsx
 msgid "{0} connection"
-msgstr ""
+msgstr "การเชื่อมต่อ {0}"
 
 #. placeholder {0}: bot.name
 #: src/pages/ExternalConversationSettings.tsx
@@ -113,7 +113,7 @@ msgstr ""
 #. placeholder {0}: active.name
 #: src/pages/Shell.tsx
 msgid "{0}'s screen"
-msgstr ""
+msgstr "หน้าจอของ {0}"
 
 #. placeholder {0}: routines.length
 #: src/pages/ScheduledTasks.tsx
@@ -212,12 +212,12 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "{workingBotName} is working"
-msgstr ""
+msgstr "{workingBotName} กำลังทำงาน"
 
 #. placeholder {0}: mention.name
 #: src/pages/Shell.tsx
 msgid "@{0}"
-msgstr ""
+msgstr "@{0}"
 
 #: src/pages/shell/message-cards.tsx
 msgid "A bit of everything"
@@ -285,7 +285,7 @@ msgstr "การจัดการสำหรับ {0}"
 
 #: src/pages/Shell.tsx
 msgid "Actions for space"
-msgstr ""
+msgstr "การจัดการพื้นที่"
 
 #: src/pages/BillingSettingsPanel.tsx
 #: src/pages/RoutineEditor.tsx
@@ -426,7 +426,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Agent computer"
-msgstr ""
+msgstr "คอมพิวเตอร์ของผู้ช่วย"
 
 #: src/pages/MessagingSettingsOverlay.tsx
 msgid "Agent connections"
@@ -560,7 +560,7 @@ msgstr ""
 #: src/pages/MessagingSettingsOverlay.tsx
 #: src/pages/shell/message-cards.tsx
 msgid "Approve"
-msgstr ""
+msgstr "อนุมัติ"
 
 #: src/pages/shell/message-cards.tsx
 msgid "Approve this server to let your agent use its tools."
@@ -572,15 +572,15 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "archived"
-msgstr ""
+msgstr "เก็บถาวรแล้ว"
 
 #: src/pages/Shell.tsx
 msgid "Archived"
-msgstr ""
+msgstr "เก็บถาวร"
 
 #: src/pages/Shell.tsx
 msgid "Archived. Chat, memory, and files kept."
-msgstr ""
+msgstr "เก็บถาวรแล้ว บทสนทนา ความจำ และไฟล์ยังอยู่ครบ"
 
 #: src/pages/McpServersOverlay.tsx
 msgid "Arguments"
@@ -646,7 +646,7 @@ msgstr ""
 #: src/pages/Shell.tsx
 #: src/pages/shell/chat-context.tsx
 msgid "Attachment"
-msgstr ""
+msgstr "ไฟล์แนบ"
 
 #: src/lib/model-connection-preflight.ts
 msgid "Authentication failed."
@@ -659,11 +659,11 @@ msgstr ""
 
 #: src/pages/shell/message-cards.tsx
 msgid "Authorization timed out. Please try again."
-msgstr ""
+msgstr "หมดเวลายืนยันสิทธิ์ กรุณาลองอีกครั้ง"
 
 #: src/pages/shell/message-cards.tsx
 msgid "Authorize"
-msgstr ""
+msgstr "ยืนยันสิทธิ์"
 
 #: src/pages/shell/message-cards.tsx
 msgid "Authorize this server so agents can use its tools. A popup opens."
@@ -759,7 +759,7 @@ msgstr "กำลังเปิดคอมพิวเตอร์ของ {0
 
 #: src/pages/Shell.tsx
 msgid "bot"
-msgstr ""
+msgstr "ผู้ช่วย"
 
 #: src/pages/IntegrationSetup.tsx
 #: src/pages/Shell.tsx
