@@ -59,3 +59,29 @@ describe("formatRelativeTime stays past-only", () => {
     expect(formatRelativeTime("2026-10-16T20:00:00.000Z", NOW)).toBe("just now");
   });
 });
+
+describe("formatRelativeTime boundary", () => {
+  const NOW = new Date("2026-10-16T12:00:00.000Z");
+  const ago = (seconds: number) => new Date(NOW.getTime() - seconds * 1000).toISOString();
+
+  it("never prints a zero unit between the 'just now' and 'minutes' cutoffs", () => {
+    // The regression: the "just now" cutoff is 45s but the next unit is MINUTES, so a 45-59s old
+    // item computed `Math.floor(45/60) === 0` and rendered "0m ago" — measured on the live
+    // Documents page, where a document created seconds earlier read "0 นาทีที่แล้ว".
+    for (const s of [45, 50, 59]) {
+      expect(formatRelativeTime(ago(s), NOW)).toBe("just now");
+      expect(formatRelativeTime(ago(s), NOW)).not.toContain("0m");
+    }
+  });
+
+  it("still switches to minutes once a full minute has passed", () => {
+    expect(formatRelativeTime(ago(60), NOW)).toBe("1m ago");
+    expect(formatRelativeTime(ago(90), NOW)).toBe("1m ago");
+  });
+
+  it("keeps the neighbouring thresholds unchanged", () => {
+    expect(formatRelativeTime(ago(44), NOW)).toBe("just now");
+    expect(formatRelativeTime(ago(60 * 60), NOW)).toBe("1h ago");
+    expect(formatRelativeTime(ago(60 * 60 * 24), NOW)).toBe("1d ago");
+  });
+});

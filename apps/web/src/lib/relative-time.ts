@@ -7,6 +7,11 @@ export function formatRelativeTime(iso: string, now = new Date()): string {
   const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
   if (seconds < 45) return t`just now`;
   const minutes = Math.floor(seconds / 60);
+  // Below a minute, `minutes` is 0 and the next branch would print "0m ago" — measured on the
+  // live Documents page, where a 45-59s old document read "0 นาทีที่แล้ว". The "just now" cutoff
+  // and the minutes cutoff disagree, so anything in between must resolve to "just now" rather
+  // than a zero unit.
+  if (minutes < 1) return t`just now`;
   if (minutes < 60) return t`${minutes}m ago`;
   const hours = Math.floor(minutes / 60);
   if (hours < 24) return t`${hours}h ago`;

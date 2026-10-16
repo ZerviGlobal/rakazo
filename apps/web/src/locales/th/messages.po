@@ -131,7 +131,7 @@ msgstr ""
 #: src/lib/relative-time.ts
 #: src/pages/ActivityList.tsx
 msgid "{days}d ago"
-msgstr ""
+msgstr "{days} วันที่แล้ว"
 
 #: src/components/ToolActivityDisclosure.tsx
 msgid "{hidden, plural, one {+# earlier step} other {+# earlier steps}}"
@@ -140,12 +140,12 @@ msgstr ""
 #: src/lib/relative-time.ts
 #: src/pages/ActivityList.tsx
 msgid "{hours}h ago"
-msgstr ""
+msgstr "{hours} ชั่วโมงที่แล้ว"
 
 #: src/lib/relative-time.ts
 #: src/pages/ActivityList.tsx
 msgid "{minutes}m ago"
-msgstr ""
+msgstr "{minutes} นาทีที่แล้ว"
 
 #. js-lingui-explicit-id
 #: src/lib/browser-notifications.ts
@@ -2577,7 +2577,7 @@ msgstr ""
 #: src/lib/relative-time.ts
 #: src/pages/ActivityList.tsx
 msgid "just now"
-msgstr ""
+msgstr "เมื่อสักครู่"
 
 #: src/pages/shell/dialogs.tsx
 msgid "Keep memories"
