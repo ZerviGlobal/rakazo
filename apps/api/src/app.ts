@@ -579,7 +579,20 @@ export async function createApp(
     },
   });
   const rpc = new RPCHandler(router, {
-    clientInterceptors: [onError((error, { path }) => logUnexpectedRpcError(error, path))],
+    clientInterceptors: [
+      // `IsolationError` means "not yours, or does not exist" — the scope guard throws it in ~49
+      // places, but only some handlers wrap it in `ORPCError("NOT_FOUND")`. The rest surfaced as
+      // INTERNAL_SERVER_ERROR with a stack trace logged at ERROR (measured: an employee reading
+      // another employee's bot got 500 + "IsolationError … Resource not found" in the api log).
+      // Isolation itself held; only the reporting was wrong. Mapping it here fixes every route at
+      // once and makes the client show a plain not-found instead of "Something went wrong".
+      onError((error) => {
+        if (error instanceof IsolationError) {
+          throw new ORPCError("NOT_FOUND", { message: error.message });
+        }
+      }),
+      onError((error, { path }) => logUnexpectedRpcError(error, path)),
+    ],
   });
   const app = new Hono();
   app.use("*", requestLogging(logger));
