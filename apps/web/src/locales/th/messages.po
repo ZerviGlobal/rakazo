@@ -3202,7 +3202,7 @@ msgstr ""
 #: src/pages/PluginsOverlay.tsx
 #: src/pages/SpaceSearch.tsx
 msgid "No results"
-msgstr ""
+msgstr "ไม่พบผลลัพธ์"
 
 #: src/pages/ActivityList.tsx
 msgid "No runs match these filters."
