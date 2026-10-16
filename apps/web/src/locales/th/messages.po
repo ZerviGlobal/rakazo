@@ -469,7 +469,7 @@ msgstr ""
 
 #: src/pages/Auth.tsx
 msgid "Already have an account?"
-msgstr ""
+msgstr "มีบัญชีอยู่แล้ว?"
 
 #: src/pages/ExternalConversationSettings.tsx
 msgid "Always act"
@@ -682,7 +682,7 @@ msgstr "ย้อนกลับ"
 
 #: src/pages/Auth.tsx
 msgid "Back to sign in"
-msgstr ""
+msgstr "กลับไปหน้าเข้าสู่ระบบ"
 
 #: src/pages/ModelBackupsSettings.tsx
 msgid "Backup models"
@@ -1255,7 +1255,7 @@ msgstr ""
 
 #: src/pages/Auth.tsx
 msgid "Continue with email"
-msgstr ""
+msgstr "ดำเนินการต่อด้วยอีเมล"
 
 #: src/components/ComputersUnavailableHint.tsx
 #: src/pages/ModelSettingsOverlay.tsx
@@ -1744,7 +1744,7 @@ msgstr ""
 
 #: src/pages/Auth.tsx
 msgid "Create account"
-msgstr ""
+msgstr "สร้างบัญชี"
 
 #: src/pages/GroupPanel.tsx
 msgid "Create group"
@@ -1774,7 +1774,7 @@ msgstr ""
 
 #: src/pages/Auth.tsx
 msgid "Create your Rakazo"
-msgstr ""
+msgstr "สร้าง Rakazo ของคุณ"
 
 #: src/components/AskCard.tsx
 msgid "Created"
@@ -2094,7 +2094,7 @@ msgstr ""
 
 #: src/pages/Auth.tsx
 msgid "Email"
-msgstr ""
+msgstr "อีเมล"
 
 #: src/lib/user-error.ts
 msgid "Email is not allowed to register"
@@ -2977,7 +2977,7 @@ msgstr ""
 #: src/pages/shell/bot-panel.tsx
 #: src/pages/shell/dialogs.tsx
 msgid "Name"
-msgstr ""
+msgstr "ชื่อ"
 
 #: src/pages/shell/bot-panel.tsx
 msgid "Name this bot"
@@ -3752,7 +3752,7 @@ msgstr ""
 
 #: src/pages/Auth.tsx
 msgid "Reset your password"
-msgstr ""
+msgstr "ตั้งรหัสผ่านใหม่"
 
 #: src/components/ComputerMaintenanceActions.tsx
 msgid "Resetting…"
@@ -4040,7 +4040,7 @@ msgstr ""
 
 #: src/pages/Auth.tsx
 msgid "Send reset link"
-msgstr ""
+msgstr "ส่งลิงก์ตั้งรหัสผ่านใหม่"
 
 #: src/pages/AccountSettingsOverlay.tsx
 msgid "Send with Enter"
@@ -4162,7 +4162,7 @@ msgstr ""
 #: src/pages/Onboarding.tsx
 #: src/pages/Welcome.tsx
 msgid "Sign in"
-msgstr ""
+msgstr "เข้าสู่ระบบ"
 
 #: src/components/AccountAccess.tsx
 #: src/lib/user-error.ts
@@ -4172,7 +4172,7 @@ msgstr ""
 
 #: src/pages/Auth.tsx
 msgid "Sign in to Rakazo"
-msgstr ""
+msgstr "เข้าสู่ระบบ Rakazo"
 
 #: src/lib/user-error.ts
 msgid "Sign in to your existing account to link SSO"
@@ -4185,7 +4185,7 @@ msgstr ""
 #: src/pages/Auth.tsx
 #: src/pages/Welcome.tsx
 msgid "Sign up"
-msgstr ""
+msgstr "สมัครใช้งาน"
 
 #: src/pages/shell/bot-credentials.tsx
 msgid "Site"
@@ -4930,11 +4930,11 @@ msgstr ""
 
 #: src/pages/Auth.tsx
 msgid "Your email address"
-msgstr ""
+msgstr "อีเมลของคุณ"
 
 #: src/pages/Auth.tsx
 msgid "Your name"
-msgstr ""
+msgstr "ชื่อของคุณ"
 
 #: src/pages/Welcome.tsx
 msgid "Your team of always-on agents<0/>that you can give real work to."

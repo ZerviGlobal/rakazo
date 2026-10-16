@@ -159,3 +159,29 @@ test("account settings language picker includes Thai and persists it", async ({ 
   await expect(page.locator("html")).toHaveAttribute("lang", "th");
   await captureScreenshot(page, testInfo, "ui-locale-settings-th");
 });
+
+// The PRE-AUTH pages in Thai. These are the first screens an employee meets — before they have
+// an account and before any locale is stored — so an untranslated sign-in page is the first
+// impression a Thai staff member gets.
+//
+// The locale is resolved at boot (stored -> VITE_DEFAULT_UI_LOCALE -> navigator.language -> en),
+// so with a Thai browser and nothing stored these pages must render Thai. This asserts the
+// heading, which is the string a user reads first.
+test("sign-in and sign-up render in Thai for a Thai browser", async ({ page }) => {
+  await page.addInitScript(() => localStorage.removeItem("rakazo.uiLocale"));
+  await page.context().addCookies([]);
+  await page.setExtraHTTPHeaders({ "accept-language": "th-TH,th;q=0.9" });
+
+  await page.goto("/sign-in");
+  await expect(page.locator("html")).toHaveAttribute("lang", "th");
+  await expect(page.getByRole("heading", { name: "เข้าสู่ระบบ Rakazo" })).toBeVisible();
+  // The primary action must not stay English on the first screen.
+  await expect(page.getByRole("button", { name: "ดำเนินการต่อด้วยอีเมล" })).toBeVisible();
+
+  await page.goto("/sign-up");
+  await expect(page.locator("html")).toHaveAttribute("lang", "th");
+  await expect(page.getByRole("heading", { name: "สร้าง Rakazo ของคุณ" })).toBeVisible();
+
+  await page.goto("/forgot-password");
+  await expect(page.getByRole("heading", { name: "ตั้งรหัสผ่านใหม่" })).toBeVisible();
+});
