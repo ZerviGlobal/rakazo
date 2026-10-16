@@ -2363,6 +2363,10 @@ msgstr ""
 msgid "Git event"
 msgstr ""
 
+#: src/pages/Shell.tsx
+msgid "Got it. Slack, calendar, and email. I’ll see what’s already connected so I don’t make you set something up twice."
+msgstr ""
+
 #: src/pages/MessagingSettingsOverlay.tsx
 #: src/pages/Shell.tsx
 msgid "Group"
@@ -2439,6 +2443,18 @@ msgstr "Alto"
 #. js-lingui-explicit-id
 #: src/lib/model-catalog.ts
 msgid "High"
+msgstr ""
+
+#: src/pages/Shell.tsx
+msgid "Hit those one and I’ll start pulling the picture."
+msgstr ""
+
+#: src/pages/Shell.tsx
+msgid "Hit those three and I’ll start pulling the picture."
+msgstr ""
+
+#: src/pages/Shell.tsx
+msgid "Hit those two and I’ll start pulling the picture."
 msgstr ""
 
 #: src/pages/RoutineSchedule.tsx

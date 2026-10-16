@@ -366,6 +366,30 @@ const SIDEBAR_GROUP_TITLE_KEYS = {
   Unassigned: () => t`Unassigned`,
 } as const;
 
+/**
+ * Onboarding copy the API composes SERVER-side has no catalog entry, so a Thai employee reads it in
+ * English. Measured: choosing a focus option stores and paints verbatim
+ * "Got it. Slack, calendar, and email. I'll see what's already connected so I don't make you set
+ * something up twice." — during ONBOARDING, the first thing a new employee sees.
+ *
+ * The client already maps the card's question and option labels by exact match (see
+ * message-cards.tsx: "API stores English; UI locale catalogs translate it"). This extends that same
+ * approach to the sentences that FOLLOW the choice, rather than putting i18n into the API — which
+ * serves the mobile app too and cannot be tested here.
+ *
+ * Exact-match only. Anything the model generates, or that a user typed, passes through untouched:
+ * guessing at free text would corrupt real conversation.
+ */
+function translateApiComposedText(text: string): string {
+  const ONBOARDING_SENTENCES: Record<string, string> = {
+    "Got it. Slack, calendar, and email. I’ll see what’s already connected so I don’t make you set something up twice.": t`Got it. Slack, calendar, and email. I’ll see what’s already connected so I don’t make you set something up twice.`,
+    "Hit those one and I’ll start pulling the picture.": t`Hit those one and I’ll start pulling the picture.`,
+    "Hit those two and I’ll start pulling the picture.": t`Hit those two and I’ll start pulling the picture.`,
+    "Hit those three and I’ll start pulling the picture.": t`Hit those three and I’ll start pulling the picture.`,
+  };
+  return ONBOARDING_SENTENCES[text] ?? text;
+}
+
 function sidebarGroupTitle(group: { title: string | null; sectionId: string | null }): string | null {
   if (!group.title) return group.title;
   if (group.sectionId) return group.title;
@@ -6893,7 +6917,7 @@ const MessageView = memo(function MessageView({
                     key={i}
                     data-quote-message-id={block.kind === "text" ? quoteMessageId : undefined}
                   >
-                    <ChatMarkdown streaming={block.kind === "progress"}>{block.text}</ChatMarkdown>
+                    <ChatMarkdown streaming={block.kind === "progress"}>{translateApiComposedText(block.text)}</ChatMarkdown>
                   </div>
                 );
               }
