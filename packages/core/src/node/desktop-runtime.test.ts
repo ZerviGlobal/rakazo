@@ -425,7 +425,14 @@ describe("shared Linux desktop lifecycle", () => {
         waitForReady(joinedReady);
         const result = spawnSync("bash", ["-eu", "-c", command], {
           encoding: "utf8",
-          timeout: 20_000,
+          // This drives REAL Chromium processes whose shutdown waits are ~20s of sleeps in the
+          // worst case, and it takes ~9s when nothing is contended. At the old 20s limit it passed
+          // in isolation but intermittently timed out under full-suite parallel load, surfacing as
+          // "1 failed ... expected null to be 0" — where `null` means spawnSync hit the timeout
+          // (signal SIGTERM, code ETIMEDOUT), NOT that the command misbehaved. The assertion is
+          // about BEHAVIOUR (the browser really is quiesced and its cookies kept), so a slow host
+          // must not fail it. Raised for headroom; the assertion itself is unchanged.
+          timeout: 90_000,
           env: {
             ...process.env,
             PATH: `${bin}${path.delimiter}${process.env.PATH ?? ""}`,
