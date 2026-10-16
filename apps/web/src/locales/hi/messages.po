@@ -1841,6 +1841,7 @@ msgstr "दिन"
 msgid "Day-to-day work"
 msgstr ""
 
+#: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "days"
 msgstr "दिन"
@@ -2153,6 +2154,11 @@ msgstr ""
 msgid "Every"
 msgstr "हर"
 
+#. placeholder {0}: preset.n
+#: src/pages/RoutineEditor.tsx
+msgid "Every {0} {unit}"
+msgstr ""
+
 #: src/pages/RoutineSchedule.tsx
 msgid "every {intervalAmountSelect} {intervalUnitSelect}"
 msgstr "हर {intervalAmountSelect} {intervalUnitSelect}"
@@ -2161,6 +2167,11 @@ msgstr "हर {intervalAmountSelect} {intervalUnitSelect}"
 #: src/pages/RoutineSchedule.tsx
 msgid "Every day"
 msgstr "हर दिन"
+
+#. placeholder {0}: preset.time
+#: src/pages/RoutineEditor.tsx
+msgid "Every day at {0}"
+msgstr ""
 
 #: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
@@ -2176,10 +2187,20 @@ msgstr "हर सोमवार"
 msgid "Every month"
 msgstr "हर महीने"
 
+#. placeholder {0}: preset.time
+#: src/pages/RoutineEditor.tsx
+msgid "Every month at {0}"
+msgstr ""
+
 #: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "Every week"
 msgstr "हर सप्ताह"
+
+#. placeholder {0}: preset.time
+#: src/pages/RoutineEditor.tsx
+msgid "Every week at {0}"
+msgstr ""
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Executor token"
@@ -2425,6 +2446,7 @@ msgid "hour"
 msgstr "घंटा"
 
 #: src/pages/ExternalConversationSettings.tsx
+#: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "hours"
 msgstr "घंटे"
@@ -2882,6 +2904,7 @@ msgstr ""
 msgid "minute"
 msgstr "मिनट"
 
+#: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "minutes"
 msgstr "मिनट"
@@ -3246,6 +3269,10 @@ msgstr ""
 #: src/pages/RoutineSchedule.tsx
 msgid "on the 1st at {0}"
 msgstr "1 तारीख को {0} बजे"
+
+#: src/pages/RoutineEditor.tsx
+msgid "One-time"
+msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Only empty spaces can be deleted. Delete its bots and groups first."
@@ -4837,6 +4864,11 @@ msgstr ""
 #: src/pages/RoutineSchedule.tsx
 msgid "Weekdays"
 msgstr "कार्यदिवस"
+
+#. placeholder {0}: preset.time
+#: src/pages/RoutineEditor.tsx
+msgid "Weekdays at {0}"
+msgstr ""
 
 #: src/pages/shell/dialogs.tsx
 msgid "What about its memories?"

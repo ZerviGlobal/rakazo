@@ -1841,6 +1841,7 @@ msgstr "day"
 msgid "Day-to-day work"
 msgstr "Day-to-day work"
 
+#: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "days"
 msgstr "days"
@@ -2153,6 +2154,11 @@ msgstr "Error"
 msgid "Every"
 msgstr "Every"
 
+#. placeholder {0}: preset.n
+#: src/pages/RoutineEditor.tsx
+msgid "Every {0} {unit}"
+msgstr "Every {0} {unit}"
+
 #: src/pages/RoutineSchedule.tsx
 msgid "every {intervalAmountSelect} {intervalUnitSelect}"
 msgstr "every {intervalAmountSelect} {intervalUnitSelect}"
@@ -2161,6 +2167,11 @@ msgstr "every {intervalAmountSelect} {intervalUnitSelect}"
 #: src/pages/RoutineSchedule.tsx
 msgid "Every day"
 msgstr "Every day"
+
+#. placeholder {0}: preset.time
+#: src/pages/RoutineEditor.tsx
+msgid "Every day at {0}"
+msgstr "Every day at {0}"
 
 #: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
@@ -2176,10 +2187,20 @@ msgstr "Every Monday"
 msgid "Every month"
 msgstr "Every month"
 
+#. placeholder {0}: preset.time
+#: src/pages/RoutineEditor.tsx
+msgid "Every month at {0}"
+msgstr "Every month at {0}"
+
 #: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "Every week"
 msgstr "Every week"
+
+#. placeholder {0}: preset.time
+#: src/pages/RoutineEditor.tsx
+msgid "Every week at {0}"
+msgstr "Every week at {0}"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Executor token"
@@ -2425,6 +2446,7 @@ msgid "hour"
 msgstr "hour"
 
 #: src/pages/ExternalConversationSettings.tsx
+#: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "hours"
 msgstr "hours"
@@ -2882,6 +2904,7 @@ msgstr "Minimize bots"
 msgid "minute"
 msgstr "minute"
 
+#: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "minutes"
 msgstr "minutes"
@@ -3246,6 +3269,10 @@ msgstr "On a schedule"
 #: src/pages/RoutineSchedule.tsx
 msgid "on the 1st at {0}"
 msgstr "on the 1st at {0}"
+
+#: src/pages/RoutineEditor.tsx
+msgid "One-time"
+msgstr "One-time"
 
 #: src/pages/Shell.tsx
 msgid "Only empty spaces can be deleted. Delete its bots and groups first."
@@ -4837,6 +4864,11 @@ msgstr "week"
 #: src/pages/RoutineSchedule.tsx
 msgid "Weekdays"
 msgstr "Weekdays"
+
+#. placeholder {0}: preset.time
+#: src/pages/RoutineEditor.tsx
+msgid "Weekdays at {0}"
+msgstr "Weekdays at {0}"
 
 #: src/pages/shell/dialogs.tsx
 msgid "What about its memories?"

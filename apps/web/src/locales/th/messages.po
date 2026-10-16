@@ -98,7 +98,7 @@ msgstr ""
 #. placeholder {0}: routines.length
 #: src/pages/ScheduledTasks.tsx
 msgid "{activeCount} of {0} running"
-msgstr ""
+msgstr "กำลังทำงาน {activeCount} จาก {0}"
 
 #: src/lib/billing.ts
 msgid "{amount} / {period}"
@@ -609,7 +609,7 @@ msgstr "ผู้ช่วย"
 #. placeholder {0}: preset.time
 #: src/pages/RoutineSchedule.tsx
 msgid "at {0}"
-msgstr ""
+msgstr "เวลา {0}"
 
 #: src/pages/RoutineSchedule.tsx
 msgid "at {timeSelect}"
@@ -1841,9 +1841,10 @@ msgstr ""
 msgid "Day-to-day work"
 msgstr "งานประจำวัน"
 
+#: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "days"
-msgstr ""
+msgstr "วัน"
 
 #: src/pages/MessagingSettingsOverlay.tsx
 msgid "Decline"
@@ -2153,6 +2154,11 @@ msgstr ""
 msgid "Every"
 msgstr ""
 
+#. placeholder {0}: preset.n
+#: src/pages/RoutineEditor.tsx
+msgid "Every {0} {unit}"
+msgstr "ทุก {0} {unit}"
+
 #: src/pages/RoutineSchedule.tsx
 msgid "every {intervalAmountSelect} {intervalUnitSelect}"
 msgstr ""
@@ -2160,12 +2166,17 @@ msgstr ""
 #: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "Every day"
-msgstr ""
+msgstr "ทุกวัน"
+
+#. placeholder {0}: preset.time
+#: src/pages/RoutineEditor.tsx
+msgid "Every day at {0}"
+msgstr "ทุกวัน เวลา {0}"
 
 #: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "Every hour"
-msgstr ""
+msgstr "ทุกชั่วโมง"
 
 #: src/pages/RoutineSchedule.tsx
 msgid "Every Monday"
@@ -2176,10 +2187,20 @@ msgstr ""
 msgid "Every month"
 msgstr ""
 
+#. placeholder {0}: preset.time
+#: src/pages/RoutineEditor.tsx
+msgid "Every month at {0}"
+msgstr "ทุกเดือน เวลา {0}"
+
 #: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "Every week"
 msgstr ""
+
+#. placeholder {0}: preset.time
+#: src/pages/RoutineEditor.tsx
+msgid "Every week at {0}"
+msgstr "ทุกสัปดาห์ เวลา {0}"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Executor token"
@@ -2340,7 +2361,7 @@ msgstr ""
 
 #: src/pages/RoutineEditor.tsx
 msgid "Git event"
-msgstr ""
+msgstr "เหตุการณ์ Git"
 
 #: src/pages/MessagingSettingsOverlay.tsx
 #: src/pages/Shell.tsx
@@ -2425,9 +2446,10 @@ msgid "hour"
 msgstr ""
 
 #: src/pages/ExternalConversationSettings.tsx
+#: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "hours"
-msgstr ""
+msgstr "ชั่วโมง"
 
 #: src/pages/RoutineSchedule.tsx
 msgid "How often"
@@ -2459,15 +2481,15 @@ msgstr ""
 
 #: src/lib/relative-time.ts
 msgid "in {days}d"
-msgstr ""
+msgstr "อีก {days} วัน"
 
 #: src/lib/relative-time.ts
 msgid "in {hours}h"
-msgstr ""
+msgstr "อีก {hours} ชั่วโมง"
 
 #: src/lib/relative-time.ts
 msgid "in {minutes}m"
-msgstr ""
+msgstr "อีก {minutes} นาที"
 
 #: src/lib/ticket-status.ts
 msgid "In progress"
@@ -2837,7 +2859,7 @@ msgstr ""
 
 #: src/pages/RoutineEditor.tsx
 msgid "Message event"
-msgstr ""
+msgstr "เหตุการณ์ข้อความ"
 
 #: src/pages/Shell.tsx
 msgid "Message from {peer}"
@@ -2882,9 +2904,10 @@ msgstr "ย่อรายการผู้ช่วย"
 msgid "minute"
 msgstr ""
 
+#: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "minutes"
-msgstr ""
+msgstr "นาที"
 
 #: src/pages/ModelSettingsOverlay.tsx
 #: src/pages/Onboarding.tsx
@@ -3049,7 +3072,7 @@ msgstr ""
 #. placeholder {0}: formatTimeUntil(routine.nextRunAt)
 #: src/pages/ScheduledTasks.tsx
 msgid "Next run {0}"
-msgstr ""
+msgstr "ทำงานครั้งถัดไป {0}"
 
 #: src/pages/MessagingSettingsOverlay.tsx
 msgid "No agent connections yet."
@@ -3170,7 +3193,7 @@ msgstr ""
 
 #: src/pages/RoutineEditor.tsx
 msgid "No trigger"
-msgstr ""
+msgstr "ไม่มีตัวกระตุ้น"
 
 #: src/pages/ScratchpadSection.tsx
 msgid "None yet"
@@ -3246,6 +3269,10 @@ msgstr ""
 #: src/pages/RoutineSchedule.tsx
 msgid "on the 1st at {0}"
 msgstr ""
+
+#: src/pages/RoutineEditor.tsx
+msgid "One-time"
+msgstr "ครั้งเดียว"
 
 #: src/pages/Shell.tsx
 msgid "Only empty spaces can be deleted. Delete its bots and groups first."
@@ -3411,7 +3438,7 @@ msgstr ""
 #. placeholder {0}: routine.name
 #: src/pages/ScheduledTasks.tsx
 msgid "Pause {0}"
-msgstr ""
+msgstr "หยุด {0} ชั่วคราว"
 
 #: src/pages/RoutineEditor.tsx
 #: src/pages/ScheduledTasks.tsx
@@ -3785,7 +3812,7 @@ msgstr ""
 #. placeholder {0}: routine.name
 #: src/pages/ScheduledTasks.tsx
 msgid "Resume {0}"
-msgstr ""
+msgstr "ทำงาน {0} ต่อ"
 
 #: src/components/AccountAccess.tsx
 #: src/pages/Auth.tsx
@@ -4838,6 +4865,11 @@ msgstr ""
 msgid "Weekdays"
 msgstr ""
 
+#. placeholder {0}: preset.time
+#: src/pages/RoutineEditor.tsx
+msgid "Weekdays at {0}"
+msgstr "วันธรรมดา เวลา {0}"
+
 #: src/pages/shell/dialogs.tsx
 msgid "What about its memories?"
 msgstr ""
@@ -4864,7 +4896,7 @@ msgstr ""
 
 #: src/pages/RoutineEditor.tsx
 msgid "When a webhook fires"
-msgstr ""
+msgstr "เมื่อเว็บฮุกทำงาน"
 
 #: src/pages/RoutineEditor.tsx
 msgid "When to run"

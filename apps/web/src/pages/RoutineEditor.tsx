@@ -6,8 +6,8 @@ import {
   type CronPreset,
   cronFromPreset,
   defaultCronPreset,
-  formatCron,
   isOneShotRoutineCrons,
+  ONCE_ROUTINE_CRON,
   presetFromCron,
 } from "@rakazo/core";
 import {
@@ -137,8 +137,45 @@ export function routineTriggerSummary(routine: Routine): string {
   if (routine.messageProvider === "slack") parts.push(t`Slack message`);
   else if (routine.messageProvider === "teams") parts.push(t`Teams message`);
   else if (routine.messageProvider) parts.push(t`Message event`);
-  for (const cron of routine.crons) parts.push(formatCron(cron));
+  for (const cron of routine.crons) parts.push(summariseCron(cron));
   return parts.length > 0 ? parts.join(" · ") : t`No trigger`;
+}
+
+/**
+ * Describe a cron in the CURRENT UI LANGUAGE.
+ *
+ * WHY NOT `formatCron`: that lives in packages/core and builds its phrase from plain template
+ * literals with no Lingui wiring, so its output never passes through a catalog. A Thai employee
+ * therefore read "Every day at 9:00 AM" on the Scheduled-tasks page — measured on a real account.
+ * Wiring i18n into core would also reach the mobile app, which consumes the same package and
+ * cannot be tested here, so the phrase is composed at this layer instead.
+ *
+ * It reuses core's own `presetFromCron`, which already returns STRUCTURED fields (`freq`, `n`,
+ * `unit`, `time`) rather than a finished sentence — so there is no second cron parser to keep in
+ * step with the first.
+ */
+function summariseCron(cron: string): string {
+  const preset = presetFromCron(cron);
+  switch (preset.freq) {
+    case "Every hour":
+      return t`Every hour`;
+    case "Every day":
+      return t`Every day at ${preset.time}`;
+    case "Weekdays":
+      return t`Weekdays at ${preset.time}`;
+    case "Every week":
+      return t`Every week at ${preset.time}`;
+    case "Every month":
+      return t`Every month at ${preset.time}`;
+    case "Interval": {
+      const unit =
+        preset.unit === "minutes" ? t`minutes` : preset.unit === "hours" ? t`hours` : t`days`;
+      return t`Every ${preset.n} ${unit}`;
+    }
+    default:
+      // "Advanced" / one-shot: a raw cron is language-neutral, so show it rather than English.
+      return cron.trim() === ONCE_ROUTINE_CRON ? t`One-time` : cron.trim();
+  }
 }
 
 export function RoutineListHeader({ onCreate }: { onCreate: () => void }) {

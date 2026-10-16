@@ -1841,6 +1841,7 @@ msgstr "天"
 msgid "Day-to-day work"
 msgstr "日常工作"
 
+#: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "days"
 msgstr "天"
@@ -2153,6 +2154,11 @@ msgstr ""
 msgid "Every"
 msgstr "每"
 
+#. placeholder {0}: preset.n
+#: src/pages/RoutineEditor.tsx
+msgid "Every {0} {unit}"
+msgstr ""
+
 #: src/pages/RoutineSchedule.tsx
 msgid "every {intervalAmountSelect} {intervalUnitSelect}"
 msgstr "每 {intervalAmountSelect} {intervalUnitSelect}"
@@ -2161,6 +2167,11 @@ msgstr "每 {intervalAmountSelect} {intervalUnitSelect}"
 #: src/pages/RoutineSchedule.tsx
 msgid "Every day"
 msgstr "每天"
+
+#. placeholder {0}: preset.time
+#: src/pages/RoutineEditor.tsx
+msgid "Every day at {0}"
+msgstr ""
 
 #: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
@@ -2176,10 +2187,20 @@ msgstr "每周一"
 msgid "Every month"
 msgstr "每月"
 
+#. placeholder {0}: preset.time
+#: src/pages/RoutineEditor.tsx
+msgid "Every month at {0}"
+msgstr ""
+
 #: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "Every week"
 msgstr "每周"
+
+#. placeholder {0}: preset.time
+#: src/pages/RoutineEditor.tsx
+msgid "Every week at {0}"
+msgstr ""
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Executor token"
@@ -2425,6 +2446,7 @@ msgid "hour"
 msgstr "小时"
 
 #: src/pages/ExternalConversationSettings.tsx
+#: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "hours"
 msgstr "小时"
@@ -2882,6 +2904,7 @@ msgstr ""
 msgid "minute"
 msgstr "分钟"
 
+#: src/pages/RoutineEditor.tsx
 #: src/pages/RoutineSchedule.tsx
 msgid "minutes"
 msgstr "分钟"
@@ -3246,6 +3269,10 @@ msgstr "按计划"
 #: src/pages/RoutineSchedule.tsx
 msgid "on the 1st at {0}"
 msgstr "每月 1 日 {0}"
+
+#: src/pages/RoutineEditor.tsx
+msgid "One-time"
+msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Only empty spaces can be deleted. Delete its bots and groups first."
@@ -4837,6 +4864,11 @@ msgstr ""
 #: src/pages/RoutineSchedule.tsx
 msgid "Weekdays"
 msgstr "工作日"
+
+#. placeholder {0}: preset.time
+#: src/pages/RoutineEditor.tsx
+msgid "Weekdays at {0}"
+msgstr ""
 
 #: src/pages/shell/dialogs.tsx
 msgid "What about its memories?"
