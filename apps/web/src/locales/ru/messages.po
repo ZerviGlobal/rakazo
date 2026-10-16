@@ -1561,6 +1561,7 @@ msgstr "Не удалось связаться с сервером модели.
 #: src/lib/user-error.ts
 #: src/pages/AccountSettingsOverlay.tsx
 #: src/pages/Auth.tsx
+#: src/pages/Shell.tsx
 msgid "Could not reach the server"
 msgstr "Не удалось связаться с сервером"
 
@@ -4271,6 +4272,7 @@ msgstr "Обновление программного обеспечения"
 
 #: src/App.tsx
 #: src/lib/user-error.ts
+#: src/pages/Shell.tsx
 msgid "Something went wrong. Try again."
 msgstr "Что-то пошло не так. Попробуйте ещё раз."
 

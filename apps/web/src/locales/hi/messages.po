@@ -1561,6 +1561,7 @@ msgstr "मॉडल सर्वर तक नहीं पहुँच सक�
 #: src/lib/user-error.ts
 #: src/pages/AccountSettingsOverlay.tsx
 #: src/pages/Auth.tsx
+#: src/pages/Shell.tsx
 msgid "Could not reach the server"
 msgstr "सर्वर से संपर्क नहीं हो सका"
 
@@ -4271,6 +4272,7 @@ msgstr ""
 
 #: src/App.tsx
 #: src/lib/user-error.ts
+#: src/pages/Shell.tsx
 msgid "Something went wrong. Try again."
 msgstr "कुछ गलत हो गया। फिर से कोशिश करें।"
 

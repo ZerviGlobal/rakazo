@@ -1561,6 +1561,7 @@ msgstr "Impossible de joindre le serveur du modèle."
 #: src/lib/user-error.ts
 #: src/pages/AccountSettingsOverlay.tsx
 #: src/pages/Auth.tsx
+#: src/pages/Shell.tsx
 msgid "Could not reach the server"
 msgstr "Impossible d'atteindre le serveur"
 
@@ -4271,6 +4272,7 @@ msgstr "Mise à jour logicielle"
 
 #: src/App.tsx
 #: src/lib/user-error.ts
+#: src/pages/Shell.tsx
 msgid "Something went wrong. Try again."
 msgstr "Un problème est survenu. Réessayez."
 

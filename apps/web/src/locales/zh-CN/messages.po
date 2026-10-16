@@ -1561,6 +1561,7 @@ msgstr "无法连接到模型服务器。"
 #: src/lib/user-error.ts
 #: src/pages/AccountSettingsOverlay.tsx
 #: src/pages/Auth.tsx
+#: src/pages/Shell.tsx
 msgid "Could not reach the server"
 msgstr "无法连接服务器"
 
@@ -4271,6 +4272,7 @@ msgstr "软件更新"
 
 #: src/App.tsx
 #: src/lib/user-error.ts
+#: src/pages/Shell.tsx
 msgid "Something went wrong. Try again."
 msgstr "出了点问题。请重试。"
 

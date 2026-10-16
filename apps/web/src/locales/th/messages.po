@@ -1561,6 +1561,7 @@ msgstr ""
 #: src/lib/user-error.ts
 #: src/pages/AccountSettingsOverlay.tsx
 #: src/pages/Auth.tsx
+#: src/pages/Shell.tsx
 msgid "Could not reach the server"
 msgstr "เชื่อมต่อเซิร์ฟเวอร์ไม่ได้"
 
@@ -4271,6 +4272,7 @@ msgstr ""
 
 #: src/App.tsx
 #: src/lib/user-error.ts
+#: src/pages/Shell.tsx
 msgid "Something went wrong. Try again."
 msgstr "เกิดข้อผิดพลาด ลองอีกครั้ง"
 
