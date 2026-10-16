@@ -1295,7 +1295,7 @@ msgstr ""
 
 #: src/pages/ScratchpadSection.tsx
 msgid "Could not add"
-msgstr ""
+msgstr "เพิ่มไม่สำเร็จ"
 
 #: src/pages/McpServersOverlay.tsx
 msgid "Could not add MCP server"
@@ -1331,7 +1331,7 @@ msgstr "ล้างบทสนทนาไม่สำเร็จ"
 
 #: src/components/ComputerUpdateProgress.tsx
 msgid "Could not complete action"
-msgstr ""
+msgstr "ทำรายการไม่สำเร็จ"
 
 #: src/pages/McpOAuthCallback.tsx
 msgid "Could not complete OAuth"
@@ -1344,16 +1344,16 @@ msgstr "อัปเดตไม่สำเร็จ ลองอีกคร�
 #: src/components/integrations/IntegrationSetup.tsx
 #: src/pages/PluginsOverlay.tsx
 msgid "Could not connect"
-msgstr ""
+msgstr "เชื่อมต่อไม่สำเร็จ"
 
 #. placeholder {0}: registration.name
 #: src/pages/MemorySettingsOverlay.tsx
 msgid "Could not connect {0}"
-msgstr ""
+msgstr "เชื่อมต่อ {0} ไม่สำเร็จ"
 
 #: src/pages/ModelSettingsOverlay.tsx
 msgid "Could not connect this provider"
-msgstr ""
+msgstr "เชื่อมต่อผู้ให้บริการรายนี้ไม่สำเร็จ"
 
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Could not connect this voice provider"
@@ -1361,7 +1361,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Could not connect to the computer screen"
-msgstr ""
+msgstr "เชื่อมต่อหน้าจอคอมพิวเตอร์ไม่สำเร็จ"
 
 #: src/components/AccountAccess.tsx
 #: src/lib/account-security.ts
@@ -1370,7 +1370,7 @@ msgstr ""
 #: src/pages/Auth.tsx
 #: src/pages/Shell.tsx
 msgid "Could not continue"
-msgstr ""
+msgstr "ดำเนินการต่อไม่สำเร็จ"
 
 #: src/pages/shell/bot-panel.tsx
 msgid "Could not create bot"
@@ -1378,7 +1378,7 @@ msgstr "สร้างผู้ช่วยไม่สำเร็จ"
 
 #: src/pages/GroupPanel.tsx
 msgid "Could not create group"
-msgstr ""
+msgstr "สร้างกลุ่มไม่สำเร็จ"
 
 #: src/pages/shell/dialogs.tsx
 msgid "Could not create section"
@@ -1386,15 +1386,15 @@ msgstr "สร้างแผนกไม่สำเร็จ"
 
 #: src/pages/shell/dialogs.tsx
 msgid "Could not create space"
-msgstr ""
+msgstr "สร้างพื้นที่ไม่สำเร็จ"
 
 #: src/pages/Onboarding.tsx
 msgid "Could not create your bot"
-msgstr ""
+msgstr "สร้างผู้ช่วยไม่สำเร็จ"
 
 #: src/pages/shell/dialogs.tsx
 msgid "Could not delete bot"
-msgstr ""
+msgstr "ลบผู้ช่วยไม่สำเร็จ"
 
 #: src/pages/shell/dialogs.tsx
 msgid "Could not delete department"
@@ -1422,7 +1422,7 @@ msgstr "ลบพื้นที่ไม่สำเร็จ"
 
 #: src/pages/Artifacts.tsx
 msgid "Could not delete this artifact."
-msgstr ""
+msgstr "ลบเอกสารนี้ไม่สำเร็จ"
 
 #: src/pages/MemorySettingsOverlay.tsx
 msgid "Could not disconnect memory provider"
@@ -1451,15 +1451,15 @@ msgstr ""
 #. placeholder {0}: props.name
 #: src/components/ArtifactFileCard.tsx
 msgid "Could not download {0}. Try again."
-msgstr ""
+msgstr "ดาวน์โหลด {0} ไม่สำเร็จ ลองอีกครั้ง"
 
 #: src/components/ArtifactFileCard.tsx
 msgid "Could not download {name}. Try again."
-msgstr ""
+msgstr "ดาวน์โหลด {name} ไม่สำเร็จ ลองอีกครั้ง"
 
 #: src/components/computer/FilesApp.tsx
 msgid "Could not download file"
-msgstr ""
+msgstr "ดาวน์โหลดไฟล์ไม่สำเร็จ"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Could not install connector"
@@ -1467,16 +1467,16 @@ msgstr ""
 
 #: src/components/computer/FilesApp.tsx
 msgid "Could not list files"
-msgstr ""
+msgstr "แสดงรายการไฟล์ไม่สำเร็จ"
 
 #: src/components/ErrorBoundary.tsx
 #: src/pages/KnowledgeSection.tsx
 msgid "Could not load"
-msgstr ""
+msgstr "โหลดไม่สำเร็จ"
 
 #: src/pages/ActivityList.tsx
 msgid "Could not load activity"
-msgstr ""
+msgstr "โหลดกิจกรรมไม่สำเร็จ"
 
 #: src/components/ApprovalRulesSettings.tsx
 msgid "Could not load approval rules"
@@ -1484,7 +1484,7 @@ msgstr ""
 
 #: src/pages/Artifacts.tsx
 msgid "Could not load artifacts."
-msgstr ""
+msgstr "โหลดเอกสารไม่สำเร็จ"
 
 #: src/pages/ModelBackupsSettings.tsx
 msgid "Could not load backup models"
@@ -1496,11 +1496,11 @@ msgstr ""
 
 #: src/pages/IntegrationSetup.tsx
 msgid "Could not load bots. Reload to try again."
-msgstr ""
+msgstr "โหลดรายชื่อผู้ช่วยไม่สำเร็จ กรุณาโหลดหน้าใหม่"
 
 #: src/components/computer/TerminalApp.tsx
 msgid "Could not load commands"
-msgstr ""
+msgstr "โหลดคำสั่งไม่สำเร็จ"
 
 #: src/pages/shell/bot-credentials.tsx
 msgid "Could not load credentials."
@@ -1521,12 +1521,12 @@ msgstr ""
 
 #: src/pages/RoutineRunHistory.tsx
 msgid "Could not load run history"
-msgstr ""
+msgstr "โหลดประวัติการทำงานไม่สำเร็จ"
 
 #: src/lib/account-security.ts
 #: src/pages/Auth.tsx
 msgid "Could not load sign-in options"
-msgstr ""
+msgstr "โหลดตัวเลือกการเข้าสู่ระบบไม่สำเร็จ"
 
 #: src/pages/KnowledgeSection.tsx
 msgid "Could not load skill"
@@ -1534,15 +1534,15 @@ msgstr ""
 
 #: src/pages/Artifacts.tsx
 msgid "Could not load this artifact."
-msgstr ""
+msgstr "โหลดเอกสารนี้ไม่สำเร็จ"
 
 #: src/pages/PeerMessagesOverlay.tsx
 msgid "Could not load this chat."
-msgstr ""
+msgstr "โหลดบทสนทนานี้ไม่สำเร็จ"
 
 #: src/components/ArtifactFileCard.tsx
 msgid "Could not load this file."
-msgstr ""
+msgstr "โหลดไฟล์นี้ไม่สำเร็จ"
 
 #: src/components/SoftwareUpdateSection.tsx
 msgid "Could not load update status"
@@ -1559,7 +1559,7 @@ msgstr ""
 
 #: src/components/computer/FilesApp.tsx
 msgid "Could not open file"
-msgstr ""
+msgstr "เปิดไฟล์ไม่สำเร็จ"
 
 #: src/pages/LocalSettings.tsx
 msgid "Could not open local settings. Start the local server and create its owner account, then try again."
@@ -1567,7 +1567,7 @@ msgstr ""
 
 #: src/components/computer/TerminalApp.tsx
 msgid "Could not open terminal"
-msgstr ""
+msgstr "เปิดเทอร์มินัลไม่สำเร็จ"
 
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Could not play a test clip"
@@ -1575,7 +1575,7 @@ msgstr ""
 
 #: src/lib/model-connection-preflight.ts
 msgid "Could not reach the model server."
-msgstr ""
+msgstr "เชื่อมต่อเซิร์ฟเวอร์โมเดลไม่ได้"
 
 #: src/lib/computer-sandbox.ts
 #: src/lib/user-error.ts
@@ -1587,7 +1587,7 @@ msgstr "เชื่อมต่อเซิร์ฟเวอร์ไม่ไ
 
 #: src/pages/ScratchpadSection.tsx
 msgid "Could not remove"
-msgstr ""
+msgstr "ลบไม่สำเร็จ"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Could not remove connector"
@@ -1603,7 +1603,7 @@ msgstr "ลบคีย์ไม่สำเร็จ"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Could not rename connection"
-msgstr ""
+msgstr "เปลี่ยนชื่อการเชื่อมต่อไม่สำเร็จ"
 
 #: src/pages/shell/dialogs.tsx
 msgid "Could not rename section"
@@ -1611,15 +1611,15 @@ msgstr "เปลี่ยนชื่อแผนกไม่สำเร็จ
 
 #: src/pages/shell/dialogs.tsx
 msgid "Could not rename space"
-msgstr ""
+msgstr "เปลี่ยนชื่อพื้นที่ไม่สำเร็จ"
 
 #: src/pages/shell/message-cards.tsx
 msgid "Could not render chart"
-msgstr ""
+msgstr "แสดงแผนภูมิไม่สำเร็จ"
 
 #: src/pages/Auth.tsx
 msgid "Could not reset password"
-msgstr ""
+msgstr "รีเซ็ตรหัสผ่านไม่สำเร็จ"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Could not revoke connection"
@@ -1627,13 +1627,13 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Could not run routine"
-msgstr ""
+msgstr "รันงานตามกำหนดการไม่สำเร็จ"
 
 #: src/pages/ExternalConversationSettings.tsx
 #: src/pages/KnowledgeSection.tsx
 #: src/pages/shell/bot-panel.tsx
 msgid "Could not save"
-msgstr ""
+msgstr "บันทึกไม่สำเร็จ"
 
 #: src/components/ApprovalRulesSettings.tsx
 msgid "Could not save Auto Review"
@@ -1645,7 +1645,7 @@ msgstr ""
 
 #: src/pages/GroupPanel.tsx
 msgid "Could not save group"
-msgstr ""
+msgstr "บันทึกกลุ่มไม่สำเร็จ"
 
 #: src/pages/Onboarding.tsx
 msgid "Could not save model"
@@ -1653,7 +1653,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Could not save routine"
-msgstr ""
+msgstr "บันทึกงานตามกำหนดการไม่สำเร็จ"
 
 #: src/components/ApprovalRulesSettings.tsx
 msgid "Could not save rule"
@@ -1665,7 +1665,7 @@ msgstr ""
 
 #: src/pages/HostComputerPrompt.tsx
 msgid "Could not save that choice"
-msgstr ""
+msgstr "บันทึกตัวเลือกนั้นไม่สำเร็จ"
 
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Could not save that speech model"
@@ -1681,7 +1681,7 @@ msgstr "บันทึกคีย์ไม่สำเร็จ"
 
 #: src/pages/shell/message-cards.tsx
 msgid "Could not save this choice"
-msgstr ""
+msgstr "บันทึกตัวเลือกนี้ไม่สำเร็จ"
 
 #: src/pages/PluginsOverlay.tsx
 msgid "Could not search catalog"
@@ -1693,7 +1693,7 @@ msgstr ""
 
 #: src/lib/call-session.ts
 msgid "Could not send that"
-msgstr ""
+msgstr "ส่งไม่สำเร็จ"
 
 #: src/pages/McpServersOverlay.tsx
 msgid "Could not start OAuth"
@@ -1705,15 +1705,15 @@ msgstr ""
 
 #: src/components/AskCard.tsx
 msgid "Could not submit this answer"
-msgstr ""
+msgstr "ส่งคำตอบไม่สำเร็จ"
 
 #: src/pages/Shell.tsx
 msgid "Could not take control"
-msgstr ""
+msgstr "เข้าควบคุมไม่สำเร็จ"
 
 #: src/pages/ScratchpadSection.tsx
 msgid "Could not update"
-msgstr ""
+msgstr "อัปเดตไม่สำเร็จ"
 
 #: src/pages/McpServersOverlay.tsx
 msgid "Could not update agent access"
@@ -1725,7 +1725,7 @@ msgstr ""
 
 #: src/pages/Shell.tsx
 msgid "Could not update reaction"
-msgstr ""
+msgstr "อัปเดตปฏิกิริยาไม่สำเร็จ"
 
 #: src/pages/MemorySettingsOverlay.tsx
 msgid "Could not update the default memory scope"
@@ -1733,7 +1733,7 @@ msgstr ""
 
 #: src/components/computer/FilesApp.tsx
 msgid "Could not upload file"
-msgstr ""
+msgstr "อัปโหลดไฟล์ไม่สำเร็จ"
 
 #: src/components/ComputersUnavailableHint.tsx
 msgid "Could not verify computer setup ({failureMessage}). Fix the connection, then check again."
