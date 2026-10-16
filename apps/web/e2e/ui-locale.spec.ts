@@ -126,3 +126,36 @@ test("account settings language picker includes French and persists it", async (
   await expect(page.locator("html")).toHaveAttribute("lang", "fr");
   await captureScreenshot(page, testInfo, "ui-locale-settings-fr");
 });
+
+// Thai follows the same pattern as the locales above. It was the ONE locale the Zervi work added
+// and the only one without a spec, so the path an employee actually uses to switch language —
+// Settings -> Language -> picker -> reload — was untested for it.
+//
+// Thai matters more than the others here: the staff this is for are in Chonburi, and the app has
+// no server-side locale, so this picker (or the browser language) is the only way they get Thai.
+test("account settings language picker includes Thai and persists it", async ({ page }, testInfo) => {
+  const stamp = Date.now();
+  await signup(page, `ui-locale-th-${stamp}@rakazo.test`, "password12", "Locale QA");
+  await completeOnboarding(page, testInfo);
+
+  await page.getByTestId("user-menu-trigger").click();
+  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  const settings = page.getByTestId("user-settings");
+  await expect(settings).toBeVisible();
+
+  const picker = settings.getByTestId("ui-locale-select");
+  await picker.click();
+  await expect(settings.getByRole("option", { name: "ไทย", exact: true })).toBeVisible();
+  await captureScreenshot(page, testInfo, "ui-locale-picker-th");
+
+  await settings.getByRole("option", { name: "ไทย", exact: true }).click();
+  // "ทั่วไป" is Thai for "General" — the Settings heading, so this proves Thai actually rendered
+  // rather than merely being selected.
+  await expect(settings.getByRole("heading", { name: "ทั่วไป", exact: true })).toBeVisible();
+  await expect(picker).toHaveText("ไทย");
+  await expect(page.locator("html")).toHaveAttribute("lang", "th");
+  await expect(page.locator("html")).toHaveAttribute("dir", "ltr");
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("lang", "th");
+  await captureScreenshot(page, testInfo, "ui-locale-settings-th");
+});
