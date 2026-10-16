@@ -99,6 +99,7 @@ const RESTART_GIVE_UP_ERROR =
 /** Web Speech wants a BCP-47 tag; the app's UI locale is a short code. */
 const SPEECH_LOCALE_TAGS: Record<UiLocale, string> = {
   en: "en-US",
+  th: "th-TH",
   de: "de-DE",
   es: "es-ES",
   fr: "fr-FR",

@@ -1,5 +1,6 @@
 export const UI_LOCALES = [
   "en",
+  "th",
   "de",
   "ko",
   "tr",
@@ -17,6 +18,8 @@ export const UI_LOCALE_STORAGE_KEY = "rakazo.uiLocale";
 
 export const UI_LOCALE_LABELS: Record<UiLocale, string> = {
   en: "English",
+  // Each locale labels itself in its own script; Thai follows that rule.
+  th: "ไทย",
   de: "Deutsch",
   ko: "한국어",
   tr: "Türkçe",
@@ -32,6 +35,7 @@ export const UI_LOCALE_LABELS: Record<UiLocale, string> = {
 export function isUiLocale(value: string | null | undefined): value is UiLocale {
   return (
     value === "en" ||
+    value === "th" ||
     value === "de" ||
     value === "ko" ||
     value === "tr" ||
@@ -50,6 +54,8 @@ export function normalizeUiLocale(raw: string | null | undefined): UiLocale {
   const normalized = raw.trim().toLowerCase().replace(/_/g, "-");
   if (normalized === "pt" || normalized.startsWith("pt-")) return "pt-BR";
   if (normalized === "es" || normalized.startsWith("es-")) return "es";
+  // Thai has no product-relevant regional split: th and th-TH both mean Thai.
+  if (normalized === "th" || normalized.startsWith("th-")) return "th";
   // Simplified Chinese only. Do not fold zh-TW / zh-HK / zh-Hant into zh-CN.
   if (
     normalized === "zh" ||

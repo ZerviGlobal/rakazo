@@ -42,6 +42,7 @@ describe("activateUiLocale", () => {
   it("falls back to English when the preferred catalog fails to load", async () => {
     setCatalogLoadersForTests({
       en: async () => ({ messages: { Settings: "Settings" } }),
+      th: async () => ({ messages: { Settings: "ตั้งค่า" } }),
       de: async () => {
         throw new Error("de catalog missing");
       },
@@ -66,6 +67,9 @@ describe("activateUiLocale", () => {
     setCatalogLoadersForTests({
       en: async () => {
         throw new Error("en missing");
+      },
+      th: async () => {
+        throw new Error("th missing");
       },
       de: async () => {
         throw new Error("de missing");
@@ -109,6 +113,7 @@ describe("activateUiLocale", () => {
 
     setCatalogLoadersForTests({
       en: async () => ({ messages: { Settings: "Settings" } }),
+      th: async () => ({ messages: { Settings: "ตั้งค่า" } }),
       de: async () => dePromise,
       ko: async () => ({ messages: { Settings: "설정" } }),
       tr: async () => ({ messages: { Settings: "Ayarlar" } }),
@@ -138,6 +143,7 @@ describe("activateUiLocale", () => {
 
     setCatalogLoadersForTests({
       en: async () => ({ messages: { Settings: "Settings" } }),
+      th: async () => ({ messages: { Settings: "ตั้งค่า" } }),
       de: async () => dePromise,
       ko: async () => ({ messages: { Settings: "설정" } }),
       tr: async () => ({ messages: { Settings: "Ayarlar" } }),
@@ -172,6 +178,7 @@ describe("activateUiLocale", () => {
 
     setCatalogLoadersForTests({
       en: async () => ({ messages: { Settings: "Settings" } }),
+      th: async () => ({ messages: { Settings: "ตั้งค่า" } }),
       de: async () => dePromise,
       ko: async () => ({ messages: { Settings: "설정" } }),
       tr: async () => ({ messages: { Settings: "Ayarlar" } }),
