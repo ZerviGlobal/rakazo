@@ -2032,7 +2032,7 @@ msgstr "เอกสาร"
 
 #: src/pages/Auth.tsx
 msgid "Don’t have an account?"
-msgstr ""
+msgstr "ยังไม่มีบัญชี?"
 
 #: src/lib/ticket-status.ts
 #: src/pages/ActivityList.tsx
