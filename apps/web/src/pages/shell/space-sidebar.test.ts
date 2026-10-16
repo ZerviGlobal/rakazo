@@ -1,14 +1,16 @@
 import { describe, expect, it, vi } from "vitest";
 import { commitSpaceRename, sidebarGroupsForSpaces } from "./space-sidebar";
 
-function chat(id: string, name: string) {
+// `sectionId` is widened deliberately: the fixture returns null by default, but tests also
+// build bots that belong to a section, and an inferred literal `null` rejects that.
+function chat(id: string, name: string, sectionId: string | null = null) {
   return {
     id,
     name,
     title: "",
     preview: "",
     pinned: false,
-    sectionId: null,
+    sectionId,
     parentBotId: null,
   };
 }
@@ -97,5 +99,58 @@ describe("commitSpaceRename", () => {
     ).rejects.toThrow("Space deletion is already in progress");
     expect(apply).not.toHaveBeenCalled();
     expect(refresh).not.toHaveBeenCalled();
+  });
+});
+
+describe("empty departments", () => {
+  // Measured on the live deployment: creating three departments showed only two, because the
+  // grouping helper drops sections with no members. With no row there is nothing to rename or
+  // delete, so a department made on a phone appeared to vanish — which reads as "the button
+  // failed". It must render even while empty.
+  function spaceWithSections(sections: { id: string; name: string }[], bots = [chat("b1", "Chief")]) {
+    return { ...space("space-1", "Personal", { bots }), botSections: sections };
+  }
+
+  it("renders a department that has no members yet", () => {
+    const groups = sidebarGroupsForSpaces(
+      [spaceWithSections([{ id: "sec-1", name: "ฝ่ายขาย" }])],
+      "",
+    );
+    const section = groups.find((group) => group.title === "ฝ่ายขาย");
+    expect(section).toBeDefined();
+    expect(section).toMatchObject({ sectionId: "sec-1" });
+    expect(section?.bots).toEqual([]);
+    // The unassigned bot still has its own group; that is correct and comes first.
+    expect(groups.map((group) => group.title)).toEqual(["Unassigned", "ฝ่ายขาย"]);
+  });
+
+  it("does not duplicate a department that already has members", () => {
+    const assigned = chat("b1", "Chief", "sec-1");
+    const groups = sidebarGroupsForSpaces(
+      [spaceWithSections([{ id: "sec-1", name: "ฝ่ายขาย" }], [assigned])],
+      "",
+    );
+    expect(groups.filter((group) => group.title === "ฝ่ายขาย")).toHaveLength(1);
+    expect(groups.find((group) => group.title === "ฝ่ายขาย")?.bots).toHaveLength(1);
+  });
+
+  it("keeps every empty department, in section order", () => {
+    const groups = sidebarGroupsForSpaces(
+      [
+        spaceWithSections([
+          { id: "s1", name: "ฝ่ายขาย" },
+          { id: "s2", name: "ฝ่ายผลิต" },
+          { id: "s3", name: "ฝ่ายบัญชี" },
+        ]),
+      ],
+      "",
+    );
+    // "Unassigned" leads because the fixture's bot belongs to no section.
+    expect(groups.map((group) => group.title)).toEqual([
+      "Unassigned",
+      "ฝ่ายขาย",
+      "ฝ่ายผลิต",
+      "ฝ่ายบัญชี",
+    ]);
   });
 });

@@ -50,19 +50,44 @@ export function sidebarGroupsForSpaces<TBot extends SidebarChat, TGroup extends 
     const visibleGroups = space.groups.filter((group) =>
       `${group.name} ${group.preview ?? ""}`.toLowerCase().includes(needle),
     );
-    const sections = groupBotsForSidebar(
-      [
-        ...visibleBots.map((chat) => ({ kind: "bot" as const, chat })),
-        ...visibleGroups.map((chat) => ({ kind: "group" as const, chat })),
-      ].map((item) => ({
-        ...item,
-        id: item.chat.id,
-        parentBotId: item.kind === "bot" ? (item.chat.parentBotId ?? null) : null,
-        pinned: item.chat.pinned,
-        sectionId: item.chat.sectionId,
-      })),
-      space.botSections,
-    ).map((group, index) => ({
+    // Roster rows for this space, with the fields the grouping needs.
+    const rows = [
+      ...visibleBots.map((chat) => ({ kind: "bot" as const, chat })),
+      ...visibleGroups.map((chat) => ({ kind: "group" as const, chat })),
+    ].map((item) => ({
+      ...item,
+      id: item.chat.id,
+      parentBotId: item.kind === "bot" ? (item.chat.parentBotId ?? null) : null,
+      pinned: item.chat.pinned,
+      sectionId: item.chat.sectionId,
+    }));
+
+    /*
+     * An EMPTY department must still render, or it becomes unreachable.
+     *
+     * `groupBotsForSidebar` drops sections with no members. It is shared with the mobile app,
+     * so this is compensated here rather than there. Measured on the live deployment: creating
+     * three departments showed only two, because the empty one produced no group — and with no
+     * row there is no way to rename or delete it. A department created on a phone therefore
+     * appeared to vanish, which reads as "the button failed".
+     *
+     * Typed off `rows` so the concat stays homogeneous: an empty `bots: []` alone infers as
+     * never[] and widens the array to a union, which fails the map below.
+     */
+    const emptySections = space.botSections
+      .filter((section) => !visibleBots.some((bot) => bot.sectionId === section.id))
+      .filter((group) => !visibleGroups.some((g) => g.sectionId === group.id))
+      .map(
+        (section): { key: string; title: string; bots: typeof rows } => ({
+          key: `section:${section.id}`,
+          title: section.name,
+          bots: [],
+        }),
+      );
+
+    const sections = groupBotsForSidebar(rows, space.botSections)
+      .concat(emptySections)
+      .map((group, index) => ({
       ...group,
       sectionId: group.key.startsWith("section:") ? group.key.slice("section:".length) : null,
       key: showSpaceNames ? `space:${space.id}:${group.key}` : group.key,
