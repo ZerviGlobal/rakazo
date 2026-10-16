@@ -130,6 +130,22 @@ import { mountWebhookHttpRoutes } from "./webhook.js";
  * exp:// origin is trusted: it would accept any Expo host as a redirect target.
  * The loopback entries are the Expo web dev server.
  */
+/**
+ * Browser origins to trust in addition to WEB_ORIGIN/BETTER_AUTH_URL, from
+ * `EXTRA_TRUSTED_ORIGINS` (comma-separated).
+ *
+ * WHY THIS EXISTS: the trusted list was built only from `webOrigin`/`baseUrl` plus the hardcoded
+ * mobile entries, so putting the app behind a reverse proxy on a different hostname was REJECTED —
+ * measured: `Origin: http://rakazo.zervi.local` returned 403 with no ACAO header. Exposing an
+ * internal service to staff therefore required a CODE change. This makes it configuration.
+ */
+export function splitOrigins(raw: string | undefined): string[] {
+  return (raw ?? "")
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean);
+}
+
 export const MOBILE_AUTH_ORIGINS = [
   "rakazo://",
   "http://localhost:8081",
@@ -405,7 +421,7 @@ export async function createApp(
     signupAllowlist: env.signupAllowlist,
     email,
     onEmailError: (error) => getLogger().error("transactional email delivery failed", error),
-    extraOrigins: MOBILE_AUTH_ORIGINS,
+    extraOrigins: [...MOBILE_AUTH_ORIGINS, ...splitOrigins(env.extraOrigins)],
     beforeDeleteUser: async (userId) => {
       // First, so a provider failure aborts deletion before anything is destroyed.
       await billing?.cancelForDeletedUser(userId);
@@ -1075,12 +1091,12 @@ export async function createApp(
 
 export function isTrustedOrigin(
   origin: string,
-  env: Pick<AppEnv, "webOrigin" | "apiUrl" | "authUrl">,
+  env: Pick<AppEnv, "webOrigin" | "apiUrl" | "authUrl" | "extraOrigins">,
 ) {
   if (!origin) return true;
   if (origin.startsWith("rakazo://")) return true;
   const allowed = new Set(
-    [env.webOrigin, env.apiUrl, env.authUrl, ...MOBILE_AUTH_ORIGINS].flatMap(originVariants),
+    [env.webOrigin, env.apiUrl, env.authUrl, ...MOBILE_AUTH_ORIGINS, ...splitOrigins(env.extraOrigins)].flatMap(originVariants),
   );
   return allowed.has(origin);
 }

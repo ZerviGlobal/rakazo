@@ -82,3 +82,32 @@ describe("mobile auth origins", () => {
     }
   });
 });
+
+describe("EXTRA_TRUSTED_ORIGINS — needed to expose the app behind a proxy", () => {
+  const base = {
+    webOrigin: "http://100.74.72.109:5173",
+    apiUrl: "http://100.74.72.109:5173",
+    authUrl: "http://100.74.72.109:5173",
+  };
+
+  it("REJECTS an unconfigured hostname, so trust is never widened by accident", () => {
+    // Measured against the live deployment: `Origin: http://rakazo.zervi.local` returned 403 with no
+    // ACAO header. That is the correct default — a reverse proxy hostname is not trusted until named.
+    expect(isTrustedOrigin("http://rakazo.zervi.local", base)).toBe(false);
+    expect(isTrustedOrigin("https://rakazo.zervi.local", base)).toBe(false);
+  });
+
+  it("ACCEPTS it once named in EXTRA_TRUSTED_ORIGINS", () => {
+    // This is the rollout case: the app behind a TLS proxy on its own hostname. Before this the list
+    // came only from webOrigin/baseUrl plus hardcoded mobile entries, so exposing the app to staff
+    // required a CODE change rather than configuration.
+    const env = { ...base, extraOrigins: "https://rakazo.zervi.local" };
+    expect(isTrustedOrigin("https://rakazo.zervi.local", env)).toBe(true);
+  });
+
+  it("still rejects a DIFFERENT hostname when one is configured", () => {
+    const env = { ...base, extraOrigins: "https://rakazo.zervi.local" };
+    expect(isTrustedOrigin("https://evil.example", env)).toBe(false);
+    expect(isTrustedOrigin("http://rakazo.zervi.local", env)).toBe(false); // scheme must match
+  });
+});

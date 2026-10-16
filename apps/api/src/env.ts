@@ -26,6 +26,8 @@ export interface AppEnv {
   webOrigin: string;
   /** Comma-separated CIDRs of proxy hops in front of this API (see AUTH_TRUSTED_PROXIES). */
   authTrustedProxies?: string;
+  /** Comma-separated extra browser origins to trust (a reverse proxy's hostname, a LAN host). */
+  extraOrigins?: string;
   privacyPolicyUrl?: string;
   apiUrl: string;
   apiHost: string;
@@ -170,6 +172,7 @@ export function loadEnv(source: NodeJS.ProcessEnv = process.env): AppEnv {
     // Proxy hop(s) in front of this API. Enables per-client sign-in rate-limit buckets instead of
     // one shared bucket for the whole deployment. See trustedProxyCidrs in @rakazo/auth.
     authTrustedProxies: optional(source.AUTH_TRUSTED_PROXIES),
+    extraOrigins: optional(source.EXTRA_TRUSTED_ORIGINS),
     privacyPolicyUrl: optional(source.PRIVACY_POLICY_URL),
     apiUrl: source.API_URL ?? "http://127.0.0.1:3100",
     apiHost: source.API_HOST ?? "127.0.0.1",
