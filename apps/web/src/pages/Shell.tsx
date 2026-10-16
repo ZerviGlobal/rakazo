@@ -352,6 +352,32 @@ const COMPOSER_ONE_LINE_GAP_PX = 14;
 /** Narrower than the expand check so a draft at the edge cannot flip. */
 const COMPOSER_COLLAPSE_SLACK_PX = 16;
 
+/** Titles `groupBotsForSidebar` synthesises, which arrive as English literals from `@rakazo/core`.
+ * The shared helper builds "Pinned" and "Unassigned" for the web AND mobile apps, so the strings
+ * cannot be translated there without wiring Lingui into a package mobile also consumes — and an
+ * employee was reading them in English.
+ *
+ * The labels are looked up HERE as literals, so `intl:extract` sees them. Calling `t` on a value
+ * passed in as an argument does NOT extract (verified: a macro over a dynamic tail left no msgid,
+ * and `Unassigned` in the catalog came from an unrelated file). A department's own name is user
+ * data and passes through untouched, even if it happens to read "Pinned". */
+const SIDEBAR_GROUP_TITLE_KEYS = {
+  Pinned: () => t`Pinned`,
+  Unassigned: () => t`Unassigned`,
+} as const;
+
+function sidebarGroupTitle(group: { title: string | null; sectionId: string | null }): string | null {
+  if (!group.title) return group.title;
+  if (group.sectionId) return group.title;
+  // A space-prefixed title reads "Space · Pinned", so translate only the synthesised half.
+  const separator = " · ";
+  const at = group.title.lastIndexOf(separator);
+  const head = at > 0 ? group.title.slice(0, at) + separator : "";
+  const tail = at > 0 ? group.title.slice(at + separator.length) : group.title;
+  const label = SIDEBAR_GROUP_TITLE_KEYS[tail as keyof typeof SIDEBAR_GROUP_TITLE_KEYS];
+  return label ? head + label() : group.title;
+}
+
 function threadSnapshotSignal(parent: AbortSignal): AbortSignal {
   return AbortSignal.any([parent, AbortSignal.timeout(THREAD_SNAPSHOT_TIMEOUT_MS)]);
 }
@@ -3064,7 +3090,7 @@ export function ShellPage() {
                               {group.showLock ? (
                                 <Lock size={11} strokeWidth={2} aria-hidden="true" />
                               ) : null}
-                              <span className="truncate">{group.title}</span>
+                              <span className="truncate">{sidebarGroupTitle(group)}</span>
                             </span>
                             {group.emptySpaceId ? null : (
                               <ChevronDown

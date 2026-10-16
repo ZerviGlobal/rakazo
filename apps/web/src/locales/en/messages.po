@@ -3462,6 +3462,10 @@ msgstr "Pick a model from the list or enter a model id served by this endpoint."
 msgid "Pin"
 msgstr "Pin"
 
+#: src/pages/Shell.tsx
+msgid "Pinned"
+msgstr "Pinned"
+
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Playing…"
 msgstr "Playing…"
@@ -4647,6 +4651,7 @@ msgid "Type your answer"
 msgstr "Type your answer"
 
 #: src/pages/BotContextMenu.tsx
+#: src/pages/Shell.tsx
 msgid "Unassigned"
 msgstr "Unassigned"
 

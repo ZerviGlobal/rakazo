@@ -3462,6 +3462,10 @@ msgstr "请从列表中选择模型，或输入此端点提供的模型 ID。"
 msgid "Pin"
 msgstr "置顶"
 
+#: src/pages/Shell.tsx
+msgid "Pinned"
+msgstr ""
+
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Playing…"
 msgstr "播放中…"
@@ -4647,6 +4651,7 @@ msgid "Type your answer"
 msgstr "输入你的回答"
 
 #: src/pages/BotContextMenu.tsx
+#: src/pages/Shell.tsx
 msgid "Unassigned"
 msgstr "未分配"
 

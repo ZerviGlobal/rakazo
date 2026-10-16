@@ -3462,6 +3462,10 @@ msgstr "सूची से एक मॉडल चुनें या इस �
 msgid "Pin"
 msgstr "पिन करें"
 
+#: src/pages/Shell.tsx
+msgid "Pinned"
+msgstr ""
+
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Playing…"
 msgstr "प्ले हो रहा है…"
@@ -4647,6 +4651,7 @@ msgid "Type your answer"
 msgstr "अपना उत्तर लिखें"
 
 #: src/pages/BotContextMenu.tsx
+#: src/pages/Shell.tsx
 msgid "Unassigned"
 msgstr "असाइन नहीं किया गया"
 

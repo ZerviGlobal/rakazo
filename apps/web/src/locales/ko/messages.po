@@ -3462,6 +3462,10 @@ msgstr "목록에서 모델을 선택하거나 이 엔드포인트가 제공하�
 msgid "Pin"
 msgstr "고정"
 
+#: src/pages/Shell.tsx
+msgid "Pinned"
+msgstr ""
+
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Playing…"
 msgstr "재생 중…"
@@ -4647,6 +4651,7 @@ msgid "Type your answer"
 msgstr "답변을 입력하세요"
 
 #: src/pages/BotContextMenu.tsx
+#: src/pages/Shell.tsx
 msgid "Unassigned"
 msgstr "섹션 없음"
 

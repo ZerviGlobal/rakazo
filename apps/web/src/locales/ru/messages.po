@@ -3462,6 +3462,10 @@ msgstr "Выберите модель из списка или введите id
 msgid "Pin"
 msgstr "Закрепить"
 
+#: src/pages/Shell.tsx
+msgid "Pinned"
+msgstr ""
+
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Playing…"
 msgstr "Воспроизведение…"
@@ -4647,6 +4651,7 @@ msgid "Type your answer"
 msgstr "Введите ответ"
 
 #: src/pages/BotContextMenu.tsx
+#: src/pages/Shell.tsx
 msgid "Unassigned"
 msgstr "Без раздела"
 

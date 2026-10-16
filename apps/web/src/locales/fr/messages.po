@@ -3462,6 +3462,10 @@ msgstr "Choisissez un modèle dans la liste ou saisissez un identifiant de modè
 msgid "Pin"
 msgstr "Épingler"
 
+#: src/pages/Shell.tsx
+msgid "Pinned"
+msgstr ""
+
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Playing…"
 msgstr "Lecture en cours…"
@@ -4647,6 +4651,7 @@ msgid "Type your answer"
 msgstr "Saisissez votre réponse"
 
 #: src/pages/BotContextMenu.tsx
+#: src/pages/Shell.tsx
 msgid "Unassigned"
 msgstr "Non assigné"
 

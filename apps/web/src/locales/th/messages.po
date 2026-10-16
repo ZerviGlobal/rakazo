@@ -3462,6 +3462,10 @@ msgstr ""
 msgid "Pin"
 msgstr ""
 
+#: src/pages/Shell.tsx
+msgid "Pinned"
+msgstr "ปักหมุด"
+
 #: src/pages/VoiceSettingsOverlay.tsx
 msgid "Playing…"
 msgstr ""
@@ -4647,8 +4651,9 @@ msgid "Type your answer"
 msgstr ""
 
 #: src/pages/BotContextMenu.tsx
+#: src/pages/Shell.tsx
 msgid "Unassigned"
-msgstr ""
+msgstr "ยังไม่สังกัดฝ่าย"
 
 #: src/components/SoftwareUpdateSection.tsx
 msgid "Unavailable"
