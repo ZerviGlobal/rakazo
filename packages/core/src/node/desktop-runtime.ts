@@ -101,7 +101,12 @@ function browserRunningFunction(profile: string, pidFile: string) {
     // Match the configured flag in either NUL-separated argv or Chromium's one-line
     // setproctitle. Searching for the whole flag keeps spaces and " --" inside the path.
     "  cmdline_text() {",
-    "    tr '\\0' '\\n' <\"/proc/$1/cmdline\" 2>/dev/null || true",
+    // stderr is redirected BEFORE the input redirect on purpose. Bash applies redirections left to
+    // right, so `tr ... <"/proc/$1/cmdline" 2>/dev/null` still prints
+    // "bash: line N: /proc/<pid>/cmdline: No such file or directory" when the process has exited —
+    // 2>/dev/null comes too late to catch the failed input redirect. That leaked a scary shell error
+    // into quiesce output (and into a test's stderr assertion) every time a browser had already gone.
+    "    tr '\\0' '\\n' 2>/dev/null <\"/proc/$1/cmdline\" || true",
     "  }",
     "  has_arg() {",
     '    text=$(cmdline_text "$1")',
