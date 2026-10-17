@@ -2,6 +2,26 @@
 
 One line per task: date, what changed, where. Newest first.
 
+2026-10-17  Rakazo vs LobeHub drawn from both live systems                         Zak
+            Archie asked how this app works compared to our Lobe agents. Answer: not the same product at
+            different maturity, different SHAPES. Rakazo = agent WORKSPACE (each assistant has a Linux
+            computer and ONE thread); LobeHub = agent PLATFORM (211 agents, 280 topics, tools as
+            configuration, no computer at all). Lobe answers questions; Rakazo does jobs.
+            Pushed docs/zervi/diagrams/rakazo-vs-lobehub.{html,json}, commit 85833913.
+            THREE CORRECTIONS, all caught by querying instead of assuming:
+              (1) TWO LobeHub databases exist — zervi-lobe-postgres17 is live (211 agents, updated
+                  today); zervi-lobe-postgres is a stale 99-agent August snapshot. I nearly compared
+                  against the dead one.
+              (2) plugins is jsonb, not an array — array_length() errored, so my first "167 with
+                  plugins" came from a different, lucky query. Redid it properly: 167 with, 44 without.
+              (3) user_memory_persona_documents is EMPTY (0 rows). I had listed persona documents as a
+                  live memory feature; they are schema that is unused. Corrected in html AND json.
+            Verified counts: 211 agents / 167 plugins / 44 none / agentMode 165 on, 3 off, 43 absent;
+            89 KBs, 559 agent-KB links, 280 topics (max 42 on one agent). Rakazo: 8 assistants, 3 users.
+            Rendered and looked at — 0 label collisions, no overflow.
+            The comparison also sharpened the shared-assistant work: LobeHub has had workspace_id +
+            visibility + groups all along, which is exactly the axis where Rakazo is behind.
+
 2026-10-17  shared-assistant design: the obvious versions leak; stopped for decisions  Zak
             Archie said "build shared department assistants". I mapped the model FIRST and found the
             obvious implementations leak: Thread.botId is @unique, so sharing an assistant means sharing
