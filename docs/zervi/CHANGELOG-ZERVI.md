@@ -2,6 +2,27 @@
 
 One line per task: date, what changed, where. Newest first.
 
+2026-10-17  documented the Team Computer, measured against the live system         Zak
+            Archie asked what the Team Computer is and how to use it. Wrote docs/zervi/TEAM-COMPUTER.md
+            (commit a51e6a24, verified 200 on GitHub) grounded in the RUNNING system, not the name:
+            ComputerMode is ["team","dedicated"] and team is the DEFAULT; the DB holds ONE computer row
+            per SPACE (scopeKey=team:<spaceId>) — that key is what makes it one machine for many bots.
+            MEASURED, NOT ASSUMED:
+              shared   : OS user (uid=1000 rakazo), filesystem, installed tools, shared/ folder
+              separate : browser profile (5 profiles for 5 bots, 1:1), X displays X1..X4, Chrome procs
+              NOT A BOUNDARY: bots/<id>/ is same-uid 755 — I wrote canary.txt into one assistant's
+                         folder and read it back from the same shell, then removed it. So the folders
+                         ORGANISE work, they do not isolate it. docs/computer-runtime.md says exactly
+                         this ("not security boundaries"), and now it is also demonstrated.
+            Recorded the operational rule people actually hit: takeover is refused with CONFLICT
+            "Stop the bot first" while that assistant is mid-run, unless run is waiting_takeover.
+            DREW THE DISTINCTION THAT CAUSES REWORK: a Team computer shares a MACHINE, not an
+            ASSISTANT — bots still carry their own userId, so "one Ops assistant for the department"
+            remains unsolved (the round-56 gap). Team fixes tool/file duplication, not assistant
+            sharing.
+            ALSO CLEANED UP: found ~/pdfenv (my fpdf2 venv from round 61) sitting in the SHARED home of
+            a live computer and removed it. Exactly the kind of thing a shared workspace accumulates.
+
 2026-10-17  architecture + message-logic diagrams, pushed                       Zak
             Two diagrams, not one — they answer different questions, and combining them would mean
             arrows that sometimes mean data flow and sometimes control flow. Committed to
