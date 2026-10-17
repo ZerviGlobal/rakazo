@@ -2,6 +2,30 @@
 
 One line per task: date, what changed, where. Newest first.
 
+2026-10-17  two LobeHub DBs: Coolify leftover, NOT Odoo-era                          Zak
+            Archie suspected the old LobeHub database came from the Odoo dev work before CloudPepper. It
+            did not. Both were created 3 days apart in August; the cause is the DEPLOYMENT TOOL:
+              2026-08-11  Coolify (service lobechat-zrv01), pgvector pg16, bind-mounted under
+                          /data/coolify/services/lobechat-zrv01, on the coolify network, NO compose labels
+              2026-08-14  redeployed by hand from /opt/zervi/lobehub/docker-compose.yml, ParadeDB pg17,
+                          named volume, network alias "postgresql"
+            WHICH IS LIVE IS NOT AMBIGUOUS: the app resolves "postgresql", an alias on the pg17
+            container ONLY. The old one is on another network, unreachable from the app, restart:no.
+            Both still RUNNING is what made it confusing.
+            The Aug-11 attempt was ABANDONED, not migrated: its 99 agents (Shop/Vox/Sall/Seam/Stitch/
+            Vector/Sage/Warp) were seeded in a 3-MINUTE BURST (11:15:52-11:18:45) and never used — 0
+            sessions, 0 messages, data dir mtime never moved past creation.
+            BUT its 9 knowledge bases ARE Zervi's: Zervi SOPs, Quality, HR, Finance, Commercial,
+            Products, Agency Directory, Engineering, Odoo v17 Archive. The live DB's wiki set is
+            differently named (Zervi 01 Architecture ... Zervi 08 Gap Audit), so these 9 may have NO
+            successor. That is the one thing worth salvaging before anything is deleted.
+            NOTHING STOPPED OR DELETED — data-destruction gate. Recorded the safe order in
+            docs/zervi/LOBEHUB-TWO-DATABASES.md (af0dd625): dump the 9 KBs, verify the dump opens, then
+            stop and remove the container and the 66 MB dir. Archie's call.
+            ALSO SPOTTED: /data/coolify/services holds 11 service dirs and SIX have no containers at
+            all — the same abandoned-but-on-disk pattern is not unique to LobeHub. coolify-db is also
+            running:unhealthy. Separate cleanup question.
+
 2026-10-17  Rakazo vs LobeHub drawn from both live systems                         Zak
             Archie asked how this app works compared to our Lobe agents. Answer: not the same product at
             different maturity, different SHAPES. Rakazo = agent WORKSPACE (each assistant has a Linux
