@@ -9,6 +9,7 @@ installation.
 | [`DEPLOYMENT-RUNBOOK.md`](./DEPLOYMENT-RUNBOOK.md) | How this deployment is built and operated: the three compose files, image tags, deploy and rollback scripts, the Zervi employee UI (navigation, departments, Thai), and the verification suite. |
 | [`CHANGELOG-ZERVI.md`](./CHANGELOG-ZERVI.md) | Dated log of what changed and why, newest first. Includes the defects found and the mistakes made while finding them. |
 | [`UI-ADOPTION-ASSESSMENT.md`](./UI-ADOPTION-ASSESSMENT.md) | Assessment of how far the upstream UI could be adopted as-is, and what had to be built. |
+| [`diagrams/`](./diagrams/) | Two diagrams: how the deployment is wired, and the logic of one message from send to reply. Open the HTML; the JSON beside it is the editable structural record. |
 
 ## Reading these honestly
 

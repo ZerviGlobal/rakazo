@@ -1,0 +1,77 @@
+{
+  "title": "Rakazo — Zervi deployment: the app, its features, and what happens when you send a message",
+  "source": "ZerviGlobal/rakazo @ 3694d7c1, branch zervi/employee-ui. Facts read from packages/contracts/src/ids.ts, packages/contracts/src/rpc.ts, packages/adapters/src/builtin-tools.ts, docker ps, and the live database on ZBOX.",
+  "diagramType": "architecture + sequence (two diagrams, one page)",
+  "colourLegend": {
+    "grey": "outside the trust boundary",
+    "blue": "Zervi-built / Zervi-configurable",
+    "green": "upstream Rakazo, unchanged",
+    "amber": "state that persists",
+    "red": "known gap"
+  },
+  "diagram1": {
+    "name": "Deployment architecture",
+    "boundaries": [
+      { "id": "employee", "label": "Employee", "colour": "grey" },
+      { "id": "host", "label": "ZBOX host · tailnet 100.74.72.109 · HTTP only", "colour": "grey" },
+      { "id": "appnet", "label": "docker network rakazo_app · 10.0.5.0/24", "colour": "green" },
+      { "id": "perbot", "label": "per-bot network, egress restricted", "colour": "green" },
+      { "id": "external", "label": "Outside Zervi", "colour": "grey" }
+    ],
+    "nodes": [
+      { "id": "phone", "label": "Phone / desktop browser", "in": "employee", "colour": "grey" },
+      { "id": "web", "label": "web  :5173\nVite + React + Thai", "in": "host", "colour": "blue" },
+      { "id": "api", "label": "api  :3100\nFastify + oRPC", "in": "host", "colour": "green" },
+      { "id": "worker", "label": "worker\nGraphile job runner", "in": "appnet", "colour": "green" },
+      { "id": "pg", "label": "postgres", "in": "appnet", "colour": "amber" },
+      { "id": "sup", "label": "supervisor\ncreates + adopts bot containers", "in": "appnet", "colour": "green" },
+      { "id": "bot", "label": "bot container\ncomputer:edge\n(Xvfb + Chromium + tools)", "in": "perbot", "colour": "green" },
+      { "id": "vol", "label": "volume rakazo_appdata\nhomes/team-<id> per bot", "in": "appnet", "colour": "amber" },
+      { "id": "llm", "label": "model provider\n(deepseek / OpenAI-compatible)", "in": "external", "colour": "grey" }
+    ],
+    "edges": [
+      { "from": "phone", "to": "web", "label": "HTTPS? no — plain HTTP", "colour": "red" },
+      { "from": "web", "to": "api", "label": "/rpc proxy, xfwd:true", "colour": "blue" },
+      { "from": "api", "to": "pg", "label": "reads/writes" },
+      { "from": "api", "to": "worker", "label": "enqueue run.continue" },
+      { "from": "worker", "to": "pg", "label": "lease a run" },
+      { "from": "worker", "to": "sup", "label": "ensure computer" },
+      { "from": "sup", "to": "bot", "label": "create / reuse by label" },
+      { "from": "bot", "to": "vol", "label": "~/ = homes/team-<id>" },
+      { "from": "worker", "to": "llm", "label": "tool loop" }
+    ],
+    "annotations": [
+      "web and api are the only published ports; the tailnet IP is pinned in zbox-bind.yml",
+      "bots get their OWN network with egress restricted, not rakazo_app",
+      "the supervisor replaces a bot container when the desired image differs from info.Image"
+    ]
+  },
+  "diagram2": {
+    "name": "What happens when you send a message",
+    "actors": ["You", "web", "api", "postgres", "worker", "bot", "model"],
+    "steps": [
+      { "n": 1, "who": "You", "what": "type Thai text, attach a file", "note": "artifactIds, not attachments" },
+      { "n": 2, "who": "web", "what": "threads/send over /rpc" },
+      { "n": 3, "who": "api", "what": "insert message + task + run", "status": "run.status = queued" },
+      { "n": 4, "who": "api", "what": "enqueue run.continue" },
+      { "n": 5, "who": "worker", "what": "lease the run", "status": "leased → running", "note": "leaseOwner + leaseFence stop two workers double-running" },
+      { "n": 6, "who": "worker", "what": "ensure the bot computer exists", "note": "supervisor finds by rakazo.botId label, reuses or replaces" },
+      { "n": 7, "who": "bot", "what": "model proposes a tool call", "note": "shell, browser_*, computer_*, attach_file, charts, memory, ask_user, handoff_to_bot" },
+      { "n": 8, "who": "worker", "what": "execute tool in the bot container, feed result back" },
+      { "n": 9, "who": "bot", "what": "loop 7–8 until done", "note": "progress blocks stream to the UI while this runs" },
+      { "n": 10, "who": "api", "what": "store blocks, reply appears", "status": "completed", "note": "userErrorMessage turns a provider blob into Thai" }
+    ],
+    "states": ["queued", "leased", "running", "waiting_input", "waiting_takeover", "completed", "failed", "cancelled"],
+    "failureModes": [
+      { "state": "failed", "cause": "no model configured", "seen": "'Connect a model in Settings before running bots.'" },
+      { "state": "failed", "cause": "provider rejected the key", "seen": "401 Authentication Fails" },
+      { "state": "waiting_input", "cause": "the bot called ask_user", "seen": "run pauses, resumes on reply" },
+      { "state": "waiting_takeover", "cause": "the bot handed control to a human", "seen": "computer control" }
+    ]
+  },
+  "gapsDrawn": [
+    { "gap": "assistants are per-user, not per-department", "effect": "two colleagues cannot share one assistant", "colour": "red" },
+    { "gap": "tailnet-only, HTTP-only", "effect": "no employee can reach it", "colour": "red" },
+    { "gap": "no Thai font in computer:edge", "effect": "Thai DOCUMENTS render as tofu; reading Thai is fine", "colour": "red" }
+  ]
+}

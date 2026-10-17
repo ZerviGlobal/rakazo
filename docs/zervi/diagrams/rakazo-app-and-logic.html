@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Rakazo — app, features and message logic (Zervi deployment)</title>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#161a21; --line:#2a3140; --ink:#e8ecf3; --dim:#96a2b4;
+    --grey:#5b6577; --blue:#4a9eff; --green:#3fbf7f; --amber:#e0a33e; --red:#e05c5c;
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f6f7f9; --panel:#fff; --line:#d7dce4; --ink:#161a21; --dim:#5b6577; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.5 ui-sans-serif,-apple-system,"Segoe UI",Roboto,"Noto Sans Thai",sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:36px 24px 80px}
+  h1{font-size:23px;margin:0 0 4px;letter-spacing:-.01em}
+  h2{font-size:16px;margin:34px 0 10px;letter-spacing:-.01em}
+  .sub{color:var(--dim);font-size:13px;margin:0 0 22px}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 6px;font-size:12.5px;color:var(--dim)}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px 4px;overflow-x:auto}
+  svg{display:block;max-width:100%;height:auto}
+  .box{fill:var(--panel);stroke-width:1.5}
+  .lbl{font-size:12.5px;font-weight:600;fill:var(--ink)}
+  .sm{font-size:10.5px;fill:var(--dim)}
+  .edge{stroke:var(--grey);stroke-width:1.5;fill:none}
+  .edgeblue{stroke:var(--blue);stroke-width:1.6;fill:none}
+  .edgered{stroke:var(--red);stroke-width:1.8;fill:none;stroke-dasharray:5 3}
+  .elabel{font-size:10px;fill:var(--dim)}
+  .bnd{fill:none;stroke:var(--line);stroke-width:1.2;stroke-dasharray:6 4}
+  .bndlbl{font-size:10.5px;fill:var(--dim);letter-spacing:.06em;text-transform:uppercase}
+  table{border-collapse:collapse;width:100%;font-size:13px;margin-top:8px}
+  th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+  code{background:rgba(127,127,127,.16);padding:1px 5px;border-radius:4px;font-size:12px}
+  .gap{border-left:3px solid var(--red);padding:6px 0 6px 12px;margin:10px 0;font-size:13px}
+  .note{color:var(--dim);font-size:12.5px;margin:8px 0 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Rakazo — the app, its features, and the logic of one message</h1>
+  <p class="sub">Zervi deployment · <code>ZerviGlobal/rakazo</code> @ <code>3694d7c1</code> · branch <code>zervi/employee-ui</code>.
+     Read from the running system on ZBOX, not from a README.</p>
+
+  <div class="legend">
+    <span><i style="background:var(--green)"></i>upstream Rakazo, unchanged</span>
+    <span><i style="background:var(--blue)"></i>Zervi-built or Zervi-configured</span>
+    <span><i style="background:var(--amber)"></i>persistent state</span>
+    <span><i style="background:var(--red)"></i>known gap</span>
+    <span><i style="background:var(--grey)"></i>outside the trust boundary</span>
+  </div>
+
+  <h2>1 · Where it actually runs</h2>
+  <div class="card">
+  <svg viewBox="0 0 1120 640" role="img" aria-label="Deployment architecture">
+    <defs>
+      <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#5b6577"/>
+      </marker>
+      <marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#4a9eff"/>
+      </marker>
+      <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#e05c5c"/>
+      </marker>
+    </defs>
+
+    <rect class="box" x="14" y="150" width="150" height="76" rx="10" stroke="var(--grey)"/>
+    <text class="lbl" x="30" y="178">Phone / desktop</text>
+    <text class="sm"  x="30" y="196">a browser, on the</text>
+    <text class="sm"  x="30" y="211">tailnet</text>
+
+    <rect class="bnd" x="196" y="46" width="560" height="566" rx="14"/>
+    <text class="bndlbl" x="212" y="68">ZBOX host · 100.74.72.109 · HTTP only</text>
+
+    <rect class="box" x="216" y="150" width="176" height="88" rx="10" stroke="var(--blue)"/>
+    <text class="lbl" x="232" y="178">web  :5173</text>
+    <text class="sm"  x="232" y="196">Vite + React</text>
+    <text class="sm"  x="232" y="211">Thai catalog (448)</text>
+    <text class="sm"  x="232" y="226">employee nav + tabs</text>
+
+    <rect class="box" x="216" y="316" width="176" height="88" rx="10" stroke="var(--green)"/>
+    <text class="lbl" x="232" y="344">api  :3100</text>
+    <text class="sm"  x="232" y="362">Fastify + oRPC</text>
+    <text class="sm"  x="232" y="377">38 namespaces</text>
+    <text class="sm"  x="232" y="392">auth + isolation</text>
+
+    <rect class="bnd" x="424" y="90" width="318" height="496" rx="12"/>
+    <text class="bndlbl" x="440" y="112">docker network rakazo_app · 10.0.5.0/24</text>
+
+    <rect class="box" x="444" y="132" width="132" height="72" rx="10" stroke="var(--green)"/>
+    <text class="lbl" x="458" y="158">worker</text>
+    <text class="sm"  x="458" y="175">Graphile jobs</text>
+    <text class="sm"  x="458" y="190">leases a run</text>
+
+    <rect class="box" x="596" y="132" width="128" height="72" rx="10" stroke="var(--amber)"/>
+    <text class="lbl" x="610" y="158">postgres</text>
+    <text class="sm"  x="610" y="175">runs · messages</text>
+    <text class="sm"  x="610" y="190">artifacts · memory</text>
+
+    <rect class="box" x="444" y="246" width="132" height="82" rx="10" stroke="var(--green)"/>
+    <text class="lbl" x="458" y="272">supervisor</text>
+    <text class="sm"  x="458" y="289">creates / adopts</text>
+    <text class="sm"  x="458" y="304">bot containers</text>
+    <text class="sm"  x="458" y="319">by rakazo.botId</text>
+
+    <rect class="box" x="596" y="246" width="128" height="82" rx="10" stroke="var(--amber)"/>
+    <text class="lbl" x="610" y="272">volume</text>
+    <text class="sm"  x="610" y="289">rakazo_appdata</text>
+    <text class="sm"  x="610" y="304">homes/team-&lt;id&gt;</text>
+    <text class="sm"  x="610" y="319">one per bot</text>
+
+    <rect class="bnd" x="444" y="392" width="280" height="172" rx="12"/>
+    <text class="bndlbl" x="458" y="414">per-bot network · egress restricted</text>
+
+    <rect class="box" x="458" y="430" width="250" height="116" rx="10" stroke="var(--green)"/>
+    <text class="lbl" x="472" y="456">bot container — one per assistant</text>
+    <text class="sm"  x="472" y="476">computer:edge · Xvfb + Chromium</text>
+    <text class="sm"  x="472" y="492">shell · files · browser · screen</text>
+    <text class="sm"  x="472" y="508">tools run here, not on the host</text>
+    <text class="sm"  x="472" y="528" style="fill:var(--red)">no Thai font → Thai docs = tofu</text>
+
+    <rect class="bnd" x="812" y="90" width="294" height="496" rx="12"/>
+    <text class="bndlbl" x="828" y="112">outside Zervi</text>
+    <rect class="box" x="832" y="132" width="254" height="82" rx="10" stroke="var(--grey)"/>
+    <text class="lbl" x="846" y="158">model provider</text>
+    <text class="sm"  x="846" y="176">deepseek / OpenAI-compatible</text>
+    <text class="sm"  x="846" y="192">one credential per user</text>
+
+    <path class="edgered" d="M164,188 L212,188" marker-end="url(#ar)"/>
+    <text class="elabel" x="16" y="136" style="fill:var(--red)">plain HTTP · tailnet only</text>
+
+    <path class="edgeblue" d="M304,238 L304,316" marker-end="url(#ab)"/>
+    <text class="elabel" x="312" y="280" style="fill:var(--blue)">/rpc · xfwd</text>
+
+    <path class="edge" d="M392,346 L440,346" marker-end="url(#a)"/>
+    <text class="elabel" x="330" y="340">reads + enqueue</text>
+
+    <path class="edge" d="M576,168 L592,168" marker-end="url(#a)"/>
+    <path class="edge" d="M592,186 L576,186" marker-end="url(#a)"/>
+    <text class="elabel" x="470" y="222">lease · store</text>
+
+    <path class="edge" d="M510,204 L510,246" marker-end="url(#a)"/>
+    <text class="elabel" x="518" y="230">ensure</text>
+
+    <path class="edge" d="M592,287 L596,287" marker-end="url(#a)"/>
+    <text class="elabel" x="470" y="300">~/ mount</text>
+
+    <path class="edge" d="M500,328 L500,430" marker-end="url(#a)" opacity=".6"/>
+    <text class="elabel" x="508" y="380">create / reuse</text>
+
+    <path class="edge" d="M576,150 L826,150" marker-end="url(#a)" opacity=".55"/>
+    <text class="elabel" x="700" y="142">tool loop</text>
+  </svg>
+  </div>
+  <p class="note">Only <code>web:5173</code> and <code>api:3100</code> are published, both pinned to the
+     tailnet IP in <code>zbox-bind.yml</code>. A bot gets its <em>own</em> network with egress restricted —
+     it is not on <code>rakazo_app</code>. The supervisor replaces a bot container when the desired image
+     differs from <code>info.Image</code>, which is why changing the computer image is disruptive to a live
+     user.</p>
+
+  <h2>2 · The logic: what happens when you send a message</h2>
+  <div class="card">
+  <svg viewBox="0 0 780 540" role="img" aria-label="Sequence: message to reply">
+    <defs>
+      <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#4a9eff"/>
+      </marker>
+    </defs>
+
+    <g>
+      <text class="lbl" x="26"  y="30">You</text><line x1="34"  y1="42" x2="34"  y2="532" stroke="var(--line)"/>
+      <text class="lbl" x="126" y="30">web</text><line x1="134" y1="42" x2="134" y2="532" stroke="var(--line)"/>
+      <text class="lbl" x="228" y="30">api</text><line x1="236" y1="42" x2="236" y2="532" stroke="var(--line)"/>
+      <text class="lbl" x="330" y="30">postgres</text><line x1="338" y1="42" x2="338" y2="532" stroke="var(--line)"/>
+      <text class="lbl" x="446" y="30">worker</text><line x1="454" y1="42" x2="454" y2="532" stroke="var(--line)"/>
+      <text class="lbl" x="556" y="30">bot</text><line x1="564" y1="42" x2="564" y2="532" stroke="var(--line)"/>
+      <text class="lbl" x="668" y="30">model</text><line x1="676" y1="42" x2="676" y2="532" stroke="var(--line)"/>
+    </g>
+
+    <path class="edgeblue" d="M34,86 L134,86" marker-end="url(#b)"/>
+    <text class="elabel" x="38" y="80">1 · text + file</text>
+
+    <path class="edgeblue" d="M134,132 L236,132" marker-end="url(#b)"/>
+    <text class="elabel" x="138" y="126">2 · /rpc send</text>
+
+    <path class="edgeblue" d="M236,178 L338,178" marker-end="url(#b)"/>
+    <text class="elabel" x="240" y="172">3 · run = queued</text>
+
+    <path class="edgeblue" d="M236,224 L454,224" marker-end="url(#b)"/>
+    <text class="elabel" x="240" y="218">4 · enqueue job</text>
+
+    <path class="edgeblue" d="M454,270 L338,270" marker-end="url(#b)"/>
+    <text class="elabel" x="344" y="264">5 · lease</text>
+
+    <path class="edgeblue" d="M454,316 L564,316" marker-end="url(#b)"/>
+    <text class="elabel" x="458" y="310">6 · ensure</text>
+
+    <path class="edgeblue" d="M564,362 L676,362" marker-end="url(#b)"/>
+    <text class="elabel" x="568" y="356">7 · tool call</text>
+
+    <path class="edgeblue" d="M676,408 L564,408" marker-end="url(#b)"/>
+    <text class="elabel" x="568" y="402">8 · result</text>
+
+    <path class="edge" d="M542,436 C504,440 504,462 542,466" stroke="var(--blue)" fill="none" marker-end="url(#b)"/>
+    <text class="elabel" x="404" y="456" style="fill:var(--blue)">9 · loop 7–8</text>
+
+    <path class="edgeblue" d="M454,488 L236,488" marker-end="url(#b)"/>
+    <text class="elabel" x="250" y="482">10 · store</text>
+
+    <path class="edgeblue" d="M236,516 L34,516" marker-end="url(#b)"/>
+    <text class="elabel" x="112" y="510">11 · reply appears</text>
+  </svg>
+  </div>
+
+  <table>
+    <tr><th>#</th><th>Step</th><th>Why it is not simpler</th></tr>
+    <tr><td>1</td><td>You type Thai and attach a file</td>
+        <td>The file goes as <code>artifactIds</code> — an <code>attachments</code> field does not exist and zod <em>silently drops</em> it</td></tr>
+    <tr><td>2</td><td>web → api over <code>/rpc</code></td><td>Proxied with <code>xfwd</code> so the API sees the real client IP</td></tr>
+    <tr><td>3</td><td>api inserts message + task + run</td><td>Status starts <code>queued</code>; the run is the unit of work, not the message</td></tr>
+    <tr><td>4</td><td>api enqueues <code>run.continue</code></td><td>A Graphile job, so the HTTP request returns immediately</td></tr>
+    <tr><td>5</td><td>worker <strong>leases</strong> the run</td>
+        <td><code>leaseOwner</code> + <code>leaseFence</code> stop two workers running one run twice; a crash resumes instead of duplicating</td></tr>
+    <tr><td>6</td><td>worker ensures the bot computer</td>
+        <td>Supervisor finds it by <code>rakazo.botId</code> label and <em>reuses</em> it; replaces only when the desired image differs</td></tr>
+    <tr><td>7–8</td><td>model proposes a tool call; the tool runs in the bot container</td>
+        <td>The model never touches ZBOX directly — tools execute inside the sandboxed bot</td></tr>
+    <tr><td>9</td><td>loop until done</td><td>Progress blocks stream to the UI while this runs, so a long job is visible</td></tr>
+    <tr><td>10–11</td><td>blocks stored, reply appears</td>
+        <td><code>userErrorMessage</code> turns a raw provider blob into readable Thai</td></tr>
+  </table>
+
+  <div class="legend" style="margin-top:14px">
+    <span><strong>run.status:</strong></span>
+    <span>queued</span><span>leased</span><span>running</span><span>waiting_input</span>
+    <span>waiting_takeover</span><span style="color:var(--green)">completed</span>
+    <span style="color:var(--red)">failed</span><span>cancelled</span>
+  </div>
+  <p class="note">Two of those explain a bot that seems to stall: <code>waiting_input</code> means it called
+     <code>ask_user</code> and is waiting for you; <code>waiting_takeover</code> means it handed computer
+     control to a human. Both are alive, not broken.</p>
+
+  <h2>3 · The features, by where they live</h2>
+  <table>
+    <tr><th>Surface</th><th>What it is</th><th>State</th></tr>
+    <tr><td><strong>Chat</strong></td>
+        <td>Assistant threads: text, images, files, quoting, reactions, voice replies</td>
+        <td>Working; Thai UI complete</td></tr>
+    <tr><td><strong>Documents</strong></td>
+        <td>Artifacts with versions (<code>v2</code> on re-upload), previews, download</td>
+        <td>Working; Thai filenames round-trip</td></tr>
+    <tr><td><strong>Scheduled tasks</strong></td>
+        <td>Routines on cron / webhook / GitHub / message triggers</td>
+        <td>Working</td></tr>
+    <tr><td><strong>Departments</strong></td>
+        <td>Sections grouping assistants; create / rename / delete via a real dialog</td>
+        <td>Working — but see gap 1</td></tr>
+    <tr><td><strong>The computer</strong></td>
+        <td>Each assistant gets a Linux desktop: shell, files, Chromium, screen control</td>
+        <td>Working; no Thai font (gap 3)</td></tr>
+    <tr><td><strong>Memory</strong></td>
+        <td>Per-bot or shared scope; the agent can forget</td>
+        <td>Working; <strong>no delete route</strong> — only blank it</td></tr>
+    <tr><td><strong>Skills &amp; MCP</strong></td>
+        <td>Assignable capabilities and external MCP servers</td>
+        <td>Working (owner-facing)</td></tr>
+    <tr><td><strong>Board / tickets</strong></td>
+        <td>Shared task board</td>
+        <td>Off here (<code>ticketBoardEnabled</code> false)</td></tr>
+    <tr><td><strong>Usage &amp; billing</strong></td>
+        <td>Spend reporting</td>
+        <td>Usage works; billing disabled</td></tr>
+    <tr><td><strong>Voice</strong></td>
+        <td>Speech in / out</td>
+        <td>Not configured — controls correctly hidden, no dead buttons</td></tr>
+  </table>
+
+  <h2>4 · The three gaps, drawn in red above</h2>
+  <div class="gap"><strong>Assistants are per-user, not per-department.</strong>
+    <code>Bot</code> carries its own <code>userId</code> and reads filter
+    <code>spaceId AND userId</code> — so two colleagues cannot share one assistant, which is how Zervi
+    actually wants to work.</div>
+  <div class="gap"><strong>Tailnet-only and HTTP-only.</strong> Reachable at
+    <code>http://100.74.72.109:5173</code> and nowhere else. Fine for you; not usable by staff.</div>
+  <div class="gap"><strong>No Thai font in <code>computer:edge</code>.</strong> The bot can <em>read</em>
+    Thai (proven: it returned <code>DO-2569-0042</code> from an image), but Thai <em>documents</em> it
+    generates render as empty boxes.</div>
+
+  <p class="note" style="margin-top:26px">Facts read from the running system: <code>ids.ts</code>
+    (<code>RunStatus</code>), <code>rpc.ts</code> (38 namespaces), <code>builtin-tools.ts</code> (tool
+    catalog), <code>docker ps</code>, and the live database — 49 completed, 2 failed, both with their
+    recorded reason. The companion JSON beside this file is the editable structural record.</p>
+
+</div>
+</body>
+</html>
