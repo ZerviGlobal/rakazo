@@ -1,0 +1,240 @@
+{
+  "title": "Rakazo vs LobeHub — two different shapes of agent platform",
+  "source": "Facts read from both live systems on ZBOX. Rakazo: apps/*, packages/contracts/src/ids.ts, contracts/rpc.ts, builtin-tools.ts, docker ps, rakazo-postgres-1. LobeHub: zervi-lobe-postgres17 (the LIVE db — 211 agents, updated 2026-10-17; zervi-lobe-postgres holds a stale 99-agent August snapshot), docker ps, /opt/zervi/lobehub/docker-compose.yml.",
+  "diagramType": "comparison (side-by-side architecture) + capability table",
+  "thesis": "They are not the same product at different maturity — they are different shapes. LobeHub is an agent PLATFORM: many agents, one shared conversation, tools attached per agent as configuration. Rakazo is an agent WORKSPACE: each assistant gets its own Linux computer and its own single thread, so the agent can drive a desktop, not just call APIs.",
+  "diagram": {
+    "left": {
+      "name": "Rakazo",
+      "shape": "workspace per assistant",
+      "layers": [
+        {
+          "id": "r1",
+          "label": "web :5173 · React + Thai",
+          "colour": "blue"
+        },
+        {
+          "id": "r2",
+          "label": "api :3100 · Fastify + oRPC · 38 namespaces",
+          "colour": "green"
+        },
+        {
+          "id": "r3",
+          "label": "worker · Graphile job runner · leases a run",
+          "colour": "green"
+        },
+        {
+          "id": "r4",
+          "label": "postgres · bots / threads / runs / artifacts",
+          "colour": "amber"
+        },
+        {
+          "id": "r5",
+          "label": "supervisor",
+          "colour": "green"
+        }
+      ],
+      "agents": [
+        {
+          "id": "ra1",
+          "label": "assistant\n→ 1 thread (botId @unique)",
+          "colour": "green"
+        },
+        {
+          "id": "ra2",
+          "label": "assistant\n→ 1 thread",
+          "colour": "green"
+        },
+        {
+          "id": "ra3",
+          "label": "assistant\n→ 1 thread",
+          "colour": "green"
+        }
+      ],
+      "computers": [
+        {
+          "id": "rc1",
+          "label": "TEAM computer (per SPACE)\nX1 · X2 · X3\nbots/<id> shared 755",
+          "colour": "amber"
+        }
+      ],
+      "external": [
+        {
+          "id": "rx1",
+          "label": "model provider\n(per-run user's credential)",
+          "colour": "grey"
+        }
+      ],
+      "counts": {
+        "users": 3,
+        "assistants": 8,
+        "spaces": 3,
+        "threads": 8
+      }
+    },
+    "right": {
+      "name": "LobeHub",
+      "shape": "platform of agents",
+      "layers": [
+        {
+          "id": "l1",
+          "label": "app :3210 (via proxy :3210\ntailnet) · Next.js",
+          "colour": "green"
+        },
+        {
+          "id": "l2",
+          "label": "trpc / lambda · server actions",
+          "colour": "green"
+        },
+        {
+          "id": "l3",
+          "label": "postgres17 · agents / topics / messages",
+          "colour": "amber"
+        },
+        {
+          "id": "l4",
+          "label": "redis · sessions, queues",
+          "colour": "green"
+        },
+        {
+          "id": "l5",
+          "label": "memory bridge + vector store\n(Zervi's addition)",
+          "colour": "blue"
+        }
+      ],
+      "agents": [
+        {
+          "id": "la1",
+          "label": "agent\nplugins[] · knowledge[] · persona",
+          "colour": "green"
+        },
+        {
+          "id": "la2",
+          "label": "agent\nplugins[] · knowledge[]",
+          "colour": "green"
+        },
+        {
+          "id": "la3",
+          "label": "… 211 agents in total",
+          "colour": "green"
+        }
+      ],
+      "computers": [
+        {
+          "id": "lc1",
+          "label": "no computer\nno shell · no desktop · no files",
+          "colour": "red"
+        }
+      ],
+      "external": [
+        {
+          "id": "lx1",
+          "label": "MCP servers · connectors\n+ model providers",
+          "colour": "grey"
+        }
+      ],
+      "counts": {
+        "agents": 211,
+        "with_plugins": 167,
+        "no_plugins": 44,
+        "agent_mode_on": 165,
+        "agent_mode_off": 3,
+        "agent_mode_absent": 43,
+        "knowledge_bases": 89,
+        "agent_kb_links": 559,
+        "topics": 280,
+        "max_topics_one_agent": 42,
+        "persona_docs": 0
+      }
+    }
+  },
+  "comparison": [
+    {
+      "axis": "Unit of work",
+      "rakazo": "a RUN — leased, fenced, resumable, status machine of 8 states",
+      "lobe": "a MESSAGE in a TOPIC — chat-shaped, no lease"
+    },
+    {
+      "axis": "Does the agent have a computer?",
+      "rakazo": "YES — Xvfb + Chromium + shell + files, per space",
+      "lobe": "NO — tools are API calls; no shell, no desktop, no filesystem"
+    },
+    {
+      "axis": "Can it use a Thai font, open a PDF, drive a browser?",
+      "rakazo": "YES — it is a Linux desktop",
+      "lobe": "NO — unless an MCP server does it for it"
+    },
+    {
+      "axis": "Conversations per agent",
+      "rakazo": "1 (botId @unique) — a single thread each",
+      "lobe": "MANY — topics per agent, unlimited per user"
+    },
+    {
+      "axis": "Memory model",
+      "rakazo": "bot-level: isolated | shared",
+      "lobe": "knowledge_bases (89) + 559 agent↔KB links; persona documents exist but are 0 — unused"
+    },
+    {
+      "axis": "Tools",
+      "rakazo": "native, ~140 catalog entries, executed in the bot container",
+      "lobe": "plugins[] per agent (167/211 have some) + MCP + connectors; executed in the app"
+    },
+    {
+      "axis": "The characteristic failure",
+      "rakazo": "a run stalls (waiting_input / waiting_takeover) or the model is unconfigured",
+      "lobe": "an agent HAS tools and does not USE them — enableAgentMode false is the usual cause"
+    },
+    {
+      "axis": "Multi-user",
+      "rakazo": "users + spaces, but assistants are per-user (no sharing yet)",
+      "lobe": "user_id + workspace_id + visibility, groups, market — sharing is built in"
+    },
+    {
+      "axis": "Agents in service",
+      "rakazo": "8 assistants, 3 users",
+      "lobe": "211 agents, 89 knowledge bases"
+    },
+    {
+      "axis": "Best at",
+      "rakazo": "DOING a job on a machine — produce the invoice, fill the form, run the script",
+      "lobe": "DISTRIBUTING many agents — a catalogue of specialists answering questions with knowledge"
+    }
+  ],
+  "whereEachWins": {
+    "rakazo": [
+      "A photographed Thai invoice → read it, do arithmetic, produce a PDF (proven: returned DO-2569-0042)",
+      "Shell, files, browser, screen — the work that is not an API call",
+      "One assistant per employee, with a persistent desktop and credentials",
+      "Thai UI end to end, employee-shaped navigation"
+    ],
+    "lobe": [
+      "211 specialists, each with its own persona, model and knowledge — a searchable catalogue",
+      "Knowledge bases with vector retrieval (89 KBs, 559 links)",
+      "Sharing: workspaces, visibility, groups, market — Rakazo has none of this",
+      "Topics: many separate conversations per agent, which is what people expect of chat"
+    ]
+  },
+  "theOneLine": "LobeHub answers questions; Rakazo does jobs. Neither is a better version of the other.",
+  "gapsExposed": [
+    {
+      "gap": "Rakazo cannot share one assistant across a department",
+      "contrast": "LobeHub has workspace_id + visibility + groups",
+      "colour": "red"
+    },
+    {
+      "gap": "Rakazo has ONE conversation per assistant (botId @unique)",
+      "contrast": "LobeHub has topics — many per agent",
+      "colour": "red"
+    },
+    {
+      "gap": "LobeHub has no computer at all",
+      "contrast": "Rakazo gives each space a Linux desktop",
+      "colour": "red"
+    },
+    {
+      "gap": "44 of 211 LobeHub agents have NO plugins attached",
+      "contrast": "and 43 have no enableAgentMode key — the platform's documented 'has tools but won't use them' failure",
+      "colour": "amber"
+    }
+  ]
+}

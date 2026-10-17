@@ -11,7 +11,7 @@ installation.
 | [`UI-ADOPTION-ASSESSMENT.md`](./UI-ADOPTION-ASSESSMENT.md) | Assessment of how far the upstream UI could be adopted as-is, and what had to be built. |
 | [`SHARED-ASSISTANTS-DESIGN.md`](./SHARED-ASSISTANTS-DESIGN.md) | Design for letting a department share one assistant. Records why the obvious version leaks, and the four policy decisions it needs. **Designed, not built.** |
 | [`TEAM-COMPUTER.md`](./TEAM-COMPUTER.md) | What a Team Computer is, what it shares and does not, how to use it, and when to pick Private instead. |
-| [`diagrams/`](./diagrams/) | Two diagrams: how the deployment is wired, and the logic of one message from send to reply. Open the HTML; the JSON beside it is the editable structural record. |
+| [`diagrams/`](./diagrams/) | Diagrams: how the deployment is wired, the logic of one message, and a side-by-side comparison of Rakazo against LobeHub. Open the HTML; the JSON beside it is the editable structural record. |
 
 ## Reading these honestly
 

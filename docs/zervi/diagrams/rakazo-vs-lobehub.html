@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Rakazo vs LobeHub — two shapes of agent platform</title>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#161a21; --line:#2a3140; --ink:#e8ecf3; --dim:#96a2b4;
+    --grey:#5b6577; --blue:#4a9eff; --green:#3fbf7f; --amber:#e0a33e; --red:#e05c5c;
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f6f7f9; --panel:#fff; --line:#d7dce4; --ink:#161a21; --dim:#5b6577; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.55 ui-sans-serif,-apple-system,"Segoe UI",Roboto,"Noto Sans Thai",sans-serif}
+  .wrap{max-width:1280px;margin:0 auto;padding:36px 24px 80px}
+  h1{font-size:24px;margin:0 0 6px;letter-spacing:-.015em}
+  h2{font-size:16px;margin:36px 0 12px;letter-spacing:-.01em}
+  .sub{color:var(--dim);font-size:13px;margin:0 0 8px}
+  .thesis{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--blue);
+          border-radius:8px;padding:12px 16px;font-size:14px;margin:18px 0 8px}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin:14px 0 4px;font-size:12.5px;color:var(--dim)}
+  .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px 4px;overflow-x:auto}
+  svg{display:block;max-width:100%;height:auto}
+  .box{fill:var(--panel);stroke-width:1.5}
+  .lbl{font-size:12px;font-weight:600;fill:var(--ink)}
+  .sm{font-size:10px;fill:var(--dim)}
+  .edge{stroke:var(--grey);stroke-width:1.4;fill:none}
+  .elabel{font-size:9.5px;fill:var(--dim)}
+  .bnd{fill:none;stroke:var(--line);stroke-width:1.2;stroke-dasharray:6 4}
+  .bndlbl{font-size:10px;fill:var(--dim);letter-spacing:.06em;text-transform:uppercase}
+  table{border-collapse:collapse;width:100%;font-size:13px;margin-top:10px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--dim);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em}
+  td:first-child{color:var(--dim);white-space:nowrap}
+  code{background:rgba(127,127,127,.16);padding:1px 5px;border-radius:4px;font-size:11.5px}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+  .col{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+  .col h3{margin:0 0 8px;font-size:14px}
+  .col ul{margin:0;padding-left:18px;font-size:13px}
+  .col li{margin-bottom:6px}
+  .note{color:var(--dim);font-size:12.5px;margin:8px 0 0}
+  .gap{border-left:3px solid var(--red);padding:6px 0 6px 12px;margin:9px 0;font-size:13px}
+  .gap.warn{border-left-color:var(--amber)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Rakazo vs LobeHub — two shapes of agent platform</h1>
+  <p class="sub">Both are running on this host right now. Facts read from both, not from their marketing.</p>
+
+  <div class="thesis">
+    <strong>They are not the same product at different maturity.</strong> LobeHub is an agent
+    <em>platform</em>: many agents, many conversations each, tools attached as configuration.
+    Rakazo is an agent <em>workspace</em>: each assistant gets a Linux computer and one thread, so it can
+    drive a desktop rather than only call APIs.<br>
+    <strong>LobeHub answers questions. Rakazo does jobs.</strong>
+  </div>
+
+  <div class="legend">
+    <span><i style="background:var(--green)"></i>upstream / unchanged</span>
+    <span><i style="background:var(--blue)"></i>Zervi-built</span>
+    <span><i style="background:var(--amber)"></i>persistent state</span>
+    <span><i style="background:var(--red)"></i>absent or a gap</span>
+    <span><i style="background:var(--grey)"></i>external</span>
+  </div>
+
+  <h2>The two architectures, side by side</h2>
+  <div class="card">
+  <svg viewBox="0 0 1240 700" role="img" aria-label="Rakazo and LobeHub architecture compared">
+    <defs>
+      <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill="#5b6577"/>
+      </marker>
+    </defs>
+
+    <!-- ================= LEFT: RAKAZO ================= -->
+    <rect class="bnd" x="18" y="18" width="580" height="660" rx="14"/>
+    <text class="bndlbl" x="34" y="40">Rakazo · workspace per assistant</text>
+
+    <rect class="box" x="40" y="56" width="200" height="52" rx="9" stroke="var(--blue)"/>
+    <text class="lbl" x="54" y="78">web :5173</text>
+    <text class="sm"  x="54" y="94">React + Thai · employee nav</text>
+
+    <rect class="box" x="40" y="124" width="200" height="52" rx="9" stroke="var(--green)"/>
+    <text class="lbl" x="54" y="146">api :3100</text>
+    <text class="sm"  x="54" y="162">Fastify + oRPC · 38 namespaces</text>
+
+    <rect class="box" x="40" y="192" width="200" height="52" rx="9" stroke="var(--green)"/>
+    <text class="lbl" x="54" y="214">worker</text>
+    <text class="sm"  x="54" y="230">Graphile · leases a run</text>
+
+    <rect class="box" x="40" y="260" width="200" height="52" rx="9" stroke="var(--amber)"/>
+    <text class="lbl" x="54" y="282">postgres</text>
+    <text class="sm"  x="54" y="298">bots · threads · runs · artifacts</text>
+
+    <rect class="box" x="40" y="328" width="200" height="52" rx="9" stroke="var(--green)"/>
+    <text class="lbl" x="54" y="350">supervisor</text>
+    <text class="sm"  x="54" y="366">creates / adopts containers</text>
+
+    <path class="edge" d="M140,108 L140,124" marker-end="url(#a)"/>
+    <path class="edge" d="M140,176 L140,192" marker-end="url(#a)"/>
+    <path class="edge" d="M140,244 L140,260" marker-end="url(#a)"/>
+    <path class="edge" d="M140,312 L140,328" marker-end="url(#a)"/>
+
+    <!-- assistants: one thread each -->
+    <rect class="bnd" x="272" y="56" width="308" height="240" rx="12"/>
+    <text class="bndlbl" x="288" y="78">assistants · one thread each</text>
+
+    <rect class="box" x="288" y="92" width="276" height="46" rx="8" stroke="var(--green)"/>
+    <text class="sm" x="300" y="112" style="font-weight:600;font-size:11px">assistant</text>
+    <text class="sm" x="300" y="127">→ 1 thread (botId @unique)</text>
+
+    <rect class="box" x="288" y="146" width="276" height="46" rx="8" stroke="var(--green)"/>
+    <text class="sm" x="300" y="166" style="font-weight:600;font-size:11px">assistant</text>
+    <text class="sm" x="300" y="181">→ 1 thread</text>
+
+    <rect class="box" x="288" y="200" width="276" height="46" rx="8" stroke="var(--green)"/>
+    <text class="sm" x="300" y="220" style="font-weight:600;font-size:11px">assistant</text>
+    <text class="sm" x="300" y="235">→ 1 thread</text>
+
+    <text class="sm" x="300" y="272">8 assistants · 3 users · 3 spaces</text>
+
+    <path class="edge" d="M240,286 L288,120" marker-end="url(#a)" opacity=".55"/>
+
+    <!-- the computer -->
+    <rect class="bnd" x="272" y="330" width="308" height="210" rx="12"/>
+    <text class="bndlbl" x="288" y="352">a real Linux desktop</text>
+
+    <rect class="box" x="288" y="366" width="276" height="158" rx="8" stroke="var(--amber)"/>
+    <text class="lbl" x="300" y="386">TEAM computer — one per SPACE</text>
+    <text class="sm"  x="300" y="404">Xvfb · Chromium · shell · files</text>
+    <text class="sm"  x="300" y="420">displays X1 · X2 · X3 — one per active bot</text>
+    <text class="sm"  x="300" y="436">home shared · bots/&lt;id&gt; same uid, 755</text>
+    <text class="sm"  x="300" y="452">browser profiles separate, 1:1</text>
+    <text class="sm"  x="300" y="474" style="fill:var(--red)">no Thai font → Thai docs = tofu</text>
+    <text class="sm"  x="300" y="492">this is what makes Rakazo DO a job:</text>
+    <text class="sm"  x="300" y="508">read the invoice, fill the form, run the script</text>
+
+    <path class="edge" d="M140,380 L288,440" marker-end="url(#a)" opacity=".6"/>
+    <text class="elabel" x="150" y="418">supervises</text>
+
+    <!-- external -->
+    <rect class="box" x="440" y="566" width="128" height="44" rx="8" stroke="var(--grey)"/>
+    <text class="sm" x="450" y="586">model provider</text>
+    <text class="sm" x="450" y="601">run.userId's key</text>
+    <path class="edge" d="M140,204 L440,580" marker-end="url(#a)" opacity=".3"/>
+
+    <!-- ================= RIGHT: LOBEHUB ================= -->
+    <rect class="bnd" x="628" y="18" width="594" height="660" rx="14"/>
+    <text class="bndlbl" x="644" y="40">LobeHub · platform of agents</text>
+
+    <rect class="box" x="652" y="56" width="220" height="52" rx="9" stroke="var(--green)"/>
+    <text class="lbl" x="666" y="78">app :3210 (via proxy)</text>
+    <text class="sm"  x="666" y="94">Next.js · tailnet</text>
+
+    <rect class="box" x="652" y="124" width="220" height="52" rx="9" stroke="var(--green)"/>
+    <text class="lbl" x="666" y="146">trpc / lambda</text>
+    <text class="sm"  x="666" y="162">server actions · connector sync</text>
+
+    <rect class="box" x="652" y="192" width="220" height="52" rx="9" stroke="var(--amber)"/>
+    <text class="lbl" x="666" y="214">postgres17</text>
+    <text class="sm"  x="666" y="230">agents · topics · messages</text>
+
+    <rect class="box" x="652" y="260" width="220" height="52" rx="9" stroke="var(--green)"/>
+    <text class="lbl" x="666" y="282">redis</text>
+    <text class="sm"  x="666" y="298">sessions · queues</text>
+
+    <rect class="box" x="652" y="328" width="220" height="52" rx="9" stroke="var(--blue)"/>
+    <text class="lbl" x="666" y="350">memory bridge</text>
+    <text class="sm"  x="666" y="366">+ vector store · Zervi's addition</text>
+
+    <path class="edge" d="M762,108 L762,124" marker-end="url(#a)"/>
+    <path class="edge" d="M762,176 L762,192" marker-end="url(#a)"/>
+    <path class="edge" d="M762,244 L762,260" marker-end="url(#a)"/>
+    <path class="edge" d="M762,312 L762,328" marker-end="url(#a)"/>
+
+    <!-- agents with topics -->
+    <rect class="bnd" x="896" y="56" width="308" height="240" rx="12"/>
+    <text class="bndlbl" x="912" y="78">agents · many topics each</text>
+
+    <rect class="box" x="912" y="92" width="276" height="46" rx="8" stroke="var(--green)"/>
+    <text class="sm" x="924" y="112" style="font-weight:600;font-size:11px">agent</text>
+    <text class="sm" x="924" y="127">plugins[ ] · knowledge[ ] · persona · model</text>
+
+    <rect class="box" x="912" y="146" width="276" height="46" rx="8" stroke="var(--green)"/>
+    <text class="sm" x="924" y="166" style="font-weight:600;font-size:11px">agent</text>
+    <text class="sm" x="924" y="181">topic · topic · topic … (280 total, max 42 on one agent)</text>
+
+    <rect class="box" x="912" y="200" width="276" height="46" rx="8" stroke="var(--green)"/>
+    <text class="sm" x="924" y="220" style="font-weight:600;font-size:11px">… 211 agents</text>
+    <text class="sm" x="924" y="235">167 with plugins · 44 with none</text>
+
+    <text class="sm" x="924" y="272">89 knowledge bases · 559 agent↔KB links · 280 topics</text>
+
+    <path class="edge" d="M872,286 L912,120" marker-end="url(#a)" opacity=".55"/>
+
+    <!-- NO computer -->
+    <rect class="bnd" x="896" y="330" width="308" height="210" rx="12"/>
+    <text class="bndlbl" x="912" y="352">no computer</text>
+
+    <rect class="box" x="912" y="366" width="276" height="158" rx="8" stroke="var(--red)"/>
+    <text class="lbl" x="924" y="386" style="fill:var(--red)">there is no desktop here</text>
+    <text class="sm"  x="924" y="406">no shell · no files · no screen</text>
+    <text class="sm"  x="924" y="422">no Chromium, no X display</text>
+    <text class="sm"  x="924" y="444">tools are API calls executed in the app</text>
+    <text class="sm"  x="924" y="460">or delegated to an MCP server</text>
+    <text class="sm"  x="924" y="482">→ it can ANSWER about a document</text>
+    <text class="sm"  x="924" y="498">→ it cannot OPEN, convert or produce one</text>
+    <text class="sm"  x="924" y="516" style="fill:var(--amber)">43 agents have no enableAgentMode key</text>
+
+    <!-- external -->
+    <rect class="box" x="1020" y="566" width="160" height="44" rx="8" stroke="var(--grey)"/>
+    <text class="sm" x="1030" y="586">MCP servers · connectors</text>
+    <text class="sm" x="1030" y="601">+ model providers</text>
+    <path class="edge" d="M762,204 L1020,580" marker-end="url(#a)" opacity=".3"/>
+
+    <!-- the one-line contrast, centred in the gap -->
+    <text class="elabel" x="622" y="700" style="font-size:11px;fill:var(--blue);text-anchor:middle">answers questions  ⟷  does jobs</text>
+  </svg>
+  </div>
+
+  <h2>What each is actually good at</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>Rakazo wins when the work is a <em>job</em></h3>
+      <ul>
+        <li>A photographed Thai invoice → read it, do the arithmetic, produce a PDF. <em>Proven: it returned <code>DO-2569-0042</code>.</em></li>
+        <li>Shell, files, browser, screen — the work that is not an API call.</li>
+        <li>A persistent desktop per space, with installed tools shared by every assistant.</li>
+        <li>Thai UI end to end, with employee-shaped navigation.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>LobeHub wins when the work is <em>many specialists</em></h3>
+      <ul>
+        <li>211 agents, each with its own persona, model and tool set — a searchable catalogue.</li>
+        <li>Knowledge bases with vector retrieval: 89 KBs, 559 agent↔KB links.</li>
+        <li><strong>Sharing is built in</strong> — workspaces, visibility, groups, market.</li>
+        <li>Topics: many separate conversations per agent, which is what people expect of chat.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>The row-by-row comparison</h2>
+  <table>
+    <tr><th>Axis</th><th>Rakazo</th><th>LobeHub</th></tr>
+    <tr><td>Unit of work</td>
+        <td>a <strong>run</strong> — leased, fenced, resumable, 8-state machine</td>
+        <td>a <strong>message</strong> in a topic — chat-shaped, no lease</td></tr>
+    <tr><td>Computer</td>
+        <td><strong>yes</strong> — Xvfb, Chromium, shell, files, per space</td>
+        <td><strong>none</strong> — API calls only</td></tr>
+    <tr><td>Thai font / open a PDF</td>
+        <td>yes, it is a Linux desktop</td>
+        <td>no — unless an MCP server does it</td></tr>
+    <tr><td>Conversations per agent</td>
+        <td><strong>1</strong> — <code>botId @unique</code></td>
+        <td><strong>many</strong> — topics</td></tr>
+    <tr><td>Memory</td>
+        <td>bot-level: <code>isolated | shared</code></td>
+        <td>89 knowledge bases · 559 agent↔KB links · persona docs <strong>0</strong> (unused)</td></tr>
+    <tr><td>Tools</td>
+        <td>native, ~140 catalog entries, run in the bot container</td>
+        <td><code>plugins[]</code> per agent (167/211) + MCP + connectors</td></tr>
+    <tr><td>Sharing an agent</td>
+        <td><strong>not possible</strong> — assistants are per-user</td>
+        <td><strong>built in</strong> — workspace, visibility, groups, market</td></tr>
+    <tr><td>Characteristic failure</td>
+        <td>a run stalls: <code>waiting_input</code> / <code>waiting_takeover</code></td>
+        <td>an agent <em>has</em> tools and won't <em>use</em> them</td></tr>
+    <tr><td>In service now</td><td>8 assistants · 3 users</td><td>211 agents · 89 KBs</td></tr>
+  </table>
+
+  <h2>What the comparison exposes</h2>
+
+  <div class="gap"><strong>Rakazo cannot share one assistant across a department.</strong>
+    LobeHub has had <code>workspace_id</code>, <code>visibility</code> and groups all along. This is the
+    gap you asked me to build, and it is the one place LobeHub is plainly ahead.</div>
+
+  <div class="gap"><strong>Rakazo has one conversation per assistant.</strong>
+    <code>Thread.botId</code> is <code>@unique</code>, so there is no "topic" concept. One thread per
+    assistant is fine for a single employee and wrong for a team — which is why the shared-assistant
+    design has to change this constraint rather than add a flag.</div>
+
+  <div class="gap"><strong>LobeHub has no computer at all.</strong>
+    Not a maturity difference — an architectural one. It answers <em>about</em> a document; Rakazo can
+    open one, convert it, and write the result. For a seat-cover factory that is the whole job.</div>
+
+  <div class="gap warn"><strong>44 of 211 LobeHub agents have no plugins</strong>, and 43 have no
+    <code>enableAgentMode</code> key — exactly the "has tools but won't use them" failure your own
+    platform notes call out as the known one. 3 more have it explicitly <code>false</code>. So the
+    catalogue is bigger than the working catalogue.</div>
+
+  <p class="note" style="margin-top:26px">Sources: Rakazo — <code>apps/*</code>, <code>ids.ts</code>,
+    <code>rpc.ts</code>, <code>builtin-tools.ts</code>, <code>docker ps</code>, <code>rakazo-postgres-1</code>.
+    LobeHub — <code>zervi-lobe-postgres17</code> (the <em>live</em> DB: 211 agents, updated today;
+    <code>zervi-lobe-postgres</code> holds a stale August snapshot of 99), <code>docker ps</code>,
+    <code>/opt/zervi/lobehub/docker-compose.yml</code>. Counts verified against the DB, including a
+    correction: <code>plugins</code> is <code>jsonb</code>, not an array.</p>
+
+</div>
+</body>
+</html>
