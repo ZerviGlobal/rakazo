@@ -190,6 +190,51 @@ Mitigations exist and are cheap to state, less cheap to run:
 come from the same place: it is a small, focused wrapper that leaves model choice to the caller.** That
 is good if we choose deliberately and bad if we accept the default.
 
+## Semantica — impressive, and the wrong category (asked 2026-10-17)
+
+`semantica-agi/semantica`. **MIT** — the most permissive of the four. 955 Python modules, **506 test
+files**, 100 deps. This is real engineering, not a weekend project, and its pitch is coherent:
+
+> "Graph-native infrastructure for context and accountable AI systems… deterministic infrastructure (no
+> LLM required for graph construction, reasoning, or provenance)… Ontologies and controlled vocabularies
+> (OWL, SHACL, SKOS)… Decision provenance and audit trails fall out of that structure for free."
+
+| | **Semantica** | Memori | Cognee |
+|---|---|---|---|
+| Licence | **MIT** | Apache 2.0 | Apache 2.0 |
+| Py modules | **955** | ~309 | ~2,960 |
+| Test files | **506** | (not counted) | 1,169 |
+| Shape | **graph platform** (RDF/LPG, SPARQL, ontologies) | LLM wrapper + fact store | knowledge graph |
+| Serves | Context Graph + decision provenance + W3C standards | agent memory in your DB | graph memory |
+| Agent interface | **MCP server, REST, LangChain/CrewAI/Agno** | wrapper `register()` | lib / REST / MCP |
+
+### Why it is the wrong category for what we asked
+
+We asked: *what should give a Rakazo assistant a better memory than a `grep`?* Semantica answers a
+different question — *how do we make an enterprise's data explainable to a regulator?* That is a
+legitimate and harder problem, and Semantica is a serious attempt at it. It is not a memory layer you
+bolt onto an assistant; it is a layer you **run your enterprise data through** and then query.
+
+For Zervi that means ingesting the SOPs, the Odoo archive, the knowledge bases, and maintaining an
+ontology — before the first assistant gains anything. The work is front-loaded onto modelling, and the
+payoff is auditability, which is a different requirement from "the assistant should remember".
+
+### Its real strength, and it is genuinely relevant
+
+**Deterministic provenance with no LLM in the loop** is attractive for exactly one Zervi problem: a
+seat-cover factory producing invoices and BoMs needs to answer *"why did this number come out?"* If
+Rakazo ever needs regulator-grade traceability over an assistant's decisions, Semantica is the only one
+of the four built for it, and MIT removes the licence question entirely.
+
+### Its problem for us is the same as the others, only cleaner
+
+**`bge-small-en-v1.5` is the only BGE model wired in** — "en", English. And the single occurrence of the
+word "Thai" in 955 modules is a **display label in a language detector** (`{"th": "Thai"}`); nothing
+consumes it. There is no Thai segmentation, no Thai normalisation, no multilingual embedder chosen.
+
+So on the axis that decides all of this — **does it work on Thai?** — Semantica is neutral-to-negative,
+and its ontology machinery would be built over text we cannot reliably embed.
+
 ## The recommendation, in order
 
 **Do not choose between OpenViking and TMH. Do these in sequence — each is smaller than the last:**
