@@ -2,6 +2,30 @@
 
 One line per task: date, what changed, where. Newest first.
 
+2026-10-17  Memori evaluated: closest fit yet, sharpest Thai risk                  Zak
+            Archie offered MemoriLabs/Memori. 673 files (vs Cognee 4,217, OpenViking 5,225), Apache 2.0.
+            Three things line up with Rakazo better than either earlier candidate:
+              (1) "BYODB" — bring your own database. Rakazo already runs Postgres; Memori uses THAT. No
+                  new datastore, no vector index. Tables are memori_-prefixed so they sit beside
+                  bots/threads/runs instead of colliding.
+              (2) It captures agent TRACES, not just chat — "which tools were used, which paths succeeded
+                  or failed". That is exactly Rakazo's runs + tool-completion audit data, which today
+                  goes nowhere.
+              (3) It is a WRAPPER: new Memori().llm.register(client) — one line at the call site
+                  Rakazo's executor already owns.
+            Recall is real not a grep: FAISS + cosine with similarity, rank_score, decay and a tunable
+            recall_relevance_threshold. Async, off the response path.
+            THE PROBLEM IS BIGGER HERE THAN THE OTHERS: default embedder is all-MiniLM-L6-v2 —
+            English-only, 384-dim. Zervi users write THAI, and cosine over MiniLM on Thai fails QUIETLY:
+            plausible facts, wrong ones recalled. Fixes are a multilingual fastembed model (changes
+            vector dimension, so must be picked BEFORE any data is written) or an external TEI endpoint
+            (which reintroduces the inference server Cognee avoided).
+            Insight worth keeping: Memori's strength and its risk are the SAME property — a small focused
+            wrapper that leaves model choice to the caller. Good if chosen deliberately, bad if the
+            default is accepted.
+            REVISED RANKING again: Memori and Cognee are the two to try; OpenViking last.
+            Pushed into docs/zervi/MEMORY-EVALUATION.md (149fddda).
+
 2026-10-17  Cognee evaluated: better fit than OpenViking, with one Thai risk           Zak
             Archie asked about topoteretes/cognee. Checked it properly — it removes the two things that
             disqualified OpenViking:
