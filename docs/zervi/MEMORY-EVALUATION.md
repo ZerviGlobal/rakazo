@@ -136,6 +136,60 @@ If it works on Thai, the mapping is good:
 - MCP on `:8001` means Rakazo's existing MCP tool surface could call it without new adapter code
 - Its own `SemanticMemoryProvider` adapter (4 methods) remains the clean route if MCP is not wanted
 
+## Memori — the closest architectural fit, and the sharpest Thai problem (asked 2026-10-17)
+
+`MemoriLabs/Memori`. **673 files** — a fraction of the others. **Apache 2.0.** And it is the only one
+built for exactly the problem Rakazo has.
+
+| | **Memori** | Cognee | OpenViking |
+|---|---|---|---|
+| Licence | **Apache 2.0** | Apache 2.0 | AGPLv3 |
+| Files | **673** | 4,217 | 5,225 |
+| Shape | **LLM-call wrapper + fact store** | knowledge graph | context filesystem |
+| Self-host | **yes — "BYODB"**, any DB you already run | yes, embedded | needs its own server |
+| DBs supported | Postgres, SQLite, MySQL, MariaDB, Mongo, Oracle, Cockroach, TiDB | Kuzu/LanceDB embedded | its own |
+| Retrieval | **FAISS + cosine + `rank_score` + decay** | graph + vectors | directory-scoped semantic |
+| Integration | wrapper: `new Memori().llm.register(client)` | lib / REST / MCP | SDK / server |
+| Async | **yes, off the response path** | — | — |
+| Captures **tool calls / execution traces** | **yes, explicitly** | partial | sessions |
+
+### Why this is the closest fit for Rakazo specifically
+
+Three things line up better than either previous candidate:
+
+1. **`BYODB` — bring your own database.** Rakazo already runs Postgres. Memori can use *that*, so there
+   is no new datastore, no vector index to provision, no second system to back up. The tables are
+   prefixed `memori_*` (`entity`, `subject`, `predicate`, `entity_fact`, `session`, `conversation`), so
+   they would sit beside `bots`/`threads`/`runs` rather than colliding.
+2. **It captures agent traces, not just chat.** *"which tools were used, which paths succeeded or
+   failed, what preferences emerged through action"* — that is precisely Rakazo's `runs` and tool
+   completion audit data, which currently goes nowhere.
+3. **It is a wrapper, so the integration is one line** — `register(client)`. Rakazo's executor already
+   owns the model call, so the hook point exists.
+
+Recall is real, not a `grep`: each fact returns `id`, `content`, `similarity` (0–1), `rank_score`, and
+`date_created`, with `recall_relevance_threshold` tunable (default 0.1).
+
+### The problem, and it is bigger here than for the others
+
+**The default embedding model is `all-MiniLM-L6-v2`.** It is English-only, 384-dimensional, and it is
+the single most consequential line in this evaluation. Zervi's users write **Thai**. Cosine similarity
+over MiniLM embeddings of Thai text will not retrieve reliably — and unlike a bad index, it fails
+*quietly*: plausible-looking facts, wrong ones recalled.
+
+Mitigations exist and are cheap to state, less cheap to run:
+
+- Swap the embedder. `all-MiniLM` → a multilingual model (e.g. `paraphrase-multilingual-MiniLM`, or a
+  BGE-M3-class model), which fastembed supports — but it changes the vector dimension, so it must be
+  chosen **before** any data is written.
+- Or point at an external **TEI** endpoint (`TEI(url=...)`) with a multilingual model — which means
+  running an inference server, the very weight Cognee avoided.
+- Thai also needs a tokenizer that handles no-word-spaces. `all-MiniLM`'s WordPiece tokenizer does not.
+
+**So Memori's advantage (own your DB, tiny, trace-aware) and its risk (English-default embedder) both
+come from the same place: it is a small, focused wrapper that leaves model choice to the caller.** That
+is good if we choose deliberately and bad if we accept the default.
+
 ## The recommendation, in order
 
 **Do not choose between OpenViking and TMH. Do these in sequence — each is smaller than the last:**
@@ -150,7 +204,8 @@ If it works on Thai, the mapping is good:
    in `pg_available_extensions`), so a trigram or FTS index is an extension plus an index — not a new
    system, and it would make the fallback honest instead of a substring scan that always scores 1.
 
-3. **Then pilot, behind the existing provider interface** — and **Cognee first, not OpenViking**.
+3. **Then pilot, behind the existing provider interface** — and on current evidence **Memori and
+   Cognee are the two to try, OpenViking last**.
    Apache 2.0, no external services by default, embedded graph and vectors, and an MCP surface. It is
    the cheapest of the three to try and the easiest to remove. OpenViking remains the one to consider if
    directory-scoped context turns out to matter more than relationships — but at AGPLv3 and with a VLM
