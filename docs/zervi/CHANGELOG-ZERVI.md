@@ -2,6 +2,18 @@
 
 One line per task: date, what changed, where. Newest first.
 
+2026-10-17  health check lied for a day; fixed, and negative-tested                Zak
+            rakazo-health.sh reported UNHEALTHY on the trusted-proxy check, claiming the value was
+            '10.0.26.410.0.5.4/32' — two IPs concatenated. THE DEPLOYMENT WAS FINE; MY CHECK WAS BROKEN.
+            Cause: web_ip was read with {{range .NetworkSettings.Networks}}{{.IPAddress}} {{end}} | tr -d ' '
+            — and web is attached to TWO networks (rakazo_app 10.0.5.4 and a per-bot network 10.0.26.4),
+            so stripping spaces joined them into nonsense. It passed for weeks because web had one
+            network then, and broke when a per-bot attachment appeared.
+            Fix: read web's IP on the SAME network the api uses (ask for rakazo_app explicitly) instead
+            of joining whatever exists; fall back to a single address, never a concatenation.
+            NEGATIVE-TESTED: with the value forced to 10.9.9.9/32 the check still FAILs correctly, so it
+            can still catch a genuinely wrong proxy hop. HEALTHY again, acceptance 6/6.
+
 2026-10-17  why agents never used TMH: 4,201 pages, 0 reachable                  Zak
             Archie corrected my framing — Rakazo agents are WORK agents, so they need KNOWLEDGE, not
             just memory, which is why TMH exists; and TMH was too complicated to maximise. He is right.
