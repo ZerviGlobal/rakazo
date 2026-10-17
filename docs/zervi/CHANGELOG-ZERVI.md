@@ -2,6 +2,31 @@
 
 One line per task: date, what changed, where. Newest first.
 
+2026-10-17  OpenViking vs TMH for Rakazo: measure Rakazo first                     Zak
+            Archie asked if OpenViking (volcengine, "context database for AI agents") is better/easier
+            memory for Rakazo than TMH. Answer: not either/or, and neither is the first move — Rakazo has
+            TWO memory layers and they get conflated.
+            MEASURED on the live deployment:
+              built-in store = 159 lines of Markdown docs, retrieval is a SUBSTRING match returning
+              'score: 1' for every hit. No embeddings, no ranking.
+              live data: 12 documents, 4 revisions, 222 BYTES TOTAL, ten of twelve 0 bytes.
+              BUT Rakazo ALREADY defines SemanticMemoryProvider {describe, recall, save, purgeHistory,
+              forget?} and ships TWO implementations (supermemory 317 lines, serenity 328) plus a UI and
+              memory/providerConfig — which returns null here. So upgrading memory is choosing a
+              provider, not a rewrite.
+            OPENVIKING, honestly: better at directory-scoped retrieval, L0/L1/L2 summaries, skills beside
+            memories, inspectable sessions (it has a real benchmark — LoCoMo/tau2). Against: AGPLv3,
+            2,084 Python files + 74 deps, its own :1933 server, needs a VLM and embedding model, and it
+            would be a THIRD memory layer on a host that already shows what layer-accumulation looks
+            like (see the two LobeHub DBs).
+            VERIFIED before asserting: zero vector/embedding columns in schema.prisma; live DB has only
+            plpgsql so pgvector is NOT installed; pg_trgm IS available, so the retrieval-floor fix is an
+            extension plus an index, not a system.
+            RECOMMENDED ORDER: (1) configure a semantic provider via the existing plug-point and
+            measure, (2) make the fallback honest with pg_trgm, (3) only then pilot OpenViking behind
+            the same interface. Honest blocker: 222 bytes cannot prove any engine better — the first
+            question is why Rakazo's memory is EMPTY, not which engine to adopt.
+
 2026-10-17  two LobeHub DBs: Coolify leftover, NOT Odoo-era                          Zak
             Archie suspected the old LobeHub database came from the Odoo dev work before CloudPepper. It
             did not. Both were created 3 days apart in August; the cause is the DEPLOYMENT TOOL:
