@@ -2,6 +2,22 @@
 
 One line per task: date, what changed, where. Newest first.
 
+2026-10-17  docs moved INTO the repo and pushed to the fork                     Zak
+            Archie asked which repo, and the question exposed a real gap: the runbook and work log lived
+            only on the ZBOX host (/home/ubuntu/rakazo), so anyone reading the fork on GitHub had no
+            record of what this deployment is. Now committed to ZerviGlobal/rakazo (a genuine GitHub
+            fork of elie222/rakazo — verified via isFork/parent, not assumed):
+              docs/zervi/README.md                 orientation + what is still open
+              docs/zervi/DEPLOYMENT-RUNBOOK.md     compose, images, deploy/rollback, employee UI
+              docs/zervi/CHANGELOG-ZERVI.md        the dated log
+              docs/zervi/UI-ADOPTION-ASSESSMENT.md
+            Pushed to branch zervi/employee-ui, commit 0cd4b5fb. VERIFIED on the remote, not just by
+            push output: fetched, local and remote both 0cd4b5fb, docs present in the remote tree, and
+            raw.githubusercontent.com returns 200 for both README and runbook (160,802 bytes).
+            Scanned for credential values first — the one grep hit for "sk-" was the FILENAME
+            ask-archie-bot.ts, not a key. Host-absolute paths (/opt/zervi/...) are called out in the
+            README as not part of the repo.
+
 2026-10-16  objective's named deliverables BUILT AND VERIFIED; goal closed        Zak
             The objective names navigation, departments, Thai, and requires rendered evidence. All are
             on the live deployment: Work nav + phone tab bar render in Thai; departments create/
