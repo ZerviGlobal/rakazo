@@ -2,6 +2,25 @@
 
 One line per task: date, what changed, where. Newest first.
 
+2026-10-17  architecture + message-logic diagrams, pushed                       Zak
+            Two diagrams, not one — they answer different questions, and combining them would mean
+            arrows that sometimes mean data flow and sometimes control flow. Committed to
+            docs/zervi/diagrams/ (html + the JSON structural record), commit 85b4e3ab:
+              1. WHERE IT RUNS — host / app network / per-bot restricted network / volume layout /
+                 model provider outside. Boundaries drawn because the boundaries are the information.
+              2. THE LOGIC OF ONE MESSAGE — 11-step sequence with run status at each stage, plus a
+                 table for WHY each step exists (lease+fence, artifactIds vs the silently-dropped
+                 "attachments" field, supervisor reuse-vs-replace).
+            BOTH RENDERED AND LOOKED AT, which caught real problems: the first pass had labels crossing
+            lifelines and an arrow running past the end of its lifeline. Fixed, then verified
+            GEOMETRICALLY rather than by re-screenshot: text-label collisions 0, every lifeline covers
+            its last arrow (lifelines end 532, last arrow 516).
+            I ALSO BROKE THE FILE ONCE: a python slice replaced from "<!-- edges -->" to a marker that
+            no longer existed, truncating the HTML to 169 lines. Caught by an assertion, rebuilt whole.
+            Lesson repeated from earlier rounds — anchor edits on markers you have just re-read.
+            Facts from ids.ts (RunStatus), rpc.ts (38 namespaces), builtin-tools.ts, docker ps, and the
+            live DB (49 completed / 2 failed, both with their reason).
+
 2026-10-17  docs moved INTO the repo and pushed to the fork                     Zak
             Archie asked which repo, and the question exposed a real gap: the runbook and work log lived
             only on the ZBOX host (/home/ubuntu/rakazo), so anyone reading the fork on GitHub had no
