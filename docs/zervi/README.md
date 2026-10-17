@@ -9,6 +9,7 @@ installation.
 | [`DEPLOYMENT-RUNBOOK.md`](./DEPLOYMENT-RUNBOOK.md) | How this deployment is built and operated: the three compose files, image tags, deploy and rollback scripts, the Zervi employee UI (navigation, departments, Thai), and the verification suite. |
 | [`CHANGELOG-ZERVI.md`](./CHANGELOG-ZERVI.md) | Dated log of what changed and why, newest first. Includes the defects found and the mistakes made while finding them. |
 | [`UI-ADOPTION-ASSESSMENT.md`](./UI-ADOPTION-ASSESSMENT.md) | Assessment of how far the upstream UI could be adopted as-is, and what had to be built. |
+| [`TMH-KNOWLEDGE-REACH.md`](./TMH-KNOWLEDGE-REACH.md) | **Read this first.** Why the agents never used TMH: 46 wikis, 4,201 pages, **0 bound**, no cross-wiki search, no discovery. The knowledge was never the problem. |
 | [`MEMORY-EVALUATION.md`](./MEMORY-EVALUATION.md) | What Rakazo's memory actually is (measured), and whether OpenViking would be better than TMH — answer: use the plug-point already there first. |
 | [`SHARED-ASSISTANTS-DESIGN.md`](./SHARED-ASSISTANTS-DESIGN.md) | Design for letting a department share one assistant. Records why the obvious version leaks, and the four policy decisions it needs. **Designed, not built.** |
 | [`TEAM-COMPUTER.md`](./TEAM-COMPUTER.md) | What a Team Computer is, what it shares and does not, how to use it, and when to pick Private instead. |
