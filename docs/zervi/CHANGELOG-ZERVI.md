@@ -2,6 +2,33 @@
 
 One line per task: date, what changed, where. Newest first.
 
+2026-10-17  why agents never used TMH: 4,201 pages, 0 reachable                  Zak
+            Archie corrected my framing — Rakazo agents are WORK agents, so they need KNOWLEDGE, not
+            just memory, which is why TMH exists; and TMH was too complicated to maximise. He is right.
+            Measured the hub's knowledge.db directly:
+              live wikis 46 | pages 4,201 | ready 45 | wikis bound to an agent: ZERO
+              mass is the right kind: Agent Roster 879, Zervi Odoo V19 374, ISO 9001 QMS 260, Marketing
+              230, Engineering 149, Purchasing & Supply 120, Quality 99, Stack Dictionary 112.
+            THREE BARRIERS THAT COMPOUND:
+              (1) search REQUIRES a knowledge_id = one wiki; no cross-wiki search. An agent holding
+                  "what is our customer-return procedure?" must first guess whether that is in ISO 9001
+                  QMS, Quality, Purchasing & Supply or Communication & Handoffs. It cannot.
+              (2) NO discovery surface — /v3/knowledge, /v3/wikis, /v3/knowledge/list all 404. get_info
+                  describes one wiki if you already have the id; nothing says what the 46 are.
+              (3) NOTHING bound — agent_id NULL on all 46.
+            So 4,201 pages no agent can reach. That is a missing front door, not weak agents — which is
+            exactly what Archie was describing when he said TMH was too complicated to maximise.
+            FIXES IN LEVERAGE ORDER (all reads before writes):
+              1. cross-wiki search (fan-out over the existing per-wiki BM25)
+              2. a manifest call — knowledge_wiki ALREADY has name/page_count/summary with 45 of 46
+                 summaries populated (verified). A SELECT, not a build.
+              3. bind by DEPARTMENT not agent_id — staff turnover makes per-agent the wrong axis
+              4. then Memori for decisions/traces, BESIDE the knowledge
+            KEY REFRAME: none of the four memory candidates IS a knowledge base. They build graphs from
+            documents you feed them; none ships an ISO 9001 QMS. We already have the knowledge.
+            READ-ONLY: no writes, no rebinding, no schema change. The hub also serves LobeHub and the DSH
+            fleet, so steps 1-3 need Archie's sign-off.
+
 2026-10-17  Semantica evaluated: serious, but the wrong category                    Zak
             Archie offered semantica-agi/semantica. MIT (most permissive of the four), 955 py modules,
             506 test files, 100 deps — genuinely serious engineering: graph-native context infra with
