@@ -2,6 +2,26 @@
 
 One line per task: date, what changed, where. Newest first.
 
+2026-10-17  Semantica evaluated: serious, but the wrong category                    Zak
+            Archie offered semantica-agi/semantica. MIT (most permissive of the four), 955 py modules,
+            506 test files, 100 deps — genuinely serious engineering: graph-native context infra with
+            OWL/SHACL/SKOS ontologies, SPARQL, RDF+LPG, deterministic provenance with NO LLM in the loop,
+            plus a real agent surface (MCP server, REST, LangChain/CrewAI/Agno).
+            BUT IT ANSWERS A DIFFERENT QUESTION. We asked "what gives a Rakazo assistant a better memory
+            than a grep?"; Semantica answers "how do we make enterprise data explainable to a regulator?".
+            It is not a memory layer you bolt onto an assistant — it is a layer you run enterprise data
+            THROUGH, requiring ingest + ontology modelling before the first assistant gains anything. Its
+            payoff is auditability, a different requirement from "the assistant should remember".
+            KEEP IT ON THE SHELF FOR ONE REAL THING THOUGH: deterministic provenance is right if a factory
+            needs to answer "why did this number come out?" over invoices and BoMs. It is the only one of
+            the four built for that, and MIT kills the licence question.
+            SAME THAI PROBLEM, CLEANER: bge-small-en-v1.5 is the ONLY BGE model wired in, and the single
+            occurrence of the word "Thai" in 955 modules is a display label in a language detector
+            ({"th":"Thai"}) that nothing consumes. No Thai segmentation, no multilingual embedder.
+            FOUR CANDIDATES NOW ASSESSED. Ranking unchanged: Memori and Cognee for memory; OpenViking if
+            directory-scoped context ever matters; Semantica for traceability, not memory. And the
+            constant across all four: NONE defaults to something that works on Thai.
+
 2026-10-17  Memori evaluated: closest fit yet, sharpest Thai risk                  Zak
             Archie offered MemoriLabs/Memori. 673 files (vs Cognee 4,217, OpenViking 5,225), Apache 2.0.
             Three things line up with Rakazo better than either earlier candidate:
