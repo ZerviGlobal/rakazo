@@ -2,6 +2,27 @@
 
 One line per task: date, what changed, where. Newest first.
 
+2026-10-17  shared-assistant design: the obvious versions leak; stopped for decisions  Zak
+            Archie said "build shared department assistants". I mapped the model FIRST and found the
+            obvious implementations leak: Thread.botId is @unique, so sharing an assistant means sharing
+            ONE CONVERSATION — a colleague's pay query would land in the Managing Director's sidebar.
+            Rejected two, chose one:
+              A space-wide            assistant shared, thread SHARED    -> rejected
+              B opt-in per assistant  assistant shared, thread SHARED    -> rejected (flag != transcript)
+              C opt-in, per-member    assistant shared, thread PER MEMBER -> CHOSEN
+            C needs Bot.visibility, Thread.botId to lose @unique in favour of @@unique([botId,userId]),
+            and an OR filter in listBots — with owner-only ops deliberately NOT widened.
+            VERIFIED the facts rather than asserting: Thread.botId @unique (schema:525); exactly 5 bot
+            queries filter userId; model credential resolves from run.userId (executor:3704); connections
+            filter userId: run.userId (executor:3391). So a colleague's run uses THEIR credential.
+            PUSHED docs/zervi/SHARED-ASSISTANTS-DESIGN.md (9a26a802, 200 on GitHub).
+            STOPPED BEFORE CODE, deliberately — not timidity, this one is a data-leak class. The userId
+            filter in listBots IS the tenant-isolation guarantee verified in round 33. Four policy
+            decisions are Archie's: (1) whose credential pays for a colleague's run, (2) WHOSE MEMORY the
+            shared assistant has — the sharpest, since "remembers our processes" and "my private thread"
+            pull opposite ways, (3) who may rename/delete it, (4) who sees its usage.
+            I chose to stop and ask rather than build a default and call it a design.
+
 2026-10-17  documented the Team Computer, measured against the live system         Zak
             Archie asked what the Team Computer is and how to use it. Wrote docs/zervi/TEAM-COMPUTER.md
             (commit a51e6a24, verified 200 on GitHub) grounded in the RUNNING system, not the name:
