@@ -92,6 +92,50 @@ Not marketing — these are the things Rakazo's 159-line store cannot do at any 
 5. **No Thai-specific story.** Rakazo's users are Thai; Thai tokenisation and retrieval are poor in most
    embedding stacks. Neither OpenViking nor TMH documents Thai handling.
 
+## Cognee — a genuinely different option (asked 2026-10-17)
+
+`topoteretes/cognee`. **The most interesting of the three**, because it changes two things that
+disqualified OpenViking.
+
+| | **Cognee** | OpenViking |
+|---|---|---|
+| Licence | **Apache 2.0** | AGPLv3 |
+| Shape | **knowledge graph** extraction + retrieval | virtual filesystem of context |
+| Python files | 2,960 | 2,084 |
+| Test files | **1,169** | (not counted) |
+| External services needed | **none by default** — embedded Kuzu/Ladybug graph + LanceDB vectors | own server + VLM + embedding model |
+| Can it run without an LLM? | **yes** — local GLiNER extraction + local embeddings, downloads on first use | needs a VLM |
+| Integration | Python lib, REST `:8000`, **MCP `:8001`** | SDK + server `:1933` |
+| Paper | yes (arXiv 2505.24478) | benchmark blog |
+
+**Why that matters here:** Apache 2.0 removes the licence problem entirely, and "no external services
+by default" removes the operational weight. It is the only one of the three that could plausibly run
+*inside* the existing Rakazo compose without a new database, a new vector index, or a second embedding
+model — Kuzu and LanceDB are embedded, meaning files on disk next to the app.
+
+### The catch, and it is specific to Zervi
+
+**No multilingual or Thai support is mentioned anywhere in the repository.** The default embedding
+model is `openai/text-embedding-3-large`; the local fastembed path falls back to MiniLM-family models;
+the LLM-free extraction model is **GLiNER**, which is an English-first span extractor.
+
+A **knowledge graph built by GLiNER over Thai text** is the specific risk. Thai has no word spaces, and
+entity extraction is exactly the task where that bites. So Cognee's headline advantage — a real graph
+structure linking *decision → discussion → implementation* — is precisely the capability most likely to
+underperform on the Chonburi content.
+
+That is not a reason to reject it. It is a reason to **test it on Thai before trusting it**, which is
+the same test the other two have to pass.
+
+### Where Cognee would actually fit Rakazo
+
+If it works on Thai, the mapping is good:
+
+- `cognee.remember(...)` on a committed session → durable "what we decided" memory
+- The graph linking **decision → ticket → commit** is what a factory's SOPs actually are
+- MCP on `:8001` means Rakazo's existing MCP tool surface could call it without new adapter code
+- Its own `SemanticMemoryProvider` adapter (4 methods) remains the clean route if MCP is not wanted
+
 ## The recommendation, in order
 
 **Do not choose between OpenViking and TMH. Do these in sequence — each is smaller than the last:**
@@ -106,9 +150,11 @@ Not marketing — these are the things Rakazo's 159-line store cannot do at any 
    in `pg_available_extensions`), so a trigram or FTS index is an extension plus an index — not a new
    system, and it would make the fallback honest instead of a substring scan that always scores 1.
 
-3. **Then, if it still falls short, evaluate OpenViking properly** — as an experiment on one space,
-   behind the existing provider interface. AGPLv3 review first. The provider interface means this is
-   *swappable*, which is exactly the property worth preserving.
+3. **Then pilot, behind the existing provider interface** — and **Cognee first, not OpenViking**.
+   Apache 2.0, no external services by default, embedded graph and vectors, and an MCP surface. It is
+   the cheapest of the three to try and the easiest to remove. OpenViking remains the one to consider if
+   directory-scoped context turns out to matter more than relationships — but at AGPLv3 and with a VLM
+   requirement, it should not be the first experiment.
 
 **The reason not to start at step 3:** we have 222 bytes of memory. Neither OpenViking nor TMH can be
 shown to be better on evidence that thin. The honest first question is *"why is Rakazo's memory empty?"*
