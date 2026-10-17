@@ -2,6 +2,25 @@
 
 One line per task: date, what changed, where. Newest first.
 
+2026-10-17  Cognee evaluated: better fit than OpenViking, with one Thai risk           Zak
+            Archie asked about topoteretes/cognee. Checked it properly — it removes the two things that
+            disqualified OpenViking:
+              Apache 2.0 (not AGPLv3) — licence objection gone
+              NO external services by default: embedded Kuzu/Ladybug graph + LanceDB vectors, no Neo4j,
+              no separate vector DB, no VLM. Can run with NO LLM at all (local GLiNER + local embeds).
+              1,169 test files, arXiv paper 2505.24478.
+              Integration better than OpenViking's for us: Python lib, REST :8000, and MCP :8001 — so
+              Rakazo's existing MCP surface could call it with NO new adapter code.
+            THE CATCH, specific to Zervi: NO multilingual or Thai support anywhere in the repo. Default
+            embedder openai/text-embedding-3-large, local path falls back to MiniLM, and the LLM-free
+            extractor is GLiNER — an English-first span model. A knowledge graph built by GLiNER over
+            Thai is the specific risk, and entity extraction is exactly where "Thai has no word spaces"
+            bites. Its headline capability (graph linking decision -> discussion -> implementation) is
+            the capability most likely to underperform on Chonburi content.
+            REVISED MY OWN RECOMMENDATION: step 3 is now "pilot Cognee first, not OpenViking" — cheapest
+            to try, easiest to remove, Apache 2.0, and the same Thai test decides all three.
+            Pushed into docs/zervi/MEMORY-EVALUATION.md (9cb792b6).
+
 2026-10-17  OpenViking vs TMH for Rakazo: measure Rakazo first                     Zak
             Archie asked if OpenViking (volcengine, "context database for AI agents") is better/easier
             memory for Rakazo than TMH. Answer: not either/or, and neither is the first move — Rakazo has
